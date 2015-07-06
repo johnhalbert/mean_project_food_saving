@@ -6,6 +6,6 @@ foodThingie.config(function($routeProvider){
 			templateUrl: 'partials/home.html'
 		})
 		.when('/vendor', {
-			templateUrl: 'partials/vendordashboard/html'
+			templateUrl: 'partials/vendordashboard.html'
 		})
 })
