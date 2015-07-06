@@ -1,0 +1,28 @@
+<div ng-controller='DashCtrl'>
+
+	<div id='dashMain'>
+		<table>
+			<thead>
+				<tr>
+					<td>Name</td>
+					<td>Description</td>
+					<td>Price</td>
+					<td>Quantity</td>
+					<td>Age/Expires</td>
+					<td>Update/Delete</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat='product in products'>
+					<td ng-bind='product.name'></td>
+					<td ng-bind='product.description'></td>
+					<td ng-bind='product.price'></td>
+					<td ng-bind='product.quantity'></td>
+					<td ng-bind='product.ageexpires'></td>
+					<td><button ng-click='update()'>Update</button> <button ng-click='delete()'>Delete</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>
