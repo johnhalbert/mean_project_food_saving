@@ -1,0 +1,10 @@
+{
+  "name": "Basic_Mongoose_app",
+  "description": "Learning about mongoose!",
+  "dependencies": {
+    "body-parser": "^1.13.1",
+    "express": "^4.12.4",
+    "mongoose": "^4.0.6",
+    "path": "^0.11.14"
+  }
+}
