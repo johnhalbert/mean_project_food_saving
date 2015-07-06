@@ -1,28 +1,102 @@
 <div ng-controller='DashCtrl'>
 
 	<div id='dashMain'>
-		<table>
-			<thead>
-				<tr>
-					<td>Name</td>
-					<td>Description</td>
-					<td>Price</td>
-					<td>Quantity</td>
-					<td>Age/Expires</td>
-					<td>Update/Delete</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat='product in products'>
-					<td ng-bind='product.name'></td>
-					<td ng-bind='product.description'></td>
-					<td ng-bind='product.price'></td>
-					<td ng-bind='product.quantity'></td>
-					<td ng-bind='product.ageexpires'></td>
-					<td><button ng-click='update()'>Update</button> <button ng-click='delete()'>Delete</button></td>
-				</tr>
-			</tbody>
-		</table>
+		<div class='row'>
+			<div class='small-4 columns'>
+				
+				<form>
+					<fieldset>
+						<legend>My Profile</legend>
+						<label>Address: </label>
+						<input type='text' name='address' value='{{vendor.address}}' ng-model='updateVendor.address' />
+						<label>Phone: </label>
+						<input type='text' name='phone' value='{{vendor.phone}}' ng-model='updateVendor.phone' />
+						<label>Hours: </label>
+						<input type='text' name='hours' value='{{vendor.hours}}' ng-model='updateVendor.hours' />
+						<button ng-click='updateVendor()'>Update</button>
+					</fieldset>
+				</form>
+			</div>
+			<div class='small-8 columns'>
+				<input type='text' ng-model='products_filter' placeholder='Search Products' />
+				<table>
+					<thead>
+						<tr>
+							<td>Name</td>
+							<td>Description</td>
+							<td>Price</td>
+							<td>Quantity</td>
+							<td>Age/Expires</td>
+							<td>Update/Delete</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='product in products | filter: products_filter'>
+							<td ng-bind='product.name'></td>
+							<td ng-bind='product.description'></td>
+							<td ng-bind='product.price'></td>
+							<td ng-bind='product.quantity'></td>
+							<td ng-bind='product.ageexpires'></td>
+							<td><button ng-click='update()'>Update</button> <button ng-click='delete()'>Delete</button></td>
+						</tr>
+					</tbody>
+				</table>
+				<form>
+					<fieldset>
+						<legend>Add/Update Products</legend>
+						<label>Product Name</label>
+						<input type='text' name='name' ng-model='addEditProduct.name' />
+						<label>Description</label>
+						<input type='text' name='description' ng-model='addEditProduct.description' />
+						<label>Image (URL)</label>
+						<input type='text' name='image' ng-model='addEditProduct.image' />
+						<label>Price</label>
+						<input type='text' name='price' ng-model='addEditProduct.price' />
+						<label>Quantity</label>
+						<input type='text' name='quantity' ng-model='addEditProduct.quantity' />
+						<label>Age/Expires</label>
+						<input type='text' name='ageexpires' ng-model='addEditProduct.ageexpires' />
+						<button ng-click='addEditProduct()'>Add/Edit</button>
+					</fieldset>
+				</form>
+				<hr />
+				<table>
+					<thead>
+						<tr>
+							<th>Customer Name</th>
+							<th>Product</th>
+							<th>Quantity</th>
+							<th>Total</th>
+							<th>Order Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='order in orders'>
+							<td ng-bind='order.customername'></td>
+							<td ng-bind='order.product'></td>
+							<td ng-bind='order.quantity'></td>
+							<td ng-bind='order.total'></td>
+							<td ng-bind='order.date'></td>
+						</tr>
+					</tbody>
+				</table>
+				<form>
+					<fieldset>
+						<legend>Create New Order</legend>
+						<label>Customer Name</label>
+						<input type='text' name='customername' ng-model='newOrder.customername' />
+						<label>Customer Email</label>
+						<input type='text' name='customeremail' ng-model='newOrder.customeremail' />
+						<label>Product</label>
+						<select ng-model='newOrder.product'>
+							<option ng-repeat='product in products' value='{{product.name}}' ng-bind='product.name'></option>
+						</select>
+						<label>Quantity</label>
+						<input type='text' name='quantity' ng-model='newOrder.quantity' placeholder='This will be chaning to something else soon!' />
+						<button ng-click='createOrder()'>Create Order</button>
+					</fieldset>
+				</form>
+			</div>
 	</div>
 
 </div>
