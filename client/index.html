@@ -12,8 +12,65 @@
 	<script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
 	<script type="text/javascript" src='js/foodThingie.js'></script>
 	<script src='/socket.io/socket.io.js'></script>
-	<script>
-	</script>
+	<!-- HighCharts -->
+
+		<script type="text/javascript">
+			$(function () {
+			    $('#container').highcharts({
+			        chart: {
+			            plotBackgroundColor: null,
+			            plotBorderWidth: null,
+			            plotShadow: false,
+			            type: 'pie'
+			        },
+			        title: {
+			            text: 'Browser market shares January, 2015 to May, 2015'
+			        },
+			        tooltip: {
+			            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			        },
+			        plotOptions: {
+			            pie: {
+			                allowPointSelect: true,
+			                cursor: 'pointer',
+			                dataLabels: {
+			                    enabled: true,
+			                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+			                    style: {
+			                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+			                    }
+			                }
+			            }
+			        },
+			        series: [{
+			            name: "Brands",
+			            colorByPoint: true,
+			            data: [{
+			                name: "Wasted Food",
+			                y: 56.33
+			            }, {
+			                name: "Chrome",
+			                y: 24.030000000000005,
+			                sliced: true,
+			                selected: true
+			            }, {
+			                name: "Firefox",
+			                y: 10.38
+			            }, {
+			                name: "Safari",
+			                y: 4.77
+			            }, {
+			                name: "Opera",
+			                y: 0.9100000000000001
+			            }, {
+			                name: "Proprietary or Undetectable",
+			                y: 0.2
+			            }]
+			        }]
+			    });
+			});
+		</script>
+		<!-- HighCharts End -->
 </head>
 <body>
 
@@ -38,7 +95,16 @@
 	</nav>
 
 	<div ng-view=''></div>
+
+
+
+<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
 <script src="/js/vendor/jquery.js"></script>
 <script src="/js/vendor/fastclick.js"></script>
+
+	<script src="js/highcharts.js"></script>
+	<script src="js/exporting.js"></script>
+
 </body>
 </html>
