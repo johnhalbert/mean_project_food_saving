@@ -362,6 +362,7 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
             $scope.vendor = vendor;
             console.log("YO", vendor);
             $scope.vendorLogin = {};
+            $scope.updateVendor = vendor;
             productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
                 if (products.error) {
                     console.log(products.error);
