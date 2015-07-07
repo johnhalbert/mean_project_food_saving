@@ -5,7 +5,7 @@ var productController = require('../server/controllers/productController');
 
 module.exports = function(app) {
 
-	// Products Section
+	/***************** Products *****************/
 
 	app.get('products/:id/show', function(req, res){
 		productController.retrieveProduct(req, res);
@@ -27,7 +27,7 @@ module.exports = function(app) {
 		productController.destroyProduct(req, res);
 	})
 
-	// Orders Section
+	/***************** Orders *****************/
 
 	app.get('/orders/:id/show', function(req, res){
 		orderController.retrieveOrder(req, res);
@@ -49,7 +49,7 @@ module.exports = function(app) {
 		orderController.destroyOrder(req, res);
 	})
 
-	// Customers section
+	/***************** Customers *****************/
 
 	app.get('/customers/:id/show', function(req, res){
 		customerController.retrieveCustomer(req, res);
@@ -67,7 +67,7 @@ module.exports = function(app) {
 		customerController.updateCustomer(req, res);
 	})
 
-	// Vendors section
+	/***************** Vendors *****************/
 
 	app.get('/vendors/:id/show', function(req, res){
 		vendorController.retrieveVendor(req, res);
