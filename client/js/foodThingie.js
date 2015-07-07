@@ -100,26 +100,39 @@ foodThingie.factory('socket', function ($rootScope) {
 
 //factory for vendors
 foodThingie.factory("vendorFactory", function($http){
+
+    var vendor;
+
     var factory = {};
 
-    factory.createVendor = function(vendor, callback){
-        $http.post('/vendors/new', vendor)
-          .success(function(vendor){
-            callback(vendor);
+    factory.createVendor = function(newVendor, callback){
+        $http.post('/vendors/new', newVendor)
+          .success(function(createdVendor){
+            vendor = createdVendor;
+            callback(createdVendor);
           })
     }
 
-    factory.updateVendor = function(vendor, callback){
-      $http.post('/vendors/'+vendor._id+'/update', vendor)
-        .success(function(vendor){
-          callback(vendor);
+    factory.updateVendor = function(updateVendor, callback){
+      $http.post('/vendors/'+updatedVendor._id+'/update', updateVendor)
+        .success(function(updatedVendor){
+          vendor = updatedVendor;
+          callback(updatedVendor);
         })
     }
 
-    factory.retrieveVendor = function(vendor, callback){
-      $http.get('/vendors/'+vendor._id+'/show')
-        .success(function(vendor){
-          callback(vendor);
+    factory.getVendor = function(vendorSearch, callback) {
+        $http.post('/vendors/'+vendorSearch.email+'/show', vendorSearch)
+            .success(function(foundVendor){
+                vendor = foundVendor;
+                callback(foundVendor);
+            })
+    }
+
+    factory.retrieveVendor = function(vendorSearch, callback){
+      $http.get('/vendors/'+vendorSearch._id+'/show')
+        .success(function(foundVendor){
+          callback(foundVendor);
         })
     }
 
@@ -177,11 +190,15 @@ foodThingie.factory("productFactory", function($http){
 })
 //factory for customers
 foodThingie.factory("customerFactory", function($http){
+
+    var customer;
+
     var factory = {};
 
     factory.addCustomer = function(customer, callback){
         $http.post('/add_customer', customer).success(function(results){
             console.log('added customer');
+            customer = results;
             callback(results);
         })
     }
@@ -189,13 +206,15 @@ foodThingie.factory("customerFactory", function($http){
     factory.updateCustomer = function(id, callback){
         $http.post('/customers/'+id+'/update').success(function(results){
             console.log('updated customer');
+            customer = results;
             callback(results);
         })
     }
 
-    factory.getCustomer = function(id, callback){
-        $http.get('/customers/'+id+'/show').success(function(results){
+    factory.getCustomer = function(customer, callback){
+        $http.get('/customers/show').success(function(results){
             console.log("got customer");
+            customer = results;
             callback(results);
         })
     }
@@ -203,6 +222,7 @@ foodThingie.factory("customerFactory", function($http){
     factory.getCustomers = function(callback){
         $http.get('/customers/show').success(function(results){
             console.log("got all customers");
+            customer = results;
             callback(results);
         })
     }
@@ -258,15 +278,51 @@ foodThingie.controller("piechart", function(piechartFactory){
 })
 //controller for login/registration
 foodThingie.controller('login_regController', function($scope, socket, $routeParams){
+
   $scope.addCustomer = function(){
-    customerFactory.addCustomer($scope.newCustomer, function(data){
-      if(data){
-        console.log("error")
+    customerFactory.addCustomer($scope.newCustomer, function(customer){
+      if(customer.error){
+        console.log(customer.error);
+        $scope.error = customer.error
       }else{
-        $scope.customer = data;
+        $scope.customer = customer;
       }
     })
-  }  
+  }
+
+  $scope.addVendor = function(){
+    vendorFactory.createVendor($scope.newVendor, function(vendor){
+      if (vendor.error) {
+        console.log(vendor.error);
+        $scope.error = vendor.error;
+      } else {
+        $scope.vendor = vendor;
+      }
+    })
+  }
+
+  $scope.retrieveCustomer = function(){
+    customerFactory.retrieveCustomer($scope.customerLogin, function(customer){
+        if (customer.error) {
+            console.log(customer.error);
+            $scope.error = customer.error;
+        } else {
+            $scope.customer = customer;
+        }
+    })
+  }
+
+  $scope.retrieveVendor = function(){
+    vendorFactory.retrieveVendor($scope.vendorLogin, function(vendor){
+        if (vendor.error) {
+            console.log(vendor.error);
+            $scope.error = vendor.error;
+        } else {
+            $scope.vendor = vendor;
+        }
+    })
+  }
+
 })
 //controller for dash
 foodThingie.controller('DashCtrl', function($scope, socket){
@@ -282,6 +338,8 @@ foodThingie.controller('indiController', function($scope, socket, $routeParams){
 })
 //controller for cutomers
 foodThingie.controller('customersController', function($scope, socket, $routeParams){
+
+    $scope.
 
 })
 //controller for vendors
