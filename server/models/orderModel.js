@@ -6,10 +6,14 @@ var OrderSchema = new mongoose.Schema({
 	_vendor: { type: Schema.ObjectId, ref: 'Vendor' },
 	_customer: { type: Schema.ObjectId, ref: 'Customer' },
 	products: [{ 
-		product_id: { type: String },
-		quantity: Number,
-		}],
-	total: { type: Number },
+
+		type: Schema.Types.ObjectId, 
+		ref: 'Product', 
+		quantity: Number}],
+	pickup_time: Date,
+	status: String,
+	total_price: Number,
+
 	created: { type: Date, default: Date.now }
 
 })

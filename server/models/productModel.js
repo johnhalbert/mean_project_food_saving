@@ -10,6 +10,5 @@ var ProductSchema = new mongoose.Schema({
 	description: { type: String },
 	price: { type: Number, required: 'Products must have a price' },
 	quantity: { type: Number, required: 'Products must have an initial quantity' },
-	ageexpires: { type: Date, required: 'Customers must know when the product expires (roughly)'},
-	orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }]
+	ageexpires: { type: Date, required: 'Customers must know when the product expires (roughly)'}
 })
