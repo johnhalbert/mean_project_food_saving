@@ -303,9 +303,11 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
   $scope.retrieveCustomer = function(){
     customerFactory.getCustomer($scope.customerLogin, function(customer){
         if (customer.error) {
+            $scope.customerLogin = {};
             console.log(customer.error);
             $scope.error = customer.error;
         } else {
+            $scope.customerLogin = {};
             console.log(customer);
             $scope.customer = customer;
         }
@@ -315,11 +317,12 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
   $scope.retrieveVendor = function(){
     vendorFactory.getVendor($scope.vendorLogin, function(vendor){
         if (vendor.error) {
+            $scope.vendorLogin = {};
             console.log(vendor.error);
             $scope.error = vendor.error;
         } else {
-            console.log('Success!', vendor);
             $scope.vendor = vendor;
+            $scope.vendorLogin = {};
             productFactory.retrieveProducts($scope.vendor, function(products){
                 if (products.error) {
                     console.log(products.error);
@@ -345,13 +348,18 @@ foodThingie.controller('DashCtrl', function($scope, socket){
 
 })
 //controller for vendor/products information
-foodThingie.controller('infoController', function($scope, socket, $routeParams){
+foodThingie.controller('infoController', function($scope, socket, $routeParams, vendorFactory){
+   
    vendorFactory.retrieveVendors("restaurant", function(data){
+        console.log(data);
       $scope.restaurants = data;
     })
-    vendorFactory.retrieveVendors("store", function(data){
+
+    vendorFactory.retrieveVendors("grocery", function(data){
+        console.log(data)
       $scope.stores = data;
     })
+
 })
 //controller for individual store/restaurant
 foodThingie.controller('indiController', function($scope, socket, $routeParams){
@@ -380,35 +388,3 @@ foodThingie.controller('productsController', function($scope, socket, $routePara
     })
   }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

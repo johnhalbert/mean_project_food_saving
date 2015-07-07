@@ -53,14 +53,15 @@ module.exports = {
 		Customer.findOne({'email': req.params.id}, function(err, customer){
 			if (err) {
 				console.log('Error logging in customer', err);
-			} else {
+			} else if (customer) {
 				console.log(customer);
-				console.log(req.body);
-				if (customer.email == req.body.email && customer.password == req.body.password) {
+				if (customer.email === req.body.email && customer.password === req.body.password) {
 					res.json(customer);
 				} else {
 					res.json({error: 'Login failed'});
 				}
+			} else {
+				res.json({error: 'Login failed'});
 			}
 		})
 	}

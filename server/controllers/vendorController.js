@@ -44,12 +44,14 @@ module.exports = {
 		Vendor.findOne({'email': req.body.email}, function(err, vendor){
 			if (err) {
 				console.log('Error logging in vendor', err);
-			} else {
+			} else if (vendor) {
 				if (vendor.email === req.body.email && vendor.password === req.body.password){
 					res.json(vendor);
 				} else {
 					res.json({error: 'Login failed'});
 				}
+			} else {
+				res.json({error: 'Login failed'});
 			}
 		})
 	},
