@@ -17,6 +17,10 @@ module.exports = function(app) {
 		productController.retrieveProducts(req, res);
 	})
 
+	app.get('/products/:id/vendor', function(req, res){
+		productController.retrieveProductsOfVendor(req, res);
+	})
+
 	app.post('/products/new', function(req, res){
 		productController.createProduct(req, res);
 	})

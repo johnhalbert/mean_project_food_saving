@@ -19,7 +19,7 @@
 			</div>
 			<div class='small-8 columns'>
 				<input type='text' ng-model='products_filter' placeholder='Search Products' />
-				<table>
+				<table ng-controller = "productsController">
 					<thead>
 						<tr>
 							<td>Name</td>
@@ -41,13 +41,16 @@
 						</tr>
 					</tbody>
 				</table>
-				<form>
+				<form ng-controller = "productsController">
 					<fieldset>
 						<legend>Add/Update Products</legend>
+						<input type = "hidden" value = "{{vendor._id}}" ng-model='addEditProduct.vendor_id'>
 						<label>Product Name</label>
 						<input type='text' name='name' ng-model='addEditProduct.name' />
 						<label>Description</label>
 						<input type='text' name='description' ng-model='addEditProduct.description' />
+						<label>Category</label>
+						<input type='text' name='category' ng-model='addEditProduct.category' />
 						<label>Image (URL)</label>
 						<input type='text' name='image' ng-model='addEditProduct.image' />
 						<label>Price</label>

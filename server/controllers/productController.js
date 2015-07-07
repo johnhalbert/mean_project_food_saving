@@ -8,7 +8,7 @@ module.exports = {
 			if (err) {
 				console.log('Error while creating product (1)', err);
 			} else {
-				var newProduct = new Product({name: req.body.name, image: req.body.image, description: req.body.description, price: req.body.price, quantity: req.body.quantity, ageexpires: req.body.ageexpires});
+				var newProduct = new Product({name: req.body.name, image: req.body.image, description: req.body.description, price: req.body.price, quantity: req.body.quantity, ageexpires: req.body.ageexpires, category: req.body.category, _vendor: req.body.vendor_id});
 				newProduct.save(function(err, product){
 					if (err) {
 						console.log('Error creating new product (2)', err);
@@ -52,6 +52,15 @@ module.exports = {
 	},
 	retrieveProducts: function(req, res){
 		Product.find({}, function(err, products){
+			if (err) {
+				console.log('Error retrieving product list', err);
+			} else {
+				res.json(products);
+			}
+		})
+	},
+	retrieveProductsOfVendor: function(req, res){
+		Product.find({_vendor: req.params.vendor_id}, function(err, products){
 			if (err) {
 				console.log('Error retrieving product list', err);
 			} else {

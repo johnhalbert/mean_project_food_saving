@@ -7,7 +7,9 @@ var Schema = mongoose.Schema;
 var ProductSchema = new mongoose.Schema({
 	name: { type: String, required: 'Products must have a name' },
 	image: { type: String },
+	category: { type: String, required: 'Products must have a category' },
 	description: { type: String },
+	_vendor: { type: Schema.ObjectId, ref: 'Vendor' },
 	price: { type: Number, required: 'Products must have a price' },
 	quantity: { type: Number, required: 'Products must have an initial quantity' },
 	ageexpires: { type: Date, required: 'Customers must know when the product expires (roughly)'}
