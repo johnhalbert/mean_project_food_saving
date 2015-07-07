@@ -2,7 +2,7 @@
 
 <div ng-controller='infoController'>
 
-	<input type='text' nd-model='vendor_filter' placeholder='Search Listings' />
+	<input type='text' ng-model='vendor_filter' placeholder='Search Listings' />
 	<h1>Foods</h1>
 	<div class="container">
 		<table>
@@ -16,25 +16,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>Sample</td>
-					<td>Sample</td>
-					<td>Sample</td>
-					<td>Sample</td>
-					<td>Sample</td>
-
-				</tr>
-				<tr>
-					<td>Sample</td>
-					<td>Sample</td>
-					<td>Sample</td>
-					<td>Sample</td>
-					<td>Sample</td>
-
-				</tr>
 				<tr ng-repeat='restaurant in restaurants | filter: vendor_filter'>
-					<td><a href="#/restaurant/{{restaurant._id}}"></a> ng-bind='restaurant.name'></td>
-					<td ng-bind='restaurant.location'></td>
+					<td><a href="#/singleStore/{{restaurant._id}}" ng-bind='restaurant.name'></a></td>
+					<td ng-bind='restaurant.address'></td>
 					<td ng-bind='restaurant.category'></td>
 					<td ng-bind='restaurant.hours'></td>
 					<td ng-bind='restaurant.pricerange'></td>

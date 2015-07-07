@@ -1,19 +1,19 @@
 <link rel="stylesheet" type="text/css" href="css/storeStyle.css">
 <!-- @author Anika -->
-<div id="container">
+<div id="container" ng-controller='indiController'>
 	<div class="row">
 		<div class="medium-3 columns">
 			<div class="card">
 			    <div class="image">
 			      	<img src="https://instrumentofexpression.files.wordpress.com/2012/09/img_4246.jpg">
-			        <span class="title">Kewl Store</span>
+			        <span class="title" ng-bind='vendor.name'></span>
 			    </div>
 
 			    <div class="content">
 			      	<img src="https://slaterjd.files.wordpress.com/2012/09/manchester-england-google-maps4.jpg">
-			        <p><span style = "font-weight:bold;">Address: </span> 2159 FoodSaver Avenue, San Jose, CA, 95182</p>
-			        <p><span style = "font-weight:bold;">Phone: </span> 408-SAV-FOOD</p>
-			        <p><span style = "font-weight:bold;">Hours: </span> 9 AM - 10 PM</p>
+			        <p><span style = "font-weight:bold;">Address: </span> <span ng-bind='vendor.address'></span></p>
+			        <p><span style = "font-weight:bold;">Phone: </span><span ng-bind='vendor.phone'></span></p>
+			        <p><span style = "font-weight:bold;">Hours: </span><span ng-bind='vendor.hours'></span></p>
 			    </div>
 
 			    <div class="action">

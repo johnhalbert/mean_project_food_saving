@@ -3,21 +3,21 @@ var foodThingie = angular.module('foodThingie', ['ngRoute','nvd3ChartDirectives'
 foodThingie.config(function($routeProvider){
 	$routeProvider
 		.when('/', {
-		templateUrl: 'partials/home.html'
+    		templateUrl: 'partials/home.html'
 		})
         .when('/vendor', {
-        templateUrl: 'partials/vendordashboard.html'
+            templateUrl: 'partials/vendordashboard.html'
         })
-        .when('/singleStore', {
-        templateUrl: 'partials/singleStorePartial.html'
+        .when('/singleStore/:id', {
+            templateUrl: 'partials/singleStorePartial.html'
         })
         .when('/restaurantList', {
-        templateUrl: 'partials/restaurant_list.html'
+            templateUrl: 'partials/restaurant_list.html'
         })
         .when('/groceryList', {
-        templateUrl: 'partials/grocery_list.html'
+            templateUrl: 'partials/grocery_list.html'
         })
-    		.otherwise({redirectTo:'/'});
+    	.otherwise({redirectTo:'/'});
 })
 
 //factory for pie chart
@@ -89,7 +89,7 @@ foodThingie.factory("vendorFactory", function($http){
     }
 
     factory.retrieveVendor = function(vendorSearch, callback){
-      $http.get('/vendors/'+vendorSearch._id+'/show')
+      $http.get('/vendors/'+vendorSearch+'/show')
         .success(function(foundVendor){
           callback(foundVendor);
         })
@@ -193,6 +193,11 @@ foodThingie.factory("customerFactory", function($http){
             callback(results);
         })
     }
+
+    factory.retrieveLogin = function(callback){
+        callback(customer);
+    }
+
     return factory;
 })
 //factory for orders
@@ -288,14 +293,28 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
   }
 
   $scope.addVendor = function(){
-    $scope.newVendor.hours = $scope.newVendor.fromTime + " - " + $scope.newVendor.toTime;
-    console.log($scope.newVendor);
+    var fromTime = new Date($scope.newVendor.fromTime);
+    var toTime = new Date($scope.newVendor.toTime);
+    $scope.newVendor.hours = '';
+    if (fromTime.getHours() > 12) {
+        $scope.newVendor.hours += (fromTime.getHours()-12)+" PM - ";
+    } else {
+        $scope.newVendor.hours += fromTime.getHours()+" AM - ";
+    }
+    if (toTime.getHours() > 12) {
+        $scope.newVendor.hours += (toTime.getHours()-12)+" PM";
+    } else {
+        $scope.newVendor.hours += toTime.getHours()+" AM";
+    }
     vendorFactory.createVendor($scope.newVendor, function(vendor){
       if (vendor.error) {
+        $scope.newVendor = {};
         console.log(vendor.error);
         $scope.error = vendor.error;
       } else {
+        $scope.newVendor = {};
         $scope.vendor = vendor;
+        $window.location.href = '#/vendor';
       }
     })
   }
@@ -348,8 +367,16 @@ foodThingie.controller('DashCtrl', function($scope, socket){
 
 })
 //controller for vendor/products information
-foodThingie.controller('infoController', function($scope, socket, $routeParams, vendorFactory){
-   
+foodThingie.controller('infoController', function($window, $scope, socket, $routeParams, vendorFactory, customerFactory){
+
+    customerFactory.retrieveLogin(function(customer){
+        if (customer) {
+            $scope.customer = customer;
+        } else {
+            $window.location.href = '#/';
+        }
+    })
+
    vendorFactory.retrieveVendors("restaurant", function(data){
         console.log(data);
       $scope.restaurants = data;
@@ -357,12 +384,25 @@ foodThingie.controller('infoController', function($scope, socket, $routeParams, 
 
     vendorFactory.retrieveVendors("grocery", function(data){
         console.log(data)
-      $scope.stores = data;
+      $scope.groceries = data;
     })
 
 })
 //controller for individual store/restaurant
-foodThingie.controller('indiController', function($scope, socket, $routeParams){
+foodThingie.controller('indiController', function($window, $scope, socket, $routeParams, customerFactory, vendorFactory){
+
+    customerFactory.retrieveLogin(function(customer){
+        if (customer) {
+            $scope.customer = customer;
+        } else {
+            $window.location.href = '#/';
+        }
+    });
+
+    vendorFactory.retrieveVendor($routeParams.id, function(vendor){
+        $scope.vendor = vendor;
+        console.log($scope.vendor);
+    })
 
 })
 //controller for cutomers
@@ -386,5 +426,4 @@ foodThingie.controller('productsController', function($scope, socket, $routePara
             $window.location.href = '#/vendor';
         }
     })
-  }
-})
+  });
