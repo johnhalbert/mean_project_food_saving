@@ -1,25 +1,47 @@
+<link rel="stylesheet" type="text/css" href="css/listingStyle.css">
+
 <div>
 
 	<input type='text' nd-model='vendor_filter' placeholder='Search Listings' />
-	<table>
-		<thead>
-			<tr>
-				<th>Restaurant Name</th>
-				<th>Location</th>
-				<th>Category</th>
-				<th>Hours</th>
-				<th>Price Range</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat='restaurant in restaurants | filter: vendor_filter'>
-				<td ng-bind='restaurant.name'></td>
-				<td ng-bind='restaurant.location'></td>
-				<td ng-bind='restaurant.category'></td>
-				<td ng-bind='restaurant.hours'></td>
-				<td ng-bind='restaurant.pricerange'></td>
-			</tr>
-		</tbody>
-	</table>
+	<h1>Foods</h1>
+	<div class="container">
+		<table>
+			<thead>
+				<tr>
+					<th>Restaurant Name</th>
+					<th>Location</th>
+					<th>Category</th>
+					<th>Hours</th>
+					<th>Price Range</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Sample</td>
+					<td>Sample</td>
+					<td>Sample</td>
+					<td>Sample</td>
+					<td>Sample</td>
+
+				</tr>
+				<tr>
+					<td>Sample</td>
+					<td>Sample</td>
+					<td>Sample</td>
+					<td>Sample</td>
+					<td>Sample</td>
+
+				</tr>
+				<tr ng-repeat='restaurant in restaurants | filter: vendor_filter'>
+					<td ng-bind='restaurant.name'></td>
+					<td ng-bind='restaurant.location'></td>
+					<td ng-bind='restaurant.category'></td>
+					<td ng-bind='restaurant.hours'></td>
+					<td ng-bind='restaurant.pricerange'></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
 
 </div>

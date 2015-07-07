@@ -11,6 +11,9 @@ foodThingie.config(function($routeProvider){
         .when('/singleStore', {
         templateUrl: 'partials/singleStorePartial.html'
         })
+        .when('/restaurantList', {
+        templateUrl: 'partials/restaurant_list.html'
+        })
 		.otherwise({redirectTo:'/'});
 })
 
@@ -18,51 +21,59 @@ foodThingie.config(function($routeProvider){
 foodThingie.factory("piechartFactory", function(){
     var factory = {};
 	$(function () {
-    $('#container').highcharts({
-        chart: {
-            type: 'pie',
-            options3d: {
-                enabled: true,
-                alpha: 45,
-                beta: 0
-            }
-        },
-        title: {
-            text: 'Food wasted by various sources, 2014'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                depth: 35,
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.name}'
-                }
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'Food Wasted',
-            data: [
-                ['Grocers',   45.0],
-                ['Farmers',       26.8],
-                {
-                    name: 'Restaurants',
-                    y: 12.8,
-                    sliced: true,
-                    selected: true
-                },
-                ['Individuals',    8.5],
-                ['Hospitals',     6.2],
-                ['Others',   0.7]
-            ] 
-        }]
-    	});
-	});
+                $('#container').highcharts({
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: 'Browser market shares January, 2015 to May, 2015'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        name: "Brands",
+                        colorByPoint: true,
+                        data: [{
+                            name: "Wasted Food",
+                            y: 56.33
+                        }, {
+                            name: "Chrome",
+                            y: 24.030000000000005,
+                            sliced: true,
+                            selected: true
+                        }, {
+                            name: "Firefox",
+                            y: 10.38
+                        }, {
+                            name: "Safari",
+                            y: 4.77
+                        }, {
+                            name: "Opera",
+                            y: 0.9100000000000001
+                        }, {
+                            name: "Proprietary or Undetectable",
+                            y: 0.2
+                        }]
+                    }]
+                });
+            });
     return factory;
 })
 //end factory-pie chart
@@ -175,6 +186,13 @@ foodThingie.factory("productFactory", function($http){
 //factory for customers
 foodThingie.factory("customerFactory", function($http){
     var factory = {};
+
+    factory.addCustomer = function(customer, callback){
+        $http.post('/add_customer', customer).success(function(results){
+            console.log('added customer');
+            callback(results);
+        })
+    }
     return factory;
 })
 //factory for orders
