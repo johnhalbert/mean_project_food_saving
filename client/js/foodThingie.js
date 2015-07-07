@@ -314,16 +314,41 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
   $scope.addVendor = function(){
     var fromTime = new Date($scope.newVendor.fromTime);
     var toTime = new Date($scope.newVendor.toTime);
+
     $scope.newVendor.hours = '';
     if (fromTime.getHours() > 12) {
-        $scope.newVendor.hours += (fromTime.getHours()-12)+" PM - ";
+        $scope.newVendor.hours += (fromTime.getHours()-12)+":";
+        if (fromTime.getMinutes() < 10) {
+            $scope.newVendor.hours += "0"+fromTime.getMinutes();
+        } else {
+            $scope.newVendor.hours += fromTime.getMinutes();
+        }
+        $scope.newVendor.hours += $scope.newVendor.hours += " PM - ";
     } else {
-        $scope.newVendor.hours += fromTime.getHours()+" AM - ";
+        $scope.newVendor.hours += fromTime.getHours()+":";
+        if (fromTime.getMinutes() < 10) {
+            $scope.newVendor.hours += "0"+fromTime.getMinutes();
+        } else {
+            $scope.newVendor.hours += fromTime.getMinutes();
+        }
+        $scope.newVendor.hours += " AM - ";
     }
     if (toTime.getHours() > 12) {
-        $scope.newVendor.hours += (toTime.getHours()-12)+" PM";
+        $scope.newVendor.hours += (toTime.getHours()-12)+":";
+        if (toTime.getMinutes() < 10) {
+            $scope.newVendor.hours += "0"+toTime.getMinutes();
+        } else {
+           $scope.newVendor.hours += toTime.getMinutes();
+        }
+        $scope.newVendor.hours += " PM";
     } else {
-        $scope.newVendor.hours += toTime.getHours()+" AM";
+        $scope.newVendor.hours += toTime.getHours()+":";
+        if (toTime.getMinutes() < 10) {
+            $scope.newVendor.hours += "0"+toTime.getMinutes()
+        } else {
+            $scope.newVendor.hours += toTime.getMinutes();
+        }
+        $scope.newVendor.hours += " AM";
     }
     vendorFactory.createVendor($scope.newVendor, function(vendor){
       if (vendor.error) {
