@@ -1,23 +1,25 @@
+/********************************* ROUTES *********************************/
+
 var foodThingie = angular.module('foodThingie', ['ngRoute','nvd3ChartDirectives']);
 
 foodThingie.config(function($routeProvider){
 	$routeProvider
 		.when('/', {
-		templateUrl: 'partials/home.html'
+    		templateUrl: 'partials/home.html'
 		})
         .when('/vendor', {
-        templateUrl: 'partials/vendordashboard.html'
+            templateUrl: 'partials/vendordashboard.html'
         })
-        .when('/singleStore', {
-        templateUrl: 'partials/singleStorePartial.html'
+        .when('/singleStore/:id', {
+            templateUrl: 'partials/singleStorePartial.html'
         })
         .when('/restaurantList', {
-        templateUrl: 'partials/restaurant_list.html'
+            templateUrl: 'partials/restaurant_list.html'
         })
         .when('/groceryList', {
-        templateUrl: 'partials/grocery_list.html'
+            templateUrl: 'partials/grocery_list.html'
         })
-    		.otherwise({redirectTo:'/'});
+    	.otherwise({redirectTo:'/'});
 })
 
 //factory for pie chart
@@ -55,7 +57,8 @@ foodThingie.factory('socket', function ($rootScope) {
 });
 //end socket factory
 
-//factory for vendors
+/********************************* VENDOR FACTORY *********************************/
+
 foodThingie.factory("vendorFactory", function($http){
 
     var vendor;
@@ -89,7 +92,7 @@ foodThingie.factory("vendorFactory", function($http){
     }
 
     factory.retrieveVendor = function(vendorSearch, callback){
-      $http.get('/vendors/'+vendorSearch._id+'/show')
+      $http.get('/vendors/'+vendorSearch+'/show')
         .success(function(foundVendor){
           callback(foundVendor);
         })
@@ -104,7 +107,9 @@ foodThingie.factory("vendorFactory", function($http){
 
     return factory;
 })
-//factory for products
+
+/********************************* PRODUCTS FACTORY *********************************/
+
 foodThingie.factory("productFactory", function($http){
     
     var factory = {};
@@ -137,6 +142,13 @@ foodThingie.factory("productFactory", function($http){
         })
     }
 
+    factory.retrieveProductsOfVendor = function(vendor, callback){
+      $http.get('/products/'+vendor._id+'/vendor')
+        .success(function(products){
+          callback(products);
+        })
+    }
+
     factory.destroyProduct = function(product, callback){
       $http.post('/products/'+product._id+'/destroy')
         .success(function(product){
@@ -147,7 +159,8 @@ foodThingie.factory("productFactory", function($http){
     return factory;
 
 })
-//factory for customers
+/********************************* CUSTOMERS FACTORY *********************************/
+
 foodThingie.factory("customerFactory", function($http){
 
     var customer;
@@ -193,9 +206,16 @@ foodThingie.factory("customerFactory", function($http){
             callback(results);
         })
     }
+
+    factory.retrieveLogin = function(callback){
+        callback(customer);
+    }
+
     return factory;
 })
-//factory for orders
+
+/********************************* ORDERS FACTORY *********************************/
+
 foodThingie.factory("orderFactory", function($http){
 
     var factory = {};
@@ -239,7 +259,9 @@ foodThingie.factory("orderFactory", function($http){
     return factory;
 
 })
-//controller for pie chart
+
+/********************************* PIE CHART CONTROLLER *********************************/
+
 foodThingie.controller("piechart", function($scope, piechartFactory){
   $scope.exampleData = [
         { key: "Europe", y: 620 },
@@ -273,8 +295,10 @@ var colorArray = ['#000000', '#660000', '#CC0000', '#FF6666', '#FF3333', '#FF666
 //     };
 // }
 })
-//controller for login/registration
-foodThingie.controller('login_regController', function($window, $scope, socket, $routeParams, vendorFactory, customerFactory){
+
+/********************************* LOGIN/REGISTRATION CONTROLLER *********************************/
+
+foodThingie.controller('login_regController', function($window, $scope, socket, $routeParams, vendorFactory, customerFactory, productFactory){
 
   $scope.addCustomer = function(){
     customerFactory.addCustomer($scope.newCustomer, function(customer){
@@ -288,14 +312,28 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
   }
 
   $scope.addVendor = function(){
-    $scope.newVendor.hours = $scope.newVendor.fromTime + " - " + $scope.newVendor.toTime;
-    console.log($scope.newVendor);
+    var fromTime = new Date($scope.newVendor.fromTime);
+    var toTime = new Date($scope.newVendor.toTime);
+    $scope.newVendor.hours = '';
+    if (fromTime.getHours() > 12) {
+        $scope.newVendor.hours += (fromTime.getHours()-12)+" PM - ";
+    } else {
+        $scope.newVendor.hours += fromTime.getHours()+" AM - ";
+    }
+    if (toTime.getHours() > 12) {
+        $scope.newVendor.hours += (toTime.getHours()-12)+" PM";
+    } else {
+        $scope.newVendor.hours += toTime.getHours()+" AM";
+    }
     vendorFactory.createVendor($scope.newVendor, function(vendor){
       if (vendor.error) {
+        $scope.newVendor = {};
         console.log(vendor.error);
         $scope.error = vendor.error;
       } else {
+        $scope.newVendor = {};
         $scope.vendor = vendor;
+        $window.location.href = '#/vendor';
       }
     })
   }
@@ -303,9 +341,11 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
   $scope.retrieveCustomer = function(){
     customerFactory.getCustomer($scope.customerLogin, function(customer){
         if (customer.error) {
+            $scope.customerLogin = {};
             console.log(customer.error);
             $scope.error = customer.error;
         } else {
+            $scope.customerLogin = {};
             console.log(customer);
             $scope.customer = customer;
         }
@@ -315,11 +355,24 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
   $scope.retrieveVendor = function(){
     vendorFactory.getVendor($scope.vendorLogin, function(vendor){
         if (vendor.error) {
+            $scope.vendorLogin = {};
             console.log(vendor.error);
             $scope.error = vendor.error;
         } else {
-            console.log('Success!', vendor);
             $scope.vendor = vendor;
+            console.log("YO", vendor);
+            $scope.vendorLogin = {};
+            productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
+                if (products.error) {
+                    console.log(products.error);
+                    $scope.error = products.error;
+                } else {
+                    console.log('Success!', products);
+                    $scope.products = products;
+                    $window.location.href = '#/vendor';
+                }
+            })
+            $scope.updateButton = false; // hide update button
             $window.location.href = '#/vendor';
         }
     })
@@ -334,17 +387,46 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
 foodThingie.controller('DashCtrl', function($scope, socket){
 
 })
-//controller for vendor/products information
-foodThingie.controller('infoController', function($scope, socket, $routeParams){
+
+
+/********************************* VENDOR / PRODUCTS CONTROLLER *********************************/
+
+foodThingie.controller('infoController', function($window, $scope, socket, $routeParams, vendorFactory, customerFactory){
+
+    customerFactory.retrieveLogin(function(customer){
+        if (customer) {
+            $scope.customer = customer;
+        } else {
+            $window.location.href = '#/';
+        }
+    })
+
    vendorFactory.retrieveVendors("restaurant", function(data){
+        console.log(data);
       $scope.restaurants = data;
     })
-    vendorFactory.retrieveVendors("store", function(data){
-      $scope.stores = data;
+
+    vendorFactory.retrieveVendors("grocery", function(data){
+        console.log(data)
+      $scope.groceries = data;
     })
+
 })
 //controller for individual store/restaurant
-foodThingie.controller('indiController', function($scope, socket, $routeParams){
+foodThingie.controller('indiController', function($window, $scope, socket, $routeParams, customerFactory, vendorFactory){
+
+    customerFactory.retrieveLogin(function(customer){
+        if (customer) {
+            $scope.customer = customer;
+        } else {
+            $window.location.href = '#/';
+        }
+    });
+
+    vendorFactory.retrieveVendor($routeParams.id, function(vendor){
+        $scope.vendor = vendor;
+        console.log($scope.vendor);
+    })
 
 })
 //controller for cutomers
@@ -355,39 +437,83 @@ foodThingie.controller('customersController', function($scope, socket, $routePar
 foodThingie.controller('vendorsController', function($scope, socket, $routeParams){
    
 })
-//future products controller ######################################
-foodThingie.controller('productsController', function($scope, socket, $routeParams){
 
+/********************************* PRODUCTS CONTROLLER *********************************/
+   
+foodThingie.controller('productsController', function($scope, socket, $routeParams, productFactory){
+    $scope.products = {};
+
+    $scope.retrieveProductsOfVendor = function(){
+        productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
+
+            if (products.error) {
+                console.log(products.error);
+                $scope.error = products.error;
+            } else {
+                console.log('Success!', products);
+                $scope.products = products;
+                $window.location.href = '#/vendor';
+            }
+        })
+    }
+
+    $scope.addProduct = function(){
+        productFactory.createProduct($scope.addEditProduct, function(product){
+          if (product.error) {
+                console.log(product.error);
+                $scope.error = product.error;
+            } else {
+                console.log('Success!', product);
+                $scope.products.push(product);
+                $scope.addEditProduct = {};
+
+                productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
+                    if (products.error) {
+                        console.log(products.error);
+                        $scope.error = products.error;
+                    } else {
+                        console.log('Success!', products);
+                        $scope.products = products;
+                        $window.location.href = '#/vendor';
+                    }
+                })
+
+                $window.location.href = '#/vendor';
+            }
+        })
+      }
+
+
+    $scope.updateProduct = function(){
+        productFactory.updateProduct($scope.addEditProduct, function(product){
+            if (product.error) {
+                console.log(product.error);
+                $scope.error = product.error;
+            } else {
+                console.log('Success!', product);
+                $scope.addEditProduct = {}; // set form fields to empty
+                $scope.updateButton = false; // hide update button
+                $window.location.href = '#/vendor';
+            }
+        })
+    }
+
+    $scope.retrieveProduct = function(req, res){
+        productFactory.retrieveProduct(req.body, function(product){
+            if (product.error) {
+                console.log(product.error);
+                $scope.error = product.error;
+            } else {
+                console.log('Success!', product);
+                $scope.addEditProduct = product; // populate form
+                $scope.updateButton = true; // show update button
+                $window.location.href = '#/vendor';
+            }
+        })
+    }
+     
+
+
+  
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

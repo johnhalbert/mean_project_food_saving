@@ -25,9 +25,16 @@
 			margin-left: 1em;
 		}
 
-		/*form {
+		form {
 			box-shadow: 0px 0px 10px 1px rgba(0, 0, 40, 0.2);
-		}*/
+			padding: 1em;
+			margin: 1em;
+			border-radius: 1em;
+		}
+
+		form button {
+			border-radius: 1em;
+		}
 		
 
 /*	@author Anika

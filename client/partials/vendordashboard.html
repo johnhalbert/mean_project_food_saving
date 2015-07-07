@@ -1,11 +1,9 @@
-<!-- <link rel="stylesheet" type="text/css" href="css/listingStyle.css"> -->
+<link rel="stylesheet" type="text/css" href="css/listingStyle.css">
 
-<div ng-controller='DashCtrl'>
+<div ng-controller='login_regController'>
 
 	<div id='dashMain'>
-		<div class='row'>
 			<div class='small-4 columns'>
-				
 				<form>
 					<fieldset>
 						<legend>My Profile</legend>
@@ -21,7 +19,7 @@
 			</div>
 			<div class='small-8 columns'>
 				<input type='text' ng-model='products_filter' placeholder='Search Products' />
-				<table>
+				<table ng-controller = "productsController">
 					<thead>
 						<tr>
 							<td>Name</td>
@@ -39,17 +37,20 @@
 							<td ng-bind='product.price'></td>
 							<td ng-bind='product.quantity'></td>
 							<td ng-bind='product.ageexpires'></td>
-							<td><button ng-click='update()'>Update</button> <button ng-click='delete()'>Delete</button></td>
+							<td><button ng-show= "#updateButton" ng-click='update()'>Update</button> <button ng-click='delete()'>Delete</button></td>
 						</tr>
 					</tbody>
 				</table>
-				<form>
+				<form ng-controller = "productsController">
 					<fieldset>
 						<legend>Add/Update Products</legend>
+						<input type = "hidden" value = "{{vendor._id}}" ng-model='addEditProduct.vendor_id'>
 						<label>Product Name</label>
 						<input type='text' name='name' ng-model='addEditProduct.name' />
 						<label>Description</label>
 						<input type='text' name='description' ng-model='addEditProduct.description' />
+						<label>Category</label>
+						<input type='text' name='category' ng-model='addEditProduct.category' />
 						<label>Image (URL)</label>
 						<input type='text' name='image' ng-model='addEditProduct.image' />
 						<label>Price</label>
@@ -58,7 +59,8 @@
 						<input type='text' name='quantity' ng-model='addEditProduct.quantity' />
 						<label>Age/Expires</label>
 						<input type='text' name='ageexpires' ng-model='addEditProduct.ageexpires' />
-						<button ng-click='addEditProduct()'>Add/Edit</button>
+						<button ng-hide='updateButton' ng-click='addProduct()'>Add</button>
+						<button ng-show='updateButton' ng-click='editProduct()'>Update</button>
 					</fieldset>
 				</form>
 				<hr />
@@ -99,6 +101,5 @@
 					</fieldset>
 				</form>
 			</div>
-	</div>
 
 </div>

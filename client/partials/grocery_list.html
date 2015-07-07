@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="css/listingStyle.css">
 
-<div>
+<div ng-controller='infoController'>
 
 	<input type='text' nd-model='vendor_filter' placeholder='Search Listings' />
 	<h1>Grocery Stores</h1>
@@ -14,20 +14,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>Sample</td>
-					<td>Sample</td>
-					<td>Sample</td>
-				</tr>
-				<tr>
-					<td>Sample</td>
-					<td>Sample</td>
-					<td>Sample</td>
-				</tr>
 				<tr ng-repeat='grocery in groceries | filter: vendor_filter'>
-					<td ng-bind='grocery.name'></td>
-					<td ng-bind='grocery.location'></td>
-					<td ng-bind='grocery.hours'></td>
+					<td><a href='#/singleStore/{{grocery._id}}' ng-bind='grocery.name'></a></td>
+					<td ng-bind='grocery.address'></td>
+					<td ng-bind='grocery.hours | date: "h"'></td>
 				</tr>
 			</tbody>
 		</table>
