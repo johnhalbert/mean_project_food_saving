@@ -3,6 +3,7 @@ var Vendor = mongoose.model('Vendor');
 
 module.exports = {
 	createVendor: function(req, res){
+		console.log('in createVendor');
 		var newVendor = new Vendor({name: req.body.name, type: req.body.type, address: req.body.address, phone: req.body.phone, hours: req.body.hours});
 		newVendor.save(function(err, vendor){
 			if (err) {
@@ -17,10 +18,10 @@ module.exports = {
 			if (err) {
 				console.log('Error while updating vendor (1)', err);
 			} else {
-				vendor.name: req.body.name;
-				vendor.address: req.body.address;
-				vendor.phone: req.body.phone;
-				vendor.hours: req.body.hours;
+				vendor.name = req.body.name;
+				vendor.address = req.body.address;
+				vendor.phone = req.body.phone;
+				vendor.hours = req.body.hours;
 				vendor.save(function(err, vendor){
 					if (err) {
 						console.log('Error while updating vendor (2)', err);

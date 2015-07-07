@@ -5,9 +5,11 @@ var productController = require('../server/controllers/productController');
 
 module.exports = function(app) {
 
+	console.log('exporting routes!');
+
 	/***************** Products *****************/
 
-	app.get('products/:id/show', function(req, res){
+	app.get('/products/:id/show', function(req, res){
 		productController.retrieveProduct(req, res);
 	})
 
@@ -23,7 +25,7 @@ module.exports = function(app) {
 		productController.updateProduct(req, res);
 	})
 
-	app.post('products/:id/destroy', function(req, res){
+	app.post('/products/:id/destroy', function(req, res){
 		productController.destroyProduct(req, res);
 	})
 
@@ -69,16 +71,17 @@ module.exports = function(app) {
 
 	/***************** Vendors *****************/
 
+	app.post('/vendors/new', function(req, res){
+		console.log('Im in /vendors/new');
+		vendorController.createVendor(req, res);
+	})
+
 	app.get('/vendors/:id/show', function(req, res){
 		vendorController.retrieveVendor(req, res);
 	})
 
 	app.get('/vendors/show/:id', function(req, res){
 		vendorController.retrieveVendors(req, res);
-	})
-
-	app.post('/vendors/new', function(req, res){
-		vendorController.createVendor(req, res);
 	})
 
 	app.post('/vendors/:id/update', function(req, res){

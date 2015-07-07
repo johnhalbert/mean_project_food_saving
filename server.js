@@ -11,7 +11,7 @@ var app = express();
 app.use(express.static(path.join(__dirname, './client')));
 app.use(bodyParser.json());
 
-// require('./config/routes');
+require('./config/routes')(app);
 
 var server = app.listen(8000, function(){
 	console.log('Food Thingie Lives! Port :8000 Yall!');

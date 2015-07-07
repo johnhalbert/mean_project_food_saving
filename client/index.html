@@ -48,7 +48,7 @@
 	</nav>
 
 	<!-- ******************** SIGN-IN / REGISTER  MODAL ******************** -->
-	<div class="modal fade" id="loginRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div ng-controller='login_regController' class="modal fade" id="loginRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             
@@ -58,22 +58,30 @@
                 </div>
             
                 <div class="modal-body">
+                	<div style = "overflow-y:scroll;height:30em;">
                 	<h2>Register</h2>
                 	<form>
-                		<input type = 'hidden' value = 'register'>
-                		<input type = 'text' placeholder = 'Name'>
-                		<input type = 'email' placeholder = 'Email'>
-                		<input type = 'password' placeholder = 'Password'>
-                		<a class="btn btn-success btn-ok">Register</a>
+                		<input type = 'text' placeholder = 'Name' ng-model='newVendor.name' />
+                		<input type = 'email' placeholder = 'Email' ng-model-'newVendor.email' />
+                		<input type = 'password' placeholder = 'Password' ng-model='newVendor.password' />
+                		From: <input type='time' ng-model='newVendor.fromTime' />
+                		To: <input type='time' ng-model='newVendor.toTime' />
+                		<input type='text' placeholder='Address' ng-model='newVendor.address' />
+                		<input type='text' placeholder='Phone' ng-model='newVendor.phone' />
+                		Type: <select ng-model='newVendor.type'>
+                					<option value='grocery'>Grocery Store</option>
+                					<option value='restaurant'>Restaurant</option>
+                			  </select>
+                		<a class="btn btn-success btn-ok" ng-click='addVendor()'>Register</a>
                 	</form>
 
                 	<h2>Login</h2>
                 	<form>
-                		<input type = 'hidden' value = 'login'>
-                		<input type = 'email' placeholder = 'Email'>
-                		<input type = 'password' placeholder = 'Password'>
-                		<a class="btn btn-success btn-ok">Login</a>
+                		<input type = 'email' placeholder = 'Email' ng-model='loginVendor.email' />
+                		<input type = 'password' placeholder = 'Password' ng-model='loginVendor.password'>
+                		<a class="btn btn-success btn-ok" ng-click='retrieveVendor()'>Login</a>
                 	</form>
+                </div>
                 </div>
                 
                 <div class="modal-footer">

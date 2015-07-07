@@ -24,11 +24,11 @@ module.exports = {
 		})
 	},
 	destroyOrder: function(req, res){
-		Vendor.findOne({}, fucntion(err, vedor){
+		Vendor.findOne({'_id': req.body.vendor_id}, function(err, vendor){
 			if (err) {
 				console.log('Error cancelling order (1)', err);
 			} else {
-				Order.findOne({sdfds}, function(err, order){
+				Order.findOne({'_id': req.body.order_id}, function(err, order){
 					if (err) {
 						console.log('Error cancelling order (2)', err);
 					} else {
@@ -44,13 +44,13 @@ module.exports = {
 							if (err) {
 								console.log('Error cancelling order (3)', err);
 							} else {
-								vendor.save(err, vendor){
+								vendor.save(function(err, vendor){
 									if (err) {
 										console.log('Error cancelling order (4)', err);
 									} else {
 										res.end()
 									}
-								}
+								})
 							}
 						})
 					}
@@ -81,7 +81,7 @@ module.exports = {
 	updateOrder: function(req, res){
 		Order.update(
 				{_id : req.params.id},
-				{req.body},
+				req.body,
 				function(err, numberAffected, rawResponse) {
 		   			console.log('error', err);
 		   			res.end();

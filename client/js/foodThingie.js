@@ -106,6 +106,7 @@ foodThingie.factory("vendorFactory", function($http){
     var factory = {};
 
     factory.createVendor = function(newVendor, callback){
+        console.log('creating vendor!');
         $http.post('/vendors/new', newVendor)
           .success(function(createdVendor){
             vendor = createdVendor;
@@ -277,7 +278,7 @@ foodThingie.controller("piechart", function(piechartFactory){
 
 })
 //controller for login/registration
-foodThingie.controller('login_regController', function($scope, socket, $routeParams){
+foodThingie.controller('login_regController', function($scope, socket, $routeParams, vendorFactory){
 
   $scope.addCustomer = function(){
     customerFactory.addCustomer($scope.newCustomer, function(customer){
@@ -291,6 +292,7 @@ foodThingie.controller('login_regController', function($scope, socket, $routePar
   }
 
   $scope.addVendor = function(){
+    $scope.newVendor.hours = $scope.newVendor.fromTime + " - " + $scope.newVendor.toTime;
     vendorFactory.createVendor($scope.newVendor, function(vendor){
       if (vendor.error) {
         console.log(vendor.error);
@@ -338,8 +340,6 @@ foodThingie.controller('indiController', function($scope, socket, $routeParams){
 })
 //controller for cutomers
 foodThingie.controller('customersController', function($scope, socket, $routeParams){
-
-    $scope.
 
 })
 //controller for vendors
