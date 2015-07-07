@@ -7,6 +7,7 @@ var CustomerSchema = new mongoose.Schema({
 	email: { type: String, required: 'You must enter a valid email' },
 	password: { type: String, required: 'You must include a password' },
 	orders: [{ type: Schema.Types.ObjectId, ref: 'Order'}],
+	credit_card_number: Number,
 	created: { type: Date, default: Date.now }
 })
 
