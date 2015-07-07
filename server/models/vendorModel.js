@@ -4,6 +4,8 @@ var Schema = mongoose.Schema;
 
 var VendorSchema = new mongoose.Schema({
 	name: { type: String, required: 'You must include your company name' },
+	email: { type: String, index: { unique: true }, required: 'You must include your company email' },
+	password: { type: String, required: 'You must choose a password' },
 	type: { type: String, required: 'You must specify either restaurant or store' },
 	address: { type: String, required: 'You must include your company address' },
 	phone: { type: String, required: 'You must include your company phone number' },

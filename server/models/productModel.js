@@ -12,3 +12,5 @@ var ProductSchema = new mongoose.Schema({
 	quantity: { type: Number, required: 'Products must have an initial quantity' },
 	ageexpires: { type: Date, required: 'Customers must know when the product expires (roughly)'}
 })
+
+var Product = mongoose.model('Product', ProductSchema);
