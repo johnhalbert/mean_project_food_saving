@@ -41,7 +41,7 @@ module.exports = {
 		})
 	},
 	retrieveVendors: function(req, res){
-		Vendor.find({}, function(err, vendors){
+		Vendor.find({type:req.params.id}, function(err, vendors){
 			if (err) {
 				console.log('Error while retrieving vendor list', err);
 			} else {

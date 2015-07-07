@@ -14,6 +14,9 @@ foodThingie.config(function($routeProvider){
         .when('/restaurantList', {
         templateUrl: 'partials/restaurant_list.html'
         })
+        .when('/grocerList', {
+        templateUrl: 'partials/grocer_list.html'
+        })
 		.otherwise({redirectTo:'/'});
 })
 
@@ -131,8 +134,8 @@ foodThingie.factory("vendorFactory", function($http){
         })
     }
 
-    factory.retrieveVendors = function(callback){
-      $http.get('/vendors')
+    factory.retrieveVendors = function(type, callback){
+      $http.get('/vendors/show/'+type)
         .success(function(vendors){
           callback(vendors);
         })
@@ -229,13 +232,12 @@ foodThingie.factory("orderFactory", function($http){
     }
 
     factory.destroyOrder = function(order, callback){
-      $http.post('/orders/'+order._id+'/destroy', order){
+      $http.post('/orders/'+order._id+'/destroy', order)
         .success(function(order){
           callback(order);
           // This will probably change.
         })
       }
-    }
 
     factory.retrieveOrder = function(order, callback){
       $http.get('/orders/'+order._id)
@@ -254,7 +256,7 @@ foodThingie.factory("orderFactory", function($http){
     factory.updateOrder = function(order, callback){
       $http.post('/orders/'+order._id+'/update', order)
         .success(function(order){
-          callback order;
+          callback(order);
         })
     }
   
@@ -265,7 +267,75 @@ foodThingie.factory("orderFactory", function($http){
 foodThingie.controller("piechart", function(piechartFactory){
 
 })
+//controller for login/registration
+foodThingie.controller('login_regController', function($scope, socket, $routeParams){
+  $scope.addCustomer = function(){
+    customerFactory.addCustomer($scope.newCustomer, function(data){
+      if(data){
+        console.log("error")
+      }else{
+        $scope.customer = data;
+      }
+    })
+  }  
+})
 //controller for dash
 foodThingie.controller('DashCtrl', function($scope, socket){
 
 })
+//controller for vendor/products information
+foodThingie.controller('infoController', function($scope, socket, $routeParams){
+
+})
+//controller for individual store/restaurant
+foodThingie.controller('indiController', function($scope, socket, $routeParams){
+
+})
+//controller for cutomers
+foodThingie.controller('customersController', function($scope, socket, $routeParams){
+
+})
+//controller for vendors
+foodThingie.controller('vendorsController', function($scope, socket, $routeParams){
+  $scope.retrieveRestaurants = function(){
+    vendorFactory.retrieveVendors("restaurant", function(data){
+      $scope.restaurants = data;
+    })
+  }
+})
+//future products controller ######################################
+foodThingie.controller('productsController', function($scope, socket, $routeParams){
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

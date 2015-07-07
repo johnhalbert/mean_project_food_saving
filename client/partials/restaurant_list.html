@@ -33,7 +33,7 @@
 
 				</tr>
 				<tr ng-repeat='restaurant in restaurants | filter: vendor_filter'>
-					<td ng-bind='restaurant.name'></td>
+					<td><a href="#/restaurant/{{restaurant._id}}"></a> ng-bind='restaurant.name'></td>
 					<td ng-bind='restaurant.location'></td>
 					<td ng-bind='restaurant.category'></td>
 					<td ng-bind='restaurant.hours'></td>

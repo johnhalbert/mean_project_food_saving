@@ -73,7 +73,7 @@ module.exports = function(app) {
 		vendorController.retrieveVendor(req, res);
 	})
 
-	app.get('/vendors/show', function(req, res){
+	app.get('/vendors/show/:id', function(req, res){
 		vendorController.retrieveVendors(req, res);
 	})
 
