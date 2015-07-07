@@ -5,8 +5,7 @@ var Schema = mongoose.Schema;
 var OrderSchema = new mongoose.Schema({
 	_vendor: { type: Schema.ObjectId, ref: 'Vendor' },
 	_customer: { type: Schema.ObjectId, ref: 'Customer' },
-	products: [{ 
-
+	products: [{
 		type: Schema.Types.ObjectId, 
 		ref: 'Product', 
 		quantity: Number}],
