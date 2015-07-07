@@ -1,12 +1,21 @@
-var express = require("express");
-var path = require("path");
+
+var express = require('express');
+var path = require('path');
+var bodyParser = require('body-parser');
+
+var mongoose = require('mongoose');
+
+require('./config/mongoose');
+
 var app = express();
-require('./server/config/mongoose.js');
-var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded());
+
+app.use(express.static(path.join(__dirname, './client')));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "./client")));
-require('./server/config/routes.js')(app);
-app.listen(8000, function() {
- console.log("listening on port 8000");
+
+// require('./config/routes');
+
+var server = app.listen(8000, function(){
+	console.log('Food Thingie Lives! Port :8000 Yall!');
 })
+
+require('./config/socketio')(server);
