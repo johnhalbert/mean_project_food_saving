@@ -343,16 +343,16 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
             $scope.vendor = vendor;
             $scope.vendorLogin = {};
             productFactory.retrieveProducts($scope.vendor, function(products){
-                if (products.error) {
-                    console.log(products.error);
-                    $scope.error = products.error;
-                } else {
-                    console.log('Success!', products);
-                    $scope.products = products;
-                    $window.location.href = '#/vendor';
-                }
+                // if (products.error) {
+                //     console.log(products.error);
+                //     $scope.error = products.error;
+                // } else {
+                //     console.log('Success!', products);
+                //     $scope.products = products;
+                    // $window.location.href = '#/vendor';
+                // }
             })
-            // $window.location.href = '#/vendor';
+            $window.location.href = '#/vendor';
         }
     })
   }
@@ -416,14 +416,63 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
 //future products controller $scope.retrieveVendor = function(){
    
 foodThingie.controller('productsController', function($scope, socket, $routeParams){
-     productFactory.retrieveProducts($scope.vendor, function(products){
-        if (products.error) {
-            console.log(products.error);
-            $scope.error = products.error;
-        } else {
-            console.log('Success!', products);
-            $scope.products = products;
-            $window.location.href = '#/vendor';
-        }
-    })
-  });
+
+    $scope.retrieveProducts = function(){
+        productFactory.retrieveProducts($scope.vendor, function(products){
+            if (products.error) {
+                console.log(products.error);
+                $scope.error = products.error;
+            } else {
+                console.log('Success!', products);
+                $scope.products = products;
+                $window.location.href = '#/vendor';
+            }
+        })
+    }
+
+    $scope.addProduct = function(req, res){
+        productFactory.createProduct(req.body, function(product){
+            if (product.error) {
+                console.log(product.error);
+                $scope.error = product.error;
+            } else {
+                console.log('Success!', product);
+                $scope.products.push(product);
+                $window.location.href = '#/vendor';
+            }
+        })
+    }
+
+    $scope.updateProduct = function(req, res){
+        productFactory.updateProduct(req.body, function(product){
+            if (product.error) {
+                console.log(product.error);
+                $scope.error = product.error;
+            } else {
+                console.log('Success!', product);
+                $scope.addEditProduct = {}; // set form fields to empty
+                $scope.updateButton = false; // hide update button
+                $window.location.href = '#/vendor';
+            }
+        })
+    }
+
+    $scope.retrieveProduct = function(req, res){
+        productFactory.retrieveProduct(req.body, function(product){
+            if (product.error) {
+                console.log(product.error);
+                $scope.error = product.error;
+            } else {
+                console.log('Success!', product);
+                $scope.addEditProduct = product; // populate form
+                $scope.updateButton = true; // show update button
+                $window.location.href = '#/vendor';
+            }
+        })
+    }
+     
+
+
+  
+})
+
