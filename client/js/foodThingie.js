@@ -1,4 +1,4 @@
-var foodThingie = angular.module('foodThingie', ['ngRoute']);
+var foodThingie = angular.module('foodThingie', ['ngRoute','nvd3ChartDirectives']);
 
 foodThingie.config(function($routeProvider){
 	$routeProvider
@@ -16,55 +16,13 @@ foodThingie.config(function($routeProvider){
         })
         .when('/groceryList', {
         templateUrl: 'partials/grocery_list.html'
-		.otherwise({redirectTo:'/'});
+        })
+    		.otherwise({redirectTo:'/'});
 })
 
 //factory for pie chart
 foodThingie.factory("piechartFactory", function(){
     var factory = {};
-	$(function () {
-                $('#container').highcharts({
-                    chart: {
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false,
-                        type: 'pie'
-                    },
-                    title: {
-                        text: 'Data Provided by FeedingAmerica.org'
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: true,
-                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                style: {
-                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                                }
-                            }
-                        }
-                    },
-                    series: [{
-                        name: "Food Waste",
-                        colorByPoint: true,
-                        colors: ['#AE3B41', '#3D347B'],
-                        data: [{
-                            name: "Wasted Food",
-                            y: 40,
-                            sliced: true,
-                            selected: true
-                        }, {
-                            name: "Consumed",
-                            y: 60
-                        }]
-                    }]
-                });
-            });
     return factory;
 })
 //end factory-pie chart
@@ -252,17 +210,47 @@ foodThingie.factory("orderFactory", function($http){
 
 })
 //controller for pie chart
-foodThingie.controller("piechart", function(piechartFactory){
-
+foodThingie.controller("piechart", function($scope, piechartFactory){
+  $scope.exampleData = [
+        { key: "Europe", y: 620 },
+        { key: "North America and Oceania", y: 650 },
+        { key: "Industrialized Asia", y: 530 },
+        { key: "sub-Saharan Africa", y: 350 },
+        { key: "North Africa, West and Central Asia", y: 474 },
+        { key: "South and Southeast Asia", y: 276 },
+        { key: "Latin America", y: 496 }
+      ];
+  $scope.xFunction = function(){
+    return function(d) {
+        return d.key;
+    };
+}
+  $scope.yFunction = function(){
+  return function(d){
+    return d.y;
+  };
+}
+  $scope.toolTipContentFunction = function(){
+    return function(key, x, y, e, graph) {
+        return '<p>' + "Region: " + key + '</p>' +
+              '<p>' +  x + ' lbs/yr ' + '</p>'
+    }
+  }
+var colorArray = ['#000000', '#660000', '#CC0000', '#FF6666', '#FF3333', '#FF6666', '#FFE6E6'];
+// $scope.colorFunction = function() {
+//   return function(d, i) {
+//       return colorArray[i];
+//     };
+// }
 })
 //controller for login/registration
 foodThingie.controller('login_regController', function($scope, socket, $routeParams){
   $scope.addCustomer = function(){
-    customerFactory.addCustomer($scope.newCustomer, function(data){
-      if(data){
+    customerFactory.addCustomer($scope.newCustomer, function(customer){
+      if(customer.error){
         console.log("error")
       }else{
-        $scope.customer = data;
+        $scope.customer = customer;
       }
     })
   }  
@@ -273,7 +261,12 @@ foodThingie.controller('DashCtrl', function($scope, socket){
 })
 //controller for vendor/products information
 foodThingie.controller('infoController', function($scope, socket, $routeParams){
-
+   vendorFactory.retrieveVendors("restaurant", function(data){
+      $scope.restaurants = data;
+    })
+    vendorFactory.retrieveVendors("store", function(data){
+      $scope.stores = data;
+    })
 })
 //controller for individual store/restaurant
 foodThingie.controller('indiController', function($scope, socket, $routeParams){
@@ -285,11 +278,7 @@ foodThingie.controller('customersController', function($scope, socket, $routePar
 })
 //controller for vendors
 foodThingie.controller('vendorsController', function($scope, socket, $routeParams){
-  $scope.retrieveRestaurants = function(){
-    vendorFactory.retrieveVendors("restaurant", function(data){
-      $scope.restaurants = data;
-    })
-  }
+   
 })
 //future products controller ######################################
 foodThingie.controller('productsController', function($scope, socket, $routeParams){
