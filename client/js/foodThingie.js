@@ -185,6 +185,27 @@ foodThingie.factory("customerFactory", function($http){
             callback(results);
         })
     }
+
+    factory.updateCustomer = function(id, callback){
+        $http.post('/customers/'+id+'/update').success(function(results){
+            console.log('updated customer');
+            callback(results);
+        })
+    }
+
+    factory.getCustomer = function(id, callback){
+        $http.get('/customers/'+id+'/show').success(function(results){
+            console.log("got customer");
+            callback(results);
+        })
+    }
+
+    factory.getCustomers = function(callback){
+        $http.get('/customers/show').success(function(results){
+            console.log("got all customers");
+            callback(results);
+        })
+    }
     return factory;
 })
 //factory for orders

@@ -7,6 +7,7 @@ With the billions of dollars of good food that is tossed each year in North Amer
 ### Resources
 * http://www.usda.gov/oce/foodwaste/resources/consumers.htm
 * http://www.usda.gov/oce/foodwaste/resources/donations.htm
+* http://www.feedingamerica.org/about-us/how-we-work/securing-meals/reducing-food-waste.html
 
 
 ## Team Members
