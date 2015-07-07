@@ -24,14 +24,39 @@ module.exports = {
 		})
 	},
 	destroyOrder: function(req, res){
-		Order.remove({_id: req.params.id}, function(err, results) {
-		       	if(err) {
-		         	console.log(err);
-		       	} else {
-		         	res.send(results);
-
-		       	}
-	   		})
+		Vendor.findOne({}, fucntion(err, vedor){
+			if (err) {
+				console.log('Error cancelling order (1)', err);
+			} else {
+				Order.findOne({sdfds}, function(err, order){
+					if (err) {
+						console.log('Error cancelling order (2)', err);
+					} else {
+						order.status = 'cancelled';
+						for (var i = 0; i < vendor.products.length; i++) {
+							for (var j = 0; j < order.products.length; j++) {
+								if (vendor.products[i]._id === order.products[j]._id) {
+									vendor.products[i].quantity += order.products[j].quantity;
+								}
+							}
+						}
+						order.save(function(err, order){
+							if (err) {
+								console.log('Error cancelling order (3)', err);
+							} else {
+								vendor.save(err, vendor){
+									if (err) {
+										console.log('Error cancelling order (4)', err);
+									} else {
+										res.end()
+									}
+								}
+							}
+						})
+					}
+				})
+			}
+		})
 	},
 	retrieveOrder: function(req, res){
 		Order.find({_id: req.params.id}, function(err, results) {
