@@ -274,7 +274,7 @@ var colorArray = ['#000000', '#660000', '#CC0000', '#FF6666', '#FF3333', '#FF666
 // }
 })
 //controller for login/registration
-foodThingie.controller('login_regController', function($window, $scope, socket, $routeParams, vendorFactory, customerFactory){
+foodThingie.controller('login_regController', function($window, $scope, socket, $routeParams, vendorFactory, customerFactory, productFactory){
 
   $scope.addCustomer = function(){
     customerFactory.addCustomer($scope.newCustomer, function(customer){
@@ -320,7 +320,17 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
         } else {
             console.log('Success!', vendor);
             $scope.vendor = vendor;
-            $window.location.href = '#/vendor';
+            productFactory.retrieveProducts($scope.vendor, function(products){
+                if (products.error) {
+                    console.log(products.error);
+                    $scope.error = products.error;
+                } else {
+                    console.log('Success!', products);
+                    $scope.products = products;
+                    $window.location.href = '#/vendor';
+                }
+            })
+            // $window.location.href = '#/vendor';
         }
     })
   }
@@ -355,9 +365,20 @@ foodThingie.controller('customersController', function($scope, socket, $routePar
 foodThingie.controller('vendorsController', function($scope, socket, $routeParams){
    
 })
-//future products controller ######################################
+//future products controller $scope.retrieveVendor = function(){
+   
 foodThingie.controller('productsController', function($scope, socket, $routeParams){
-
+     productFactory.retrieveProducts($scope.vendor, function(products){
+        if (products.error) {
+            console.log(products.error);
+            $scope.error = products.error;
+        } else {
+            console.log('Success!', products);
+            $scope.products = products;
+            $window.location.href = '#/vendor';
+        }
+    })
+  }
 })
 
 
