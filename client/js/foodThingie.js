@@ -14,9 +14,8 @@ foodThingie.config(function($routeProvider){
         .when('/restaurantList', {
         templateUrl: 'partials/restaurant_list.html'
         })
-        .when('/grocerList', {
-        templateUrl: 'partials/grocer_list.html'
-        })
+        .when('/groceryList', {
+        templateUrl: 'partials/grocery_list.html'
 		.otherwise({redirectTo:'/'});
 })
 
@@ -32,7 +31,7 @@ foodThingie.factory("piechartFactory", function(){
                         type: 'pie'
                     },
                     title: {
-                        text: 'Browser market shares January, 2015 to May, 2015'
+                        text: 'Data Provided by FeedingAmerica.org'
                     },
                     tooltip: {
                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -51,28 +50,17 @@ foodThingie.factory("piechartFactory", function(){
                         }
                     },
                     series: [{
-                        name: "Brands",
+                        name: "Food Waste",
                         colorByPoint: true,
+                        colors: ['#AE3B41', '#3D347B'],
                         data: [{
                             name: "Wasted Food",
-                            y: 56.33
-                        }, {
-                            name: "Chrome",
-                            y: 24.030000000000005,
+                            y: 40,
                             sliced: true,
                             selected: true
                         }, {
-                            name: "Firefox",
-                            y: 10.38
-                        }, {
-                            name: "Safari",
-                            y: 4.77
-                        }, {
-                            name: "Opera",
-                            y: 0.9100000000000001
-                        }, {
-                            name: "Proprietary or Undetectable",
-                            y: 0.2
+                            name: "Consumed",
+                            y: 60
                         }]
                     }]
                 });

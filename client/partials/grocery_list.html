@@ -1,0 +1,37 @@
+<link rel="stylesheet" type="text/css" href="css/listingStyle.css">
+
+<div>
+
+	<input type='text' nd-model='vendor_filter' placeholder='Search Listings' />
+	<h1>Grocery Stores</h1>
+	<div class="container">
+		<table>
+			<thead>
+				<tr>
+					<th>Grocery Name</th>
+					<th>Location</th>
+					<th>Hours</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Sample</td>
+					<td>Sample</td>
+					<td>Sample</td>
+				</tr>
+				<tr>
+					<td>Sample</td>
+					<td>Sample</td>
+					<td>Sample</td>
+				</tr>
+				<tr ng-repeat='grocery in groceries | filter: vendor_filter'>
+					<td ng-bind='grocery.name'></td>
+					<td ng-bind='grocery.location'></td>
+					<td ng-bind='grocery.hours'></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+</div>
