@@ -57,6 +57,10 @@ module.exports = function(app) {
 		customerController.retrieveCustomer(req, res);
 	})
 
+	app.post('/customers/:id/show', function(req, res){
+		customerController.loginCustomer(req, res);
+	})
+
 	app.get('/customers/show', function(req, res){
 		customerController.retrieveCustomers(req, res);
 	})
@@ -77,7 +81,13 @@ module.exports = function(app) {
 	})
 
 	app.get('/vendors/:id/show', function(req, res){
+		console.log(req.body);
 		vendorController.retrieveVendor(req, res);
+	})
+
+	app.post('/vendors/:id/show', function(req, res){
+		console.log(req.body);
+		vendorController.loginVendor(req, res);
 	})
 
 	app.get('/vendors/show/:id', function(req, res){

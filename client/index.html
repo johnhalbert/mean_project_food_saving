@@ -37,17 +37,20 @@
 		<section class='top-bar-section'>
 			<ul class='right'>
 				<li><a href="#">About</a></li>
-				<li><a data-href="/register" data-toggle="modal" data-target="#loginRegister">Sign Up/Log In</a>
-					<ul class='dropdown'>
+				<li><a data-href="/register" data-toggle="modal" data-target="#loginRegister">Business Sign Up/Log In</a>
+					<!-- <ul class='dropdown'>
 						<li><a href="#">Customer Sign In</a></li>
 						<li><a href="#">Business Sign In</a></li>
-					</ul>
+					</ul> -->
 				</li>
+				<li><a data-href="/register" data-toggle="modal" data-target="#loginRegisterCustomer">Customer Sign Up/Log In</a>
+				</li>
+				<li ng-controller='login_regController'><a ng-click='logout()'>Logout</a></li>
 			</ul>
 		</section>
 	</nav>
 
-	<!-- ******************** SIGN-IN / REGISTER  MODAL ******************** -->
+	<!-- **************** BUSINESS SIGN-IN / REGISTER  MODAL **************** -->
 	<div ng-controller='login_regController' class="modal fade" id="loginRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -62,7 +65,7 @@
                 	<h2>Register</h2>
                 	<form>
                 		<input type = 'text' placeholder = 'Name' ng-model='newVendor.name' />
-                		<input type = 'email' placeholder = 'Email' ng-model-'newVendor.email' />
+                		<input type = 'email' placeholder = 'Email' ng-model='newVendor.email' />
                 		<input type = 'password' placeholder = 'Password' ng-model='newVendor.password' />
                 		From: <input type='time' ng-model='newVendor.fromTime' />
                 		To: <input type='time' ng-model='newVendor.toTime' />
@@ -77,9 +80,48 @@
 
                 	<h2>Login</h2>
                 	<form>
-                		<input type = 'email' placeholder = 'Email' ng-model='loginVendor.email' />
-                		<input type = 'password' placeholder = 'Password' ng-model='loginVendor.password'>
-                		<a class="btn btn-success btn-ok" ng-click='retrieveVendor()'>Login</a>
+                		<input type = 'email' placeholder = 'Email' ng-model='vendorLogin.email' />
+                		<input type = 'password' placeholder = 'Password' ng-model='vendorLogin.password'>
+                		<button class="btn btn-success btn-ok" data-dismiss="modal" ng-click='retrieveVendor()'>Login</button>
+                	</form>
+                </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ****************************************************************** -->
+
+
+    <!-- **************** CUSTOMER SIGN-IN / REGISTER  MODAL **************** -->
+	<div ng-controller='login_regController' class="modal fade" id="loginRegisterCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Register / Sign in</h4>
+                </div>
+            
+                <div class="modal-body">
+                	<div style = "overflow-y:scroll;height:30em;">
+                	<h2>Register</h2>
+                	<form>
+                		<input type = 'text' placeholder = 'Name' ng-model='newCustomer.name' />
+                		<input type = 'email' placeholder = 'Email' ng-model='newCustomer.email' />
+                		<input type = 'password' placeholder = 'Password' ng-model='newCustomer.password' />
+                		
+                		<a class="btn btn-success btn-ok" ng-click='addCustomer()'>Register</a>
+                	</form>
+
+                	<h2>Login</h2>
+                	<form>
+                		<input type = 'email' placeholder = 'Email' ng-model='customerLogin.email' />
+                		<input type = 'password' placeholder = 'Password' ng-model='customerLogin.password'>
+                		<button class="btn btn-success btn-ok" data-dismiss="modal" ng-click='retrieveCustomer()'>Login</button>
                 	</form>
                 </div>
                 </div>

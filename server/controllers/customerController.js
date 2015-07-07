@@ -48,5 +48,20 @@ module.exports = {
 				res.json(customers);
 			}
 		})
+	},
+	loginCustomer: function(req, res){
+		Customer.findOne({'email': req.params.id}, function(err, customer){
+			if (err) {
+				console.log('Error logging in customer', err);
+			} else {
+				console.log(customer);
+				console.log(req.body);
+				if (customer.email == req.body.email && customer.password == req.body.password) {
+					res.json(customer);
+				} else {
+					res.json({error: 'Login failed'});
+				}
+			}
+		})
 	}
 }

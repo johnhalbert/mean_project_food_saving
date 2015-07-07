@@ -123,6 +123,7 @@ foodThingie.factory("vendorFactory", function($http){
     }
 
     factory.getVendor = function(vendorSearch, callback) {
+        console.log(vendorSearch);
         $http.post('/vendors/'+vendorSearch.email+'/show', vendorSearch)
             .success(function(foundVendor){
                 vendor = foundVendor;
@@ -197,7 +198,7 @@ foodThingie.factory("customerFactory", function($http){
     var factory = {};
 
     factory.addCustomer = function(customer, callback){
-        $http.post('/add_customer', customer).success(function(results){
+        $http.post('/customers/new', customer).success(function(results){
             console.log('added customer');
             customer = results;
             callback(results);
@@ -212,12 +213,20 @@ foodThingie.factory("customerFactory", function($http){
         })
     }
 
-    factory.getCustomer = function(customer, callback){
+    factory.retrieveCustomer = function(customer, callback){
         $http.get('/customers/show').success(function(results){
             console.log("got customer");
             customer = results;
             callback(results);
         })
+    }
+
+    factory.getCustomer = function(customerLogin, callback){
+        $http.post('/customers/'+customerLogin.email+'/show', customerLogin)
+            .success(function(customerLoggedIn){
+                customer = customerLoggedIn;
+                callback(customerLoggedIn);
+            })
     }
 
     factory.getCustomers = function(callback){
@@ -278,7 +287,7 @@ foodThingie.controller("piechart", function(piechartFactory){
 
 })
 //controller for login/registration
-foodThingie.controller('login_regController', function($scope, socket, $routeParams, vendorFactory){
+foodThingie.controller('login_regController', function($window, $scope, socket, $routeParams, vendorFactory, customerFactory){
 
   $scope.addCustomer = function(){
     customerFactory.addCustomer($scope.newCustomer, function(customer){
@@ -293,6 +302,7 @@ foodThingie.controller('login_regController', function($scope, socket, $routePar
 
   $scope.addVendor = function(){
     $scope.newVendor.hours = $scope.newVendor.fromTime + " - " + $scope.newVendor.toTime;
+    console.log($scope.newVendor);
     vendorFactory.createVendor($scope.newVendor, function(vendor){
       if (vendor.error) {
         console.log(vendor.error);
@@ -304,25 +314,32 @@ foodThingie.controller('login_regController', function($scope, socket, $routePar
   }
 
   $scope.retrieveCustomer = function(){
-    customerFactory.retrieveCustomer($scope.customerLogin, function(customer){
+    customerFactory.getCustomer($scope.customerLogin, function(customer){
         if (customer.error) {
             console.log(customer.error);
             $scope.error = customer.error;
         } else {
+            console.log(customer);
             $scope.customer = customer;
         }
     })
   }
 
   $scope.retrieveVendor = function(){
-    vendorFactory.retrieveVendor($scope.vendorLogin, function(vendor){
+    vendorFactory.getVendor($scope.vendorLogin, function(vendor){
         if (vendor.error) {
             console.log(vendor.error);
             $scope.error = vendor.error;
         } else {
+            console.log('Success!', vendor);
             $scope.vendor = vendor;
+            $window.location.href = '#/vendor';
         }
     })
+  }
+
+  $scope.logout = function(){
+    $window.location.href = '/';
   }
 
 })

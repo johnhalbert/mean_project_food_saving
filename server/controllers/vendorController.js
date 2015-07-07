@@ -3,8 +3,7 @@ var Vendor = mongoose.model('Vendor');
 
 module.exports = {
 	createVendor: function(req, res){
-		console.log('in createVendor');
-		var newVendor = new Vendor({name: req.body.name, type: req.body.type, address: req.body.address, phone: req.body.phone, hours: req.body.hours});
+		var newVendor = new Vendor({name: req.body.name, type: req.body.type, address: req.body.address, phone: req.body.phone, hours: req.body.hours, email: req.body.email, password: req.body.password});
 		newVendor.save(function(err, vendor){
 			if (err) {
 				console.log('Error creating new vendor', err);
@@ -38,6 +37,19 @@ module.exports = {
 				console.log('Error while retrieving vendor', err);
 			} else {
 				res.json(vendor);
+			}
+		})
+	},
+	loginVendor: function(req, res){
+		Vendor.findOne({'email': req.body.email}, function(err, vendor){
+			if (err) {
+				console.log('Error logging in vendor', err);
+			} else {
+				if (vendor.email === req.body.email && vendor.password === req.body.password){
+					res.json(vendor);
+				} else {
+					res.json({error: 'Login failed'});
+				}
 			}
 		})
 	},
