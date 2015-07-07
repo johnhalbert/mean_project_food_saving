@@ -288,12 +288,6 @@ foodThingie.controller("piechart", function($scope, piechartFactory){
               '<p>' +  x + ' lbs/yr ' + '</p>'
     }
   }
-var colorArray = ['#000000', '#660000', '#CC0000', '#FF6666', '#FF3333', '#FF6666', '#FFE6E6'];
-// $scope.colorFunction = function() {
-//   return function(d, i) {
-//       return colorArray[i];
-//     };
-// }
 })
 
 /********************************* LOGIN/REGISTRATION CONTROLLER *********************************/
