@@ -17,6 +17,11 @@
 			text-align: right;
 		}
 
+		.addCart {
+			width: 3em;
+			font-size: 12px;
+		}
+
 		.card {
 		  font-family: 'Roboto', sans-serif;
 		  overflow: hidden;
