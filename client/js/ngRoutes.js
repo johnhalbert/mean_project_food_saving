@@ -15,5 +15,8 @@ foodThingie.config(function($routeProvider){
         .when('/groceryList', {
             templateUrl: 'partials/grocery_list.html'
         })
+        .when('/cart', {
+            templateUrl: 'partials/cart.html'
+        })
     	.otherwise({redirectTo:'/'});
 })

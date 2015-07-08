@@ -11,6 +11,7 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
             $scope.error = products.error;
         } else {
             $scope.products = products;
+            console.log($scope.products);
         }
     })
 
@@ -35,7 +36,7 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
 
     $scope.deleteProduct = function(product){
     	productFactory.destroyProduct(product, function(destroyedProduct){
-    		$scope.products.products.splice($scope.products.products.indexOf(product));
+    		$scope.products.products.splice($scope.products.products.indexOf(product),1);
     	})
     }
 
