@@ -59,14 +59,14 @@
 						    </tr>
 						  </thead>
 						  <tbody>
-						    <tr ng-repeat='product in products'>
+						    <tr ng-repeat='product in products.products'>
 						      <td ng-bind='product.name'></td>
 						      <td ng-bind='product.ageexpiration'></td>
 						      <td ng-bind='product.description'></td>
 						      <td ng-bind='product.category'></td>
 						      <td ng-bind='product.price'></td>
 						      <td>Qty: <select ng-model='newOrder.quantity'>
-						      		<option ng-repeat='quantity in products.quantity' ng-bind='quantity'>{{quantity}}</option>
+						      		<option ng-repeat='quantity in products' ng-bind='quantity'>{{quantity}}</option>
 						      </select></td>
 						    </tr>
 						  </tbody>

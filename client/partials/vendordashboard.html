@@ -1,25 +1,23 @@
 <link rel="stylesheet" type="text/css" href="css/listingStyle.css">
-
-<div ng-controller='productsController'>
-
+<div ng-controller='vendorsController'>
 	<div id='dashMain'>
 			<div class='small-4 columns'>
 				<form>
 					<fieldset>
 						<legend>My Profile</legend>
 						<label>Address: </label>
-						{{console.log(vendor)}}<input type='text' name='address' value='{{updateVendor.address}}' ng-model='updateVendor.address' />
+						<input type='text' name='address' value='{{updateVendor.address}}' ng-model='updateVendor.address' />
 						<label>Phone: </label>
 						<input type='text' name='phone' value='{{updateVendor.phone}}' ng-model='updateVendor.phone'/>
 						<label>Hours: </label>
-						<input type='text' name='hours' value='updateVendor.hours' ng-model='updateVendor.hours' />
-						<button ng-click='updateVendor()'>Update</button>
+						<input type='text' name='hours' value='{{updateVendor.hours}}' ng-model='updateVendor.hours' />
+						<button ng-click='updateVendorInfo()'>Update</button>
 					</fieldset>
 				</form>
 			</div>
 			<div class='small-8 columns'>
 				<input type='text' ng-model='products_filter' placeholder='Search Products' />
-				<table >
+				<table>
 					<thead>
 						<tr>
 							<td>Name</td>
@@ -37,14 +35,14 @@
 							<td>${{product.price}}</td>
 							<td ng-bind='product.quantity'></td>
 							<td ng-bind='product.ageexpires | date: "medium"'></td>
-							<td><button ng-show= "updateButton" ng-click='update()'>Update</button> <button ng-click='delete()'>Delete</button></td>
+							<td><button ng-click='updateProduct(product)'>Update</button> <button ng-click='deleteProduct(product)'>Delete</button></td>
 						</tr>
 					</tbody>
 				</table>
-				<form >
+
+				<form>
 					<fieldset>
 						<legend>Add/Update Products</legend>
-						<!-- <input type = "hidden" value = "{{vendor._id}}" ng-model='addEditProduct.vendor_id'> -->
 						<label>Product Name</label>
 						<input type='text' name='name' ng-model='addEditProduct.name' />
 						<label>Description</label>
@@ -60,7 +58,7 @@
 						<label>Age/Expires</label>
 						<input type='text' name='ageexpires' ng-model='addEditProduct.ageexpires' />
 						<button ng-hide='updateButton' ng-click='addProduct(vendor._id)'>Add</button>
-						<button ng-show='updateButton' ng-click='editProduct(vendor._id)'>Update</button>
+						<button ng-show='updateButton' ng-click='editProduct(addEditProduct)'>Update</button>
 					</fieldset>
 				</form>
 				<hr />
@@ -103,3 +101,4 @@
 			</div>
 		</div>
 </div>
+

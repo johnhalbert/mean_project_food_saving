@@ -79,14 +79,8 @@ module.exports = function(app) {
 
 	/***************** Vendors *****************/
 
-	app.post('/vendors/new', function(req, res){
-		console.log('Im in /vendors/new');
-		vendorController.createVendor(req, res);
-	})
-
-	app.get('/vendors/:id/show', function(req, res){
-		console.log(req.body);
-		vendorController.retrieveVendor(req, res);
+	app.post('/vendors/:id/update', function(req, res){
+		vendorController.updateVendor(req, res);
 	})
 
 	app.post('/vendors/:id/show', function(req, res){
@@ -94,12 +88,13 @@ module.exports = function(app) {
 		vendorController.loginVendor(req, res);
 	})
 
-	app.get('/vendors/show/:id', function(req, res){
-		vendorController.retrieveVendors(req, res);
+	app.post('/vendors/new', function(req, res){
+		console.log('Im in /vendors/new');
+		vendorController.createVendor(req, res);
 	})
 
-	app.post('/vendors/:id/update', function(req, res){
-		vendorController.updateVendor(req, res);
+	app.get('/vendors/show/:id', function(req, res){
+		vendorController.retrieveVendors(req, res);
 	})
 
 }
