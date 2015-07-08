@@ -73,7 +73,9 @@ foodThingie.factory("vendorFactory", function($http){
             callback(createdVendor);
           })
     }
-
+    factory.getVendorInfo = function(callback){
+      callback(vendor);
+    }
     factory.updateVendor = function(updateVendor, callback){
       $http.post('/vendors/'+updatedVendor._id+'/update', updateVendor)
         .success(function(updatedVendor){
@@ -304,7 +306,6 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
       }
     })
   }
-
   $scope.addVendor = function(){
     var fromTime = new Date($scope.newVendor.fromTime);
     var toTime = new Date($scope.newVendor.toTime);
@@ -330,6 +331,7 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
         $window.location.href = '#/vendor';
       }
     })
+    console.log("dsfds");
   }
 
   $scope.retrieveCustomer = function(){
@@ -429,8 +431,12 @@ foodThingie.controller('customersController', function($scope, socket, $routePar
 
 })
 //controller for vendors
-foodThingie.controller('vendorsController', function($scope, socket, $routeParams){
-   
+foodThingie.controller('vendorsController', function($scope, socket, $routeParams, vendorFactory){
+   vendorFactory.getVendorInfo(function(data){
+    $scope.vendor = data;
+    $scope.updateVendor = data;
+   })
+   console.log($scope.vendor);
 })
 
 /********************************* PRODUCTS CONTROLLER *********************************/
@@ -440,7 +446,7 @@ foodThingie.controller('productsController', function($scope, socket, $routePara
 
     $scope.retrieveProductsOfVendor = function(){
         productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
-
+              console.log('getting products', $scope.vendor);
             if (products.error) {
                 console.log(products.error);
                 $scope.error = products.error;

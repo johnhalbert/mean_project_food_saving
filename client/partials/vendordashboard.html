@@ -3,16 +3,16 @@
 <div ng-controller='login_regController'>
 
 	<div id='dashMain'>
-			<div class='small-4 columns'>
+			<div class='small-4 columns' ng-controller="vendorsController">
 				<form>
 					<fieldset>
 						<legend>My Profile</legend>
 						<label>Address: </label>
-						{{console.log(vendor);}}<input type='text' name='address' value='{{vendor.address}}' ng-model='updateVendor.address' />
+						{{console.log(vendor)}}<input type='text' name='address' value='{{updateVendor.address}}' ng-model='updateVendor.address' />
 						<label>Phone: </label>
-						<input type='text' name='phone' value='{{vendor.phone}}' ng-model='updateVendor.phone' />
+						<input type='text' name='phone' value='{{updateVendor.phone}}' ng-model='updateVendor.phone'/>
 						<label>Hours: </label>
-						<input type='text' name='hours' value='{{vendor.hours}}' ng-model='updateVendor.hours' />
+						<input type='text' name='hours' value='updateVendor.hours' ng-model='updateVendor.hours' />
 						<button ng-click='updateVendor()'>Update</button>
 					</fieldset>
 				</form>
@@ -59,8 +59,8 @@
 						<input type='text' name='quantity' ng-model='addEditProduct.quantity' />
 						<label>Age/Expires</label>
 						<input type='text' name='ageexpires' ng-model='addEditProduct.ageexpires' />
-						<button ng-hide='updateButton' ng-click='addProduct()'>Add</button>
-						<button ng-show='updateButton' ng-click='editProduct()'>Update</button>
+						<button ng-hide='updateButton' ng-click='addProduct(vendor._id)'>Add</button>
+						<button ng-show='updateButton' ng-click='editProduct(vendor._id)'>Update</button>
 					</fieldset>
 				</form>
 				<hr />
@@ -101,5 +101,5 @@
 					</fieldset>
 				</form>
 			</div>
-
+		</div>
 </div>
