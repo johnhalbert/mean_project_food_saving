@@ -49,6 +49,7 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
     $scope.editProduct = function(product){
     	productFactory.updateProduct(product, function(returnedProduct){
     		$scope.products.products[$scope.products.products.indexOf(product)] = returnedProduct;
+    		$scope.addEditProduct = {};
     		$scope.updateButton = false;
     	})
     }
