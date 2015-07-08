@@ -1,11 +1,11 @@
 foodThingie.controller('vendorsController', function($scope, socket, $routeParams, vendorFactory, productFactory){
 
-   vendorFactory.getVendorInfo(function(data){
-    $scope.vendor = data;
-    $scope.updateVendor = data;
-   })
+   	vendorFactory.getVendorInfo(function(data){
+		$scope.vendor = data;
+		$scope.updateVendor = data;
+   	})
 
-   productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
+    productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
         if (products.error) {
             console.log(products.error);
             $scope.error = products.error;
@@ -14,7 +14,7 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
         }
     })
 
-   $scope.addProduct = function(vend_id){
+    $scope.addProduct = function(vend_id){
         $scope.addEditProduct.vendor_id = vend_id;
         productFactory.createProduct($scope.addEditProduct, function(product){
           if (product.error) {
@@ -25,6 +25,18 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
                 $scope.addEditProduct = {};
             }
         })
-      }
+    }
+
+    $scope.updateVendorInfo = function(){
+    	vendorFactory.updateVendor($scope.updateVendor, function(updatedVendor){
+    		$scope.vendor = updatedVendor;
+    	})
+    }
+
+    $scope.deleteProduct = function(product){
+    	productFactory.destroyProduct(product, function(destroyedProduct){
+    		$scope.products.products.splice($scope.products.products.indexOf(product));
+    	})
+    }
 
 })

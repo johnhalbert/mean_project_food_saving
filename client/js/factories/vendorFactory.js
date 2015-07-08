@@ -16,7 +16,8 @@ foodThingie.factory("vendorFactory", function($http){
       callback(vendor);
     }
     factory.updateVendor = function(updateVendor, callback){
-      $http.post('/vendors/'+updatedVendor._id+'/update', updateVendor)
+      console.log(updateVendor);
+      $http.post('/vendors/'+updateVendor._id+'/update', updateVendor)
         .success(function(updatedVendor){
           vendor = updatedVendor;
           callback(updatedVendor);

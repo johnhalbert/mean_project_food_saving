@@ -8,12 +8,12 @@
 					<fieldset>
 						<legend>My Profile</legend>
 						<label>Address: </label>
-						{{console.log(vendor)}}<input type='text' name='address' value='{{updateVendor.address}}' ng-model='updateVendor.address' />
+						<input type='text' name='address' value='{{updateVendor.address}}' ng-model='updateVendor.address' />
 						<label>Phone: </label>
 						<input type='text' name='phone' value='{{updateVendor.phone}}' ng-model='updateVendor.phone'/>
 						<label>Hours: </label>
-						<input type='text' name='hours' value='updateVendor.hours' ng-model='updateVendor.hours' />
-						<button ng-click='updateVendor()'>Update</button>
+						<input type='text' name='hours' value='{{updateVendor.hours}}' ng-model='updateVendor.hours' />
+						<button ng-click='updateVendorInfo()'>Update</button>
 					</fieldset>
 				</form>
 			</div>
@@ -37,7 +37,7 @@
 							<td>${{product.price}}</td>
 							<td ng-bind='product.quantity'></td>
 							<td ng-bind='product.ageexpires | date: "medium"'></td>
-							<td><button ng-show= "updateButton" ng-click='update()'>Update</button> <button ng-click='delete()'>Delete</button></td>
+							<td><button ng-show= "updateButton" ng-click='update()'>Update</button> <button ng-click='deleteProduct(product)'>Delete</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -102,3 +102,4 @@
 			</div>
 		</div>
 </div>
+
