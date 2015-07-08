@@ -462,13 +462,15 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
     $scope.vendor = data;
     $scope.updateVendor = data;
    })
-   console.log($scope.vendor);
 })
 
 /********************************* PRODUCTS CONTROLLER *********************************/
    
-foodThingie.controller('productsController', function($scope, socket, $routeParams, productFactory){
+foodThingie.controller('productsController', function($scope, socket, $routeParams, productFactory, vendorFactory){
     $scope.products = {};
+    vendorFactory.getVendorInfo(function(data){
+    $scope.vendor = data;
+   })
 
     $scope.retrieveProductsOfVendor = function(){
         productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
