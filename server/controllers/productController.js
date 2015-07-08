@@ -68,7 +68,7 @@ module.exports = {
 	},
 	retrieveProductsOfVendor: function(req, res){
 		console.log('retrieveProductsofVendor', req.params.id)
-		Vendor.find({_id: req.params.id})
+		Vendor.findOne({_id: req.params.id})
 			.populate('products')
 			.exec(function(err, products){
 				console.log(products);
