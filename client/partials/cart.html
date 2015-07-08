@@ -1,0 +1,60 @@
+
+<div class="row" ng-controller='checkoutController'>
+	<div class="medium-9 columns">
+		<h2>My Cart</h2>
+		<table>
+			<thead>
+				<tr>
+					<th width="200">Item</th>
+					<th width="150">Quantity</th>
+					<th width="150">Price</th>
+					<th width="200">Total</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat='product in cart'>
+					<td ng-bind='product.name'></td>
+					<td ng-bind='product.quantity'></td>
+					<td ng-bind='product.price'></td>
+					<td ng-bind='product.total'></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="medium-3 columns">
+		<div class="card">
+			<div class="image">
+				<span class="title" ng-bind='vendor.name'></span>
+			</div>
+
+			<div class="content">
+				<h4>Safeway</h4>
+				<img src="https://slaterjd.files.wordpress.com/2012/09/manchester-england-google-maps4.jpg">
+				<p><span style = "font-weight:bold;">Address: </span> <span ng-bind='vendor.address'></span></p>
+				<p><span style = "font-weight:bold;">Phone: </span><span ng-bind='vendor.phone'></span></p>
+				<p><span style = "font-weight:bold;">Hours: </span><span ng-bind='vendor.hours'></span></p>
+				Pickup Time:<input type = 'text' placeholder = '9:00' ng-model='' />
+				<a class="button" data-href="#" data-reveal-id="cartModal">Order</a>
+			</div>
+		</div>
+	</div>
+<!-- **********************   MODAL   **************************** -->
+<div id="cartModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" style = "background-color: rgba(250, 255, 255, 0.75);">
+
+    <h4 class="modal-title" id="myModalLabel">Pay for Order</h4>
+            
+        
+            <div class="modal-body">
+                <div style = "overflow-y:scroll;height:20em;">
+                <form>
+                    Name:<input type = 'text' placeholder = 'Name' ng-model='newVendor.name' />
+                    Zip:<input type = 'text' placeholder = 'Zip' ng-model='newVendor.email' />
+                    CC:<input type = 'text' placeholder = 'CC' ng-model='newVendor.password' />
+                    <a class="button modal-close-vendor" ng-click='checkout()'>Place Order</a>
+                    <a class="button modal-close-vendor" ng-click='requestUber()'>Request Uber</a>
+                </form>
+                </div>
+            </div>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+</div>

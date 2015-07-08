@@ -11,6 +11,7 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
             $scope.error = products.error;
         } else {
             $scope.products = products;
+            console.log($scope.products);
         }
     })
 
@@ -36,7 +37,7 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
 
     $scope.deleteProduct = function(product){
     	productFactory.destroyProduct(product, function(destroyedProduct){
-    		$scope.products.products.splice($scope.products.products.indexOf(product), 1);
+    		$scope.products.products.splice($scope.products.products.indexOf(product),1);
     	})
     }
 
@@ -56,8 +57,15 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
     }
 
     $scope.addOrder = function(){
+    	console.log('addOrder in vendorController');
+    	$scope.newOrder.vendor_id = $scope.vendor._id;
     	orderFactory.createOrder($scope.newOrder, function(addedOrder){
-
+    		if (addedOrder.error) {
+    			console.log('Error adding new order', addedOrder.error);
+    			$scope.error = addedOrder.error;
+    		} else {
+	    		$scope.orders.orders.push(addedOrder);
+	    	}
     	})
     }
 
