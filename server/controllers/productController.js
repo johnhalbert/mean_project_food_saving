@@ -4,8 +4,7 @@ var Vendor = mongoose.model('Vendor');
 
 module.exports = {
 	createProduct: function(req, res){
-		console.log("333", req.body);
-		Vendor.findOne({'_id': req.body.vendor_id}, function(err, vendor){
+		Vendor.findOne({_id: req.body.vendor_id}, function(err, vendor){
 			if (err) {
 				console.log('Error while creating product (1)', err);
 			} else {
@@ -71,12 +70,16 @@ module.exports = {
 		// Vendor.findOne({_id: req.params.id})
 		// 	.populate('products')
 		// 	.exec(function(err, products){
-		// 		console.log(products);
-		// 		res.json(products);
+		// 		if (err) {
+		// 			console.log(err);
+		// 		} else {
+		// 			console.log(products);
+		// 			res.json(products);
+		// 		}
 		// 	})
 
 		// We're hacks after all
-		
+
 		Product.find({_vendor: req.params.id}, function(err, products){
 			if (err) {
 				console.log('Error retrieving products list', err);
