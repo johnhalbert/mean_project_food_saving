@@ -169,8 +169,8 @@ foodThingie.factory("customerFactory", function($http){
 
     var factory = {};
 
-    factory.addCustomer = function(customer, callback){
-        $http.post('/customers/new', customer).success(function(results){
+    factory.addCustomer = function(newCustomer, callback){
+        $http.post('/customers/new', newCustomer).success(function(results){
             console.log('added customer');
             customer = results;
             callback(results);
