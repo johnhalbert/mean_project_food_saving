@@ -89,13 +89,16 @@
 						<input type='text' name='customername' ng-model='newOrder.customername' />
 						<label>Customer Email</label>
 						<input type='text' name='customeremail' ng-model='newOrder.customeremail' />
-						<label>Product</label>
-						<select ng-model='newOrder.product'>
-							<option ng-repeat='product in products' value='{{product.name}}' ng-bind='product.name'></option>
-						</select>
-						<label>Quantity</label>
-						<input type='text' name='quantity' ng-model='newOrder.quantity' placeholder='This will be chaning to something else soon!' />
-						<button ng-click='createOrder()'>Create Order</button>
+						<fieldset>
+							<legend>Add Products</legend>
+							<label>Product</label>
+							<select ng-model='newOrder.product'>
+								<option ng-repeat='product in products.products' value='{{product._id}}' ng-bind='product.name'></option>
+							</select>
+							<label>Quantity</label>
+							<input type='text' name='quantity' ng-model='newOrder.quantity' placeholder='This will be chaning to something else soon!' />
+						</fieldset>
+						<button ng-click='addOrder()'>Create Order</button>
 					</fieldset>
 				</form>
 			</div>
