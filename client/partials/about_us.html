@@ -1,0 +1,66 @@
+<link rel="stylesheet" type="text/css" href="css/contactFormStyle.css">
+
+<div class="row" ng-controller="infoController" >
+    <div class="large-12 columns">
+    <!-- <img id = "siteTitle" src="assets/foodUnusedTitle2.png"> -->
+	<!-- <img id = "siteTitle" src="assets/foodUnusedTitle3.png"> -->
+	<!-- <img id = "siteTitle" src="assets/foodUnusedTitle4.png"> -->
+	<img id = "siteTitle" src="assets/foodUnusedTitle5.png">
+
+	<h1 id = "aboutTitle">About Us</h1>
+	<h5>Roughly one third of the food produced in the world for human consumption every year — approximately 1.3 billion tonnes — gets lost or wasted.</h5>
+	<p>With the billions of dollars of good food that is tossed each year in North America, Food Unused aims to provide a platform to enable restaurants and grocery stores the power to sell unpurchased food at a discounted price to hungry customers.</p>
+	
+	<h1>Market</h1>
+	<p>Our approximate market size is...</p>
+
+	<h1>Future Goals</h1>
+	<p>Our future goals are...</p>
+
+	<h1>Meet the team</h1>
+	<p>Our team members are hardworking, enthusiastic hackers united under a passion to help humanity.</p>
+	<ul>
+		<li><span style = "font-weight:bold;">Anika:</span> some info</li>
+		<li><span style = "font-weight:bold;">Jay:</span> some info</li>
+		<li><span style = "font-weight:bold;">John:</span> some info</li>
+		<li><span style = "font-weight:bold;">Sina:</span> some info</li>
+	</ul>
+
+
+	<div id = "contactForm">
+		<h1>Contact Us</h1>
+		<div id="form-main">
+		  <div id="form-div">
+		    <form class="form" id="form1">
+		      
+		      <p class="name">
+		        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" id="name" />
+		      </p>
+		      
+		      <p class="email">
+		        <input name="email" type="text" class="validate[required,custom[email]] feedback-input" id="email" />
+		      </p>
+		      
+		      <p class="text">
+		        <textarea name="text" class="validate[required,length[6,300]] feedback-input" id="comment"></textarea>
+		      </p>
+		      
+		      
+		      <div class="submit">
+		        <input type="submit" value="SEND" id="button-blue"/>
+		        <div class="ease"></div>
+		      </div>
+		    </form>
+		  </div>
+		</div>
+	</div>
+
+	<h1>Make a difference</h1>
+	<div id = "chooseType">
+		<p>Where are you eating today?</p>
+		<a href='#/restaurantList' class='button selection'>Restaurant</a> <a href='#/groceryList' class='button selection'>Grocery</a>
+	</div>
+    
+
+</div>
+</div>
