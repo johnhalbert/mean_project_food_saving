@@ -84,7 +84,6 @@ module.exports = function(app) {
 	})
 
 	app.post('/vendors/:id/show', function(req, res){
-		console.log(req.body);
 		vendorController.loginVendor(req, res);
 	})
 
@@ -95,6 +94,10 @@ module.exports = function(app) {
 
 	app.get('/vendors/show/:id', function(req, res){
 		vendorController.retrieveVendors(req, res);
+	})
+
+	app.get('/vendors/:id/show', function(req, res){
+		vendorController.retrieveVendor(req, res);
 	})
 
 }

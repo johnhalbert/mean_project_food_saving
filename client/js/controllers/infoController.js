@@ -2,7 +2,6 @@ foodThingie.controller('infoController', function($window, $scope, socket, $rout
 
     customerFactory.retrieveLogin(function(customer){
         if (customer) {
-            console.log(customer)
             $scope.customer = customer;
         } else {
             console.log(customer)
@@ -12,12 +11,10 @@ foodThingie.controller('infoController', function($window, $scope, socket, $rout
     })
 
    vendorFactory.retrieveVendors("restaurant", function(data){
-        console.log(data);
       $scope.restaurants = data;
     })
 
     vendorFactory.retrieveVendors("grocery", function(data){
-        console.log(data)
       $scope.groceries = data;
     })
 

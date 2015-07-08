@@ -1,4 +1,4 @@
-foodThingie.controller('vendorsController', function($scope, socket, $routeParams, vendorFactory, productFactory){
+foodThingie.controller('vendorsController', function($scope, socket, $routeParams, vendorFactory, productFactory, orderFactory){
 
    	vendorFactory.getVendorInfo(function(data){
 		$scope.vendor = data;
@@ -13,6 +13,7 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
             $scope.products = products;
         }
     })
+
 
     $scope.addProduct = function(vend_id){
         $scope.addEditProduct.vendor_id = vend_id;
@@ -55,7 +56,9 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
     }
 
     $scope.addOrder = function(){
+    	orderFactory.createOrder($scope.newOrder, function(addedOrder){
 
+    	})
     }
 
     $scope.updateOrder = function(){
