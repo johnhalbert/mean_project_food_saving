@@ -39,4 +39,26 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
     	})
     }
 
+    $scope.updateProduct = function(product){
+    	// Passing product to the form like this causes the data in the table to update automatically.
+    	// We should try and fix this.
+    	$scope.updateButton = true;
+    	$scope.addEditProduct = product;
+    }
+
+    $scope.editProduct = function(product){
+    	productFactory.updateProduct(product, function(returnedProduct){
+    		$scope.products.products[$scope.products.products.indexOf(product)] = returnedProduct;
+    		$scope.updateButton = false;
+    	})
+    }
+
+    $scope.addOrder = function(){
+
+    }
+
+    $scope.updateOrder = function(){
+
+    }
+
 })

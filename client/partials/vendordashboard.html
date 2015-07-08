@@ -37,7 +37,7 @@
 							<td>${{product.price}}</td>
 							<td ng-bind='product.quantity'></td>
 							<td ng-bind='product.ageexpires | date: "medium"'></td>
-							<td><button ng-show= "updateButton" ng-click='update()'>Update</button> <button ng-click='deleteProduct(product)'>Delete</button></td>
+							<td><button ng-click='updateProduct(product)'>Update</button> <button ng-click='deleteProduct(product)'>Delete</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -59,7 +59,7 @@
 						<label>Age/Expires</label>
 						<input type='text' name='ageexpires' ng-model='addEditProduct.ageexpires' />
 						<button ng-hide='updateButton' ng-click='addProduct(vendor._id)'>Add</button>
-						<button ng-show='updateButton' ng-click='editProduct(vendor._id)'>Update</button>
+						<button ng-show='updateButton' ng-click='editProduct(addEditProduct)'>Update</button>
 					</fieldset>
 				</form>
 				<hr />
