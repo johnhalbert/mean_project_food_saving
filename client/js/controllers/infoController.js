@@ -6,7 +6,8 @@ foodThingie.controller('infoController', function($window, $scope, socket, $rout
             $scope.customer = customer;
         } else {
             console.log(customer)
-            $window.location.href = '#/';
+            // $window.location.href = '#/'; // deleted so that users can see
+            // list of restaurants and grocery stores even without logging in
         }
     })
 
