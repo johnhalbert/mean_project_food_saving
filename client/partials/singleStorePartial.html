@@ -66,14 +66,14 @@
 						      <td ng-bind="product.ageexpires | date:'MM/dd/yyyy'"></td>
 						      <td ng-bind='product.description'></td>
 						      <td ng-bind='product.category'></td>
-						      <td ng-bind='product.price'></td>
-						      <td>Qty: 
-						      	<select class="large-4 columns" ng-model='newOrder.quantity' ng-init="(_Array = []).length = product.quantity;">
+						      <td>${{product.price}}</td>
+						      <td> 
+						      	<select class="large-5 columns" class = "qtyDropdown" ng-model='newOrder.quantity' ng-init="(_Array = []).length = product.quantity;">
 						      		<!-- <option ng-repeat='product in products.products' ng-bind='product.quantity'>{{product.quantity}}</option> -->
 						      		 <option ng-repeat="i in _Array track by $index">{{$index+1}}</option>
 						      	</select>
 							   	
-							   	<a href="#" class="button addCart">Add to Cart</a>
+							   	<a href="#" class="large-4 columns" class="addCart">Add to Cart</a>
 						  </td>
 						    </tr>
 						  </tbody>
