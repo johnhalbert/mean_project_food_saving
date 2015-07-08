@@ -14,7 +14,7 @@ module.exports = {
 		})
 	},
 	updateCustomer: function(req, res){
-		Customer.findOne({'_id': req.params.id}, function(err, customer){
+		Customer.findOne({_id: req.params.id}, function(err, customer){
 			if (err) {
 				console.log('Error updating customer (1)', err);
 			} else {
@@ -32,7 +32,7 @@ module.exports = {
 		})
 	},
 	retrieveCustomer: function(req, res){
-		Customer.findOne({'_id': req.params.id}, function(err, customer){
+		Customer.findOne({_id: req.params.id}, function(err, customer){
 			if (err) {
 				console.log('Error retrieving customer');
 			} else {
@@ -50,7 +50,7 @@ module.exports = {
 		})
 	},
 	loginCustomer: function(req, res){
-		Customer.findOne({'email': req.params.id}, function(err, customer){
+		Customer.findOne({email: req.params.id}, function(err, customer){
 			if (err) {
 				console.log('Error logging in customer', err);
 			} else if (customer) {

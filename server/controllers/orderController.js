@@ -5,8 +5,8 @@ var Customer = mongoose.model('Customer');
 
 module.exports = {
 	createOrder: function(req, res){
-		Vendor.findOne({'_id': req.body.vendor_id}, function(err, vendor){
-			Customer.findOne({'_id': req.body.customer_id}, function(err, customer){
+		Vendor.findOne({_id: req.body.vendor_id}, function(err, vendor){
+			Customer.findOne({_id: req.body.customer_id}, function(err, customer){
 				if (err) {
 					console.log('Error creating new order (1)', err);
 				} else {
@@ -24,11 +24,11 @@ module.exports = {
 		})
 	},
 	destroyOrder: function(req, res){
-		Vendor.findOne({'_id': req.body.vendor_id}, function(err, vendor){
+		Vendor.findOne({_id: req.body.vendor_id}, function(err, vendor){
 			if (err) {
 				console.log('Error cancelling order (1)', err);
 			} else {
-				Order.findOne({'_id': req.body.order_id}, function(err, order){
+				Order.findOne({_id: req.body.order_id}, function(err, order){
 					if (err) {
 						console.log('Error cancelling order (2)', err);
 					} else {

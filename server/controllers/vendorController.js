@@ -13,7 +13,7 @@ module.exports = {
 		})
 	},
 	updateVendor: function(req, res){
-		Vendor.findOne({'_id': req.params.id}, function(err, vendor){
+		Vendor.findOne({_id: req.params.id}, function(err, vendor){
 			if (err) {
 				console.log('Error while updating vendor (1)', err);
 			} else {
@@ -32,7 +32,7 @@ module.exports = {
 		})
 	},
 	retrieveVendor: function(req, res){
-		Vendor.findOne({'_id': req.params.id}, function(err, vendor){
+		Vendor.findOne({_id: req.params.id}, function(err, vendor){
 			if (err) {
 				console.log('Error while retrieving vendor', err);
 			} else {
@@ -41,7 +41,7 @@ module.exports = {
 		})
 	},
 	loginVendor: function(req, res){
-		Vendor.findOne({'email': req.body.email}, function(err, vendor){
+		Vendor.findOne({email: req.body.email}, function(err, vendor){
 			if (err) {
 				console.log('Error logging in vendor', err);
 			} else if (vendor) {

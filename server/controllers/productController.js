@@ -28,7 +28,7 @@ module.exports = {
 		})
 	},
 	updateProduct: function(req, res){
-		Product.findOne({'_id': req.params.id}, function(err, product){
+		Product.findOne({_id: req.params.id}, function(err, product){
 			if (err) {
 				console.log('Error updating product (1)', err);
 			} else {
@@ -49,7 +49,7 @@ module.exports = {
 		})
 	},
 	retrieveProduct: function(req, res){
-		Product.findOne({'_id': req.params.id}, function(err, product){
+		Product.findOne({_id: req.params.id}, function(err, product){
 			if (err) {
 				console.log('Error retrieving product', err);
 			} else {
@@ -71,12 +71,16 @@ module.exports = {
 		Vendor.findOne({_id: req.params.id})
 			.populate('products')
 			.exec(function(err, products){
+				if(err){
+					console.log("error");
+				}else{
 				console.log(products);
 				res.json(products);
+				}
 			})
 	},
 	destroyProduct: function(req, res){
-		Product.remove({'_id': req.params.id}, function(err){
+		Product.remove({_id: req.params.id}, function(err){
 			if (err) {
 				console.log('Error deleting product', err);
 			} else {
