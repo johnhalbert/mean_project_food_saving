@@ -67,13 +67,23 @@ module.exports = {
 		})
 	},
 	retrieveProductsOfVendor: function(req, res){
-		console.log('retrieveProductsofVendor', req.params.id)
-		Vendor.findOne({_id: req.params.id})
-			.populate('products')
-			.exec(function(err, products){
-				console.log(products);
+		// console.log('retrieveProductsofVendor', req.params.id)
+		// Vendor.findOne({_id: req.params.id})
+		// 	.populate('products')
+		// 	.exec(function(err, products){
+		// 		console.log(products);
+		// 		res.json(products);
+		// 	})
+
+		// We're hacks after all
+		
+		Product.find({_vendor: req.params.id}, function(err, products){
+			if (err) {
+				console.log('Error retrieving products list', err);
+			} else {
 				res.json(products);
-			})
+			}
+		})
 	},
 	destroyProduct: function(req, res){
 		Product.remove({'_id': req.params.id}, function(err){

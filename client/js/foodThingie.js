@@ -475,6 +475,18 @@ foodThingie.controller('productsController', function($window, $scope, socket, $
     $scope.vendor = data;
    })
 
+    productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
+              console.log('getting products', $scope.vendor);
+            if (products.error) {
+                console.log(products.error);
+                $scope.error = products.error;
+            } else {
+                console.log('Success!', products);
+                $scope.products = products;
+                $window.location.href = '#/vendor';
+            }
+        })
+
     $scope.retrieveProductsOfVendor = function(){
         productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
               console.log('getting products', $scope.vendor);
