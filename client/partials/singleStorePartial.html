@@ -59,133 +59,16 @@
 						    </tr>
 						  </thead>
 						  <tbody>
-						    <tr>
-						      <td>Potatoes</td>
-						      <td>6/13/2016</td>
-						      <td>Sweet Potatoes</td>
-						      <td>Produce</td>
-						      <td>$0.75/lb</td>
-						      <td>
-								<form class="custom">
-								  <div class="row collapse">
-								    <div class="small-4 columns">
-								      <select>
-								        <option>1</option>
-								        <option>2</option>
-								        <option>3</option>
-								        <option>4</option>
-								        <option>5</option>
-								      </select>
-								    </div>
-								    <div class="small-8 columns">
-								      <a href="#" class="button postfix">ORDER</a>
-								    </div>
-								  </div>
-								</form>
-						      </td>
+						    <tr ng-repeat='product in products'>
+						      <td ng-bind='product.name'></td>
+						      <td ng-bind='product.ageexpiration'></td>
+						      <td ng-bind='product.description'></td>
+						      <td ng-bind='product.category'></td>
+						      <td ng-bind='product.price'></td>
+						      <td>Qty: <select ng-model='newOrder.quantity'>
+						      		<option ng-repeat='quantity in products.quantity' ng-bind='quantity'>{{quantity}}</option>
+						      </select></td>
 						    </tr>
-						    <tr>
-						      <td>Soup</td>
-						      <td>4/23/2016</td>
-						      <td>Tomato soup</td>
-						      <td>Canned Products</td>
-						      <td>$1.95</td>
-						      <td>
-								<form class="custom">
-								  <div class="row collapse">
-								    <div class="small-4 columns">
-								      <select>
-								        <option>1</option>
-								        <option>2</option>
-								        <option>3</option>
-								        <option>4</option>
-								        <option>5</option>
-								      </select>
-								    </div>
-								    <div class="small-8 columns">
-								      <a href="#" class="button postfix">ORDER</a>
-								    </div>
-								  </div>
-								</form>
-						      </td>
-						    </tr>
-						    
-						    <tr>
-						      <td>Pizza</td>
-						      <td>8/30/2016</td>
-						      <td>Pepperoni</td>
-						      <td>Frozen Goods</td>
-						      <td>$2.50</td>
-						      <td>
-								<form class="custom">
-								  <div class="row collapse">
-								    <div class="small-4 columns">
-								      <select>
-								        <option>1</option>
-								        <option>2</option>
-								        <option>3</option>
-								        <option>4</option>
-								        <option>5</option>
-								      </select>
-								    </div>
-								    <div class="small-8 columns">
-								      <a href="#" class="button postfix">ORDER</a>
-								    </div>
-								  </div>
-								</form>
-						      </td>
-						    </tr>
-						    <tr>
-						      <td>Ice Cream</td>
-						      <td>3/10/2016</td>
-						      <td>Coffee</td>
-						      <td>Frozen Goods</td>
-						      <td>$1.50</td>
-						      <td>
-								<form class="custom">
-								  <div class="row collapse">
-								    <div class="small-4 columns">
-								      <select>
-								        <option>1</option>
-								        <option>2</option>
-								        <option>3</option>
-								        <option>4</option>
-								        <option>5</option>
-								      </select>
-								    </div>
-								    <div class="small-8 columns">
-								      <a href="#" class="button postfix">ORDER</a>
-								    </div>
-								  </div>
-								</form>
-						      </td>
-						    </tr>
-						    <tr>
-						      <td>Beans</td>
-						      <td>4/13/2016</td>
-						      <td>Green Beans</td>
-						      <td>Produce</td>
-						      <td>$0.95/lb</td>
-						      <td>
-								<form class="custom">
-								  <div class="row collapse">
-								    <div class="small-4 columns">
-								      <select>
-								        <option>1</option>
-								        <option>2</option>
-								        <option>3</option>
-								        <option>4</option>
-								        <option>5</option>
-								      </select>
-								    </div>
-								    <div class="small-8 columns">
-								      <a href="#" class="button postfix">ORDER</a>
-								    </div>
-								  </div>
-								</form>
-						      </td>
-						    </tr>
-						    
 						  </tbody>
 						</table>
 					</div>

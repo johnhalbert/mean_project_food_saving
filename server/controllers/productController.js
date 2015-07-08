@@ -4,8 +4,7 @@ var Vendor = mongoose.model('Vendor');
 
 module.exports = {
 	createProduct: function(req, res){
-		console.log("333", req.body);
-		Vendor.findOne({'_id': req.body.vendor_id}, function(err, vendor){
+		Vendor.findOne({_id: req.body.vendor_id}, function(err, vendor){
 			if (err) {
 				console.log('Error while creating product (1)', err);
 			} else {
@@ -67,6 +66,7 @@ module.exports = {
 		})
 	},
 	retrieveProductsOfVendor: function(req, res){
+// <<<<<<< HEAD
 		console.log('retrieveProductsofVendor', req.params.id)
 		Vendor.findOne({_id: req.params.id})
 			.populate('products')
@@ -78,6 +78,29 @@ module.exports = {
 				res.json(products);
 				}
 			})
+// =======
+		// console.log('retrieveProductsofVendor', req.params.id)
+		// Vendor.findOne({_id: req.params.id})
+		// 	.populate('products')
+		// 	.exec(function(err, products){
+		// 		if (err) {
+		// 			console.log(err);
+		// 		} else {
+		// 			console.log(products);
+		// 			res.json(products);
+		// 		}
+		// 	})
+
+		// We're hacks after all
+
+		// Product.find({_vendor: req.params.id}, function(err, products){
+		// 	if (err) {
+		// 		console.log('Error retrieving products list', err);
+		// 	} else {
+		// 		res.json(products);
+		// 	}
+		// })
+// >>>>>>> 256eeb439c0fadec436a34ab107af251a091ca38
 	},
 	destroyProduct: function(req, res){
 		Product.remove({_id: req.params.id}, function(err){

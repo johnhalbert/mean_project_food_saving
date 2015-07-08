@@ -12,8 +12,8 @@ var ProductSchema = new mongoose.Schema({
 	_vendor: { type: Schema.ObjectId, ref: 'Vendor' },
 	price: { type: Number, required: 'Products must have a price' },
 	quantity: { type: Number, required: 'Products must have an initial quantity' },
-	num_ordered: { type: Number, default: 0},
-	ageexpires: { type: Date, required: 'Customers must know when the product expires (roughly)'}
+	num_ordered: { type: Number, default: 0 },
+	ageexpires: { type: Date, required: 'Customers must know when the product expires (roughly)' }
 })
 
 var Product = mongoose.model('Product', ProductSchema);

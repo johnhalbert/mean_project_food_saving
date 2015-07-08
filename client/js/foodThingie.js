@@ -117,7 +117,6 @@ foodThingie.factory("productFactory", function($http){
     var factory = {};
 
     factory.createProduct = function(product, callback){
-        console.log("222", product);
       $http.post('/products/new', product)
         .success(function(product){
           callback(product);
@@ -439,7 +438,7 @@ foodThingie.controller('infoController', function($window, $scope, socket, $rout
 
 })
 //controller for individual store/restaurant
-foodThingie.controller('indiController', function($window, $scope, socket, $routeParams, customerFactory, vendorFactory){
+foodThingie.controller('indiController', function($window, $scope, socket, $routeParams, customerFactory, vendorFactory, productFactory){
 
     customerFactory.retrieveLogin(function(customer){
         if (customer) {
@@ -452,6 +451,16 @@ foodThingie.controller('indiController', function($window, $scope, socket, $rout
     vendorFactory.retrieveVendor($routeParams.id, function(vendor){
         $scope.vendor = vendor;
         console.log($scope.vendor);
+        productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
+              console.log('getting products', $scope.vendor);
+            if (products.error) {
+                console.log(products.error);
+                $scope.error = products.error;
+            } else {
+                console.log('Success!', products);
+                $scope.products = products;
+            }
+        })
     })
 
 })
@@ -470,13 +479,12 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
 /********************************* PRODUCTS CONTROLLER *********************************/
    
 foodThingie.controller('productsController', function($window, $scope, socket, $routeParams, productFactory, vendorFactory){
-    $scope.products = [];
     vendorFactory.getVendorInfo(function(data){
     $scope.vendor = data;
    })
 
-    $scope.retrieveProductsOfVendor = function(){
-        productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
+    // set outside of function scope so products are populated on page load
+    productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
               console.log('getting products', $scope.vendor);
             if (products.error) {
                 console.log(products.error);
@@ -487,34 +495,33 @@ foodThingie.controller('productsController', function($window, $scope, socket, $
                 $window.location.href = '#/vendor';
             }
         })
-    }
 
     $scope.addProduct = function(vend_id){
-        console.log("111", vend_id);
         $scope.addEditProduct.vendor_id = vend_id;
         productFactory.createProduct($scope.addEditProduct, function(product){
+            console.log('this is here now');
           if (product.error) {
                 console.log(product.error);
                 $scope.error = product.error;
             } else {
                 console.log('Success! (1)', product);
                 $scope.addEditProduct = {};
-
-                productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
-                    console.log('loggin scope in addProduct',$scope.vendor);
-                    if (products.error) {
-                        console.log(products.error);
-                        $scope.error = products.error;
-                    } else {
-                        console.log('Success! (2)', products);
-                        $scope.products = products;
-                        $window.location.href = '#/vendor';
-                    }
-                })
-
-                $window.location.href = '#/vendor';
+                 productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
+              console.log('getting products', $scope.vendor);
+            if (products.error) {
+                console.log(products.error);
+                $scope.error = products.error;
+            } else {
+                // console.log('Success!', products);
+                $scope.products = products;
+                // console.log('Success!', $scope.products);
+                // $window.location.href = '#/vendor';
             }
         })
+                // $scope.products.push(product);
+            }
+        })
+        console.log('Success!', $scope.products);
       }
 
 
