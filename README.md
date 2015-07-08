@@ -20,6 +20,6 @@ With the billions of dollars of good food that is tossed each year in North Amer
 ## Time Log
 
 * July 6: Brainstorming, Wireframe mockup, Foundation learning, creation of html views (11 hours)
-* July 7:
+* July 7: discussion of workflow and division of tasks, discussion of APIs and features to include, completion of login/registration, completion of initial customer listing page (10 hours)
 * July 8:
 * July 9:
