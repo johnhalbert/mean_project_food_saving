@@ -12,21 +12,21 @@
 			width: 90%;
 			margin-left: 5%;
 			overflow-y: scroll;
-			box-shadow: 0px 0px 10px 1px rgba(0, 0, 40, 0.2);
+			box-shadow: 0px 0px 10px 1px rgba(0, 40, 0, 0.2);
 		}
 
 		table {
 			width: 100%;
 		}
 
-		table tr:hover { background: skyblue; } 
+		table tr:hover { background: palegreen; } 
 
 		h1 {
 			margin-left: 1em;
 		}
 
 		form {
-			box-shadow: 0px 0px 10px 1px rgba(0, 0, 40, 0.2);
+			box-shadow: 0px 0px 10px 1px rgba(0, 40, 0, 0.2);
 			padding: 1em;
 			margin: 1em;
 			border-radius: 1em;
@@ -36,6 +36,13 @@
 			border-radius: 1em;
 		}
 		
+		#largeContainer {
+			height:98em;
+		}
+
+		#dashMain {
+			background: olive;
+		}
 
 /*	@author Anika
 	 */
