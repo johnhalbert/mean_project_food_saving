@@ -115,11 +115,12 @@ foodThingie.factory("vendorFactory", function($http){
 foodThingie.factory("productFactory", function($http){
     
     var factory = {};
+    var products;
 
     factory.createProduct = function(product, callback){
       $http.post('/products/new', product)
-        .success(function(product){
-          callback(product);
+        .success(function(data){
+          callback(data);
         })
     }
 
@@ -146,7 +147,8 @@ foodThingie.factory("productFactory", function($http){
 
     factory.retrieveProductsOfVendor = function(vendor, callback){
       $http.get('/products/'+vendor._id+'/vendor')
-        .success(function(products){
+        .success(function(data){
+          products = data;
           callback(products);
         })
     }
@@ -381,20 +383,18 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
             console.log(vendor.error);
             $scope.error = vendor.error;
         } else {
-            $scope.vendor = vendor;
-            console.log("YO", vendor);
-            $scope.vendorLogin = {};
-            $scope.updateVendor = vendor;
-            productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
-                if (products.error) {
-                    console.log(products.error);
-                    $scope.error = products.error;
-                } else {
-                    console.log('Success!', products);
-                    $scope.products = products;
-                    $window.location.href = '#/vendor';
-                }
-            })
+            // $scope.vendor = vendor;
+            // $scope.vendorLogin = {};
+            // $scope.updateVendor = vendor;
+            // productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
+            //     if (products.error) {
+            //         console.log(products.error);
+            //         $scope.error = products.error;
+            //     } else {
+            //         $scope.products = products;
+            //         $window.location.href = '#/vendor';
+            //     }
+            // })
             $scope.updateButton = false; // hide update button
             $window.location.href = '#/vendor';
         }
@@ -481,47 +481,39 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
 foodThingie.controller('productsController', function($window, $scope, socket, $routeParams, productFactory, vendorFactory){
     vendorFactory.getVendorInfo(function(data){
     $scope.vendor = data;
+    $scope.updateVendor = data;
    })
 
     // set outside of function scope so products are populated on page load
     productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
-              console.log('getting products', $scope.vendor);
             if (products.error) {
                 console.log(products.error);
                 $scope.error = products.error;
             } else {
-                console.log('Success!', products);
                 $scope.products = products;
-                $window.location.href = '#/vendor';
             }
         })
 
     $scope.addProduct = function(vend_id){
         $scope.addEditProduct.vendor_id = vend_id;
         productFactory.createProduct($scope.addEditProduct, function(product){
-            console.log('this is here now');
-          if (product.error) {
+            if (product.error) {
                 console.log(product.error);
                 $scope.error = product.error;
             } else {
-                console.log('Success! (1)', product);
-                $scope.addEditProduct = {};
-                 productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
-              console.log('getting products', $scope.vendor);
-            if (products.error) {
-                console.log(products.error);
-                $scope.error = products.error;
-            } else {
-                // console.log('Success!', products);
-                $scope.products = products;
-                // console.log('Success!', $scope.products);
-                // $window.location.href = '#/vendor';
+                productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
+                  console.log('getting products', $scope.vendor);
+                  if (products.error) {
+                      console.log(products.error);
+                      $scope.error = products.error;
+                  } else {
+                      $scope.products = products;
+                      console.log('Success!(9)', $scope.products);
+                  }
+                })
             }
         })
-                // $scope.products.push(product);
-            }
-        })
-        console.log('Success!', $scope.products);
+          $scope.addEditProduct = {};
       }
 
 
@@ -531,7 +523,7 @@ foodThingie.controller('productsController', function($window, $scope, socket, $
                 console.log(product.error);
                 $scope.error = product.error;
             } else {
-                console.log('Success!', product);
+                console.log('Success! updating', product);
                 $scope.addEditProduct = {}; // set form fields to empty
                 $scope.updateButton = false; // hide update button
                 $window.location.href = '#/vendor';
