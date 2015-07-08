@@ -6,14 +6,14 @@
 			<div class="card">
 			    <div class="image">
 			      	<img src="https://instrumentofexpression.files.wordpress.com/2012/09/img_4246.jpg">
-			        <span class="title" ng-bind='vendor.name'></span>
+			        <span class="title" ng-bind='products.name'></span>
 			    </div>
 
 			    <div class="content">
 			      	<img src="https://slaterjd.files.wordpress.com/2012/09/manchester-england-google-maps4.jpg">
-			        <p><span style = "font-weight:bold;">Address: </span> <span ng-bind='vendor.address'></span></p>
-			        <p><span style = "font-weight:bold;">Phone: </span><span ng-bind='vendor.phone'></span></p>
-			        <p><span style = "font-weight:bold;">Hours: </span><span ng-bind='vendor.hours'></span></p>
+			        <p><span style = "font-weight:bold;">Address: </span> <span ng-bind='products.address'></span></p>
+			        <p><span style = "font-weight:bold;">Phone: </span><span ng-bind='products.phone'></span></p>
+			        <p><span style = "font-weight:bold;">Hours: </span><span ng-bind='products.hours'></span></p>
 			    </div>
 
 			    <div class="action">
@@ -65,8 +65,9 @@
 						      <td ng-bind='product.description'></td>
 						      <td ng-bind='product.category'></td>
 						      <td ng-bind='product.price'></td>
-						      <td>Qty: <select ng-model='newOrder.quantity'>
-						      		<option ng-repeat='quantity in products' ng-bind='quantity'>{{quantity}}</option>
+						      <td>Qty: <select ng-model='newOrder.quantity' ng-init="(_Array = []).length = product.quantity;">
+						      		<!-- <option ng-repeat='product in products.products' ng-bind='product.quantity'>{{product.quantity}}</option> -->
+						      		 <option ng-repeat="i in _Array track by $index">{{$index+1}}</option>
 						      </select></td>
 						    </tr>
 						  </tbody>
@@ -74,7 +75,7 @@
 					</div>
 			      </div>
 			      <div class="action">
-			        <a href='#/cart' ng-click="vendorInfo(vendor._id)">View my cart</a>
+			        <a href='#/cart/{{products._id}}'>View my cart</a>
 			      </div>
 			    </div>
 			  </div>
