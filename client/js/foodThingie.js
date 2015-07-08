@@ -117,7 +117,6 @@ foodThingie.factory("productFactory", function($http){
     var factory = {};
 
     factory.createProduct = function(product, callback){
-        console.log("222", product);
       $http.post('/products/new', product)
         .success(function(product){
           callback(product);
@@ -499,29 +498,16 @@ foodThingie.controller('productsController', function($window, $scope, socket, $
         })
 
     $scope.addProduct = function(vend_id){
-        console.log("111", vend_id);
         $scope.addEditProduct.vendor_id = vend_id;
         productFactory.createProduct($scope.addEditProduct, function(product){
+            console.log('this is here now');
           if (product.error) {
                 console.log(product.error);
                 $scope.error = product.error;
             } else {
                 console.log('Success! (1)', product);
                 $scope.addEditProduct = {};
-
-                productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
-                    console.log('loggin scope in addProduct',$scope.vendor);
-                    if (products.error) {
-                        console.log(products.error);
-                        $scope.error = products.error;
-                    } else {
-                        console.log('Success! (2)', products);
-                        $scope.products = products;
-                        $window.location.href = '#/vendor';
-                    }
-                })
-
-                $window.location.href = '#/vendor';
+                $scope.products.push(product);
             }
         })
       }
