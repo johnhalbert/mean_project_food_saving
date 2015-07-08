@@ -304,6 +304,7 @@ foodThingie.controller('login_regController', function($window, $scope, socket, 
         $scope.error = customer.error
       }else{
         $scope.customer = customer;
+        console.log($scope.customer);
       }
     })
   }
@@ -418,8 +419,10 @@ foodThingie.controller('infoController', function($window, $scope, socket, $rout
 
     customerFactory.retrieveLogin(function(customer){
         if (customer) {
+            console.log(customer)
             $scope.customer = customer;
         } else {
+            console.log(customer)
             $window.location.href = '#/';
         }
     })

@@ -13,9 +13,6 @@
 	<script type="text/javascript" src='js/foodThingie.js'></script>
 	<!-- Scripts required for sign in / register modal -->
 	<script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-	 <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
-
 
 	<script src='/socket.io/socket.io.js'></script>
 	<!-- for the piechart -->
@@ -24,12 +21,15 @@
 	<script src="js/nv.d3.js"></script>
 	<link rel="stylesheet" href="css/nv.d3.css"/>
 	<!-- end for the piechart -->
-	<script>
+	<!-- <script>
         $('#confirm-delete').on('show.bs.modal', function(e) {
             $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));            
         });
 
-    </script>
+
+
+    </script> -->
+
 
 </head>
 <body>
@@ -48,8 +48,8 @@
 				<li><a href="#">About</a></li>
 				<li <a href="#" class="button"  data-dropdown="hover1" data-options="is_hover:true; hover_timeout:1000">Login / Register &raquo;</a>
 					<ul id="hover1" class="mega f-dropdown" data-dropdown-content>
-						<li><a data-href="/register" data-toggle="modal" data-target="#loginRegister">Business Sign Up/Log In</a></li>
-						<li><a data-href="/register" data-toggle="modal" data-target="#loginRegisterCustomer">Customer Sign Up/Log In</a></li>
+						<li><a data-href="#" data-reveal-id="vendorModal">Business Sign Up/Log In</a></li>
+						<li><a data-href="#" data-reveal-id="customerModal">Customer Sign Up/Log In</a></li>
 					</ul>
 				</li>
 				<li ng-controller='login_regController'><a ng-click='logout()'>Logout</a></li>
@@ -57,6 +57,7 @@
 		</section>
 	</nav>
 	</div>
+
 	<div ng-view=''>
 	</div>
 <!-- ######################### -->
@@ -84,7 +85,7 @@
 	</nav> -->
 
 	<!-- **************** BUSINESS SIGN-IN / REGISTER  MODAL **************** -->
-	<div ng-controller='login_regController' class="modal fade" id="loginRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<!-- <div ng-controller='login_regController' class="modal fade" id="loginRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             
@@ -125,12 +126,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- ****************************************************************** -->
 
 
     <!-- **************** CUSTOMER SIGN-IN / REGISTER  MODAL **************** -->
-	<div ng-controller='login_regController' class="modal fade" id="loginRegisterCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<!-- <div ng-controller='login_regController' class="modal fade" id="loginRegisterCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             
@@ -164,19 +165,87 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- ****************************************************************** -->
 
+
+    <!-- ****************BUSINESS REGISTRATION FOUNDATION MODAL******************** -->
+
+    <div ng-controller='login_regController' id="vendorModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+
+        <h4 class="modal-title" id="myModalLabel">Register / Sign in</h4>
+                
+            
+                <div class="modal-body">
+                    <div style = "overflow-y:scroll;height:20em;">
+                    <h2>Register</h2>
+                    <form>
+                        <input type = 'text' placeholder = 'Name' ng-model='newVendor.name' />
+                        <input type = 'email' placeholder = 'Email' ng-model='newVendor.email' />
+                        <input type = 'password' placeholder = 'Password' ng-model='newVendor.password' />
+                        From: <input type='time' ng-model='newVendor.fromTime' />
+                        To: <input type='time' ng-model='newVendor.toTime' />
+                        <input type='text' placeholder='Address' ng-model='newVendor.address' />
+                        <input type='text' placeholder='Phone' ng-model='newVendor.phone' />
+                        Type: <select ng-model='newVendor.type'>
+                                    <option value='grocery'>Grocery Store</option>
+                                    <option value='restaurant'>Restaurant</option>
+                              </select>
+                        <a class="button modal-close-vendor" ng-click='addVendor()'>Register</a>
+                    </form>
+                </div>
+                    <h2>Login</h2>
+                    <form>
+                        <input type = 'email' placeholder = 'Email' ng-model='vendorLogin.email' />
+                        <input type = 'password' placeholder = 'Password' ng-model='vendorLogin.password'>
+                        <button class="button modal-close-vendor" data-dismiss="modal" ng-click='retrieveVendor()'>Login</button>
+                    </form>
+     
+      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+
+    <!-- ***********************CUSTOMER LOGIN/REGISTER MODAL****************** -->
+
+    <div ng-controller='login_regController' id="customerModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        <h4 class="modal-title" id="myModalLabel">Register / Sign in</h4>
+            
+                    <h2>Register</h2>
+                    <form>
+                        <input type = 'text' placeholder = 'Name' ng-model='newCustomer.name' />
+                        <input type = 'email' placeholder = 'Email' ng-model='newCustomer.email' />
+                        <input type = 'password' placeholder = 'Password' ng-model='newCustomer.password' />
+                        
+                        <a class="button modal-close-customer" ng-click='addCustomer()'>Register</a>
+                    </form>
+
+                    <h2>Login</h2>
+                    <form>
+                        <input type = 'email' placeholder = 'Email' ng-model='customerLogin.email' />
+                        <input type = 'password' placeholder = 'Password' ng-model='customerLogin.password'>
+                        <button class="button modal-close-customer" ng-click='retrieveCustomer()'>Login</button>
+                    </form>
+              <a class='close-reveal-modal' aria-label="Close">&#215;</a>
+    </div>
 
 <script src="js/vendor/jquery.js"></script>
 <script src="js/foundation/foundation.js"></script>
 <script src="js/foundation/foundation.topbar.js"></script>
 <script src="js/foundation/foundation.dropdown.js"></script>
+<script src="js/foundation/foundation.reveal.js"></script>
 <script src="js/vendor/fastclick.js"></script>
 <script type="text/javascript">
     $(document).foundation('dropdown',{
 	  activeClass: 'open'
 	});
+
+    $('.modal-close-customer').on('click', function() {
+      $('#customerModal').foundation('reveal', 'close');
+    });
+
+    $('.modal-close-vendor').on('click', function() {
+      $('#vendorModal').foundation('reveal', 'close');
+    });
+
 	$(document).foundation();
 </script>
 </body>
