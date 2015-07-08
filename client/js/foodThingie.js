@@ -117,6 +117,7 @@ foodThingie.factory("productFactory", function($http){
     var factory = {};
 
     factory.createProduct = function(product, callback){
+        console.log("222", product);
       $http.post('/products/new', product)
         .success(function(product){
           callback(product);
@@ -483,7 +484,9 @@ foodThingie.controller('productsController', function($scope, socket, $routePara
         })
     }
 
-    $scope.addProduct = function(){
+    $scope.addProduct = function(vend_id){
+        console.log("111", vend_id);
+        $scope.addEditProduct.vendor_id = vend_id;
         productFactory.createProduct($scope.addEditProduct, function(product){
           if (product.error) {
                 console.log(product.error);

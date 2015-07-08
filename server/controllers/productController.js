@@ -4,6 +4,7 @@ var Vendor = mongoose.model('Vendor');
 
 module.exports = {
 	createProduct: function(req, res){
+		console.log("333", req.body);
 		Vendor.findOne({'_id': req.body.vendor_id}, function(err, vendor){
 			if (err) {
 				console.log('Error while creating product (1)', err);
