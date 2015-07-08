@@ -8,19 +8,16 @@ foodThingie.controller('indiController', function($window, $scope, socket, $rout
         }
     });
 
-    vendorFactory.retrieveVendor($routeParams.id, function(vendor){
-        $scope.vendor = vendor;
-        console.log($scope.vendor);
-        productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
-              console.log('getting products', $scope.vendor);
-            if (products.error) {
-                console.log(products.error);
-                $scope.error = products.error;
-            } else {
-                console.log('Success!', products);
-                $scope.products = products;
-            }
-        })
+    var vendor = {};
+    vendor._id = $routeParams.id
+    productFactory.retrieveProductsOfVendor(vendor, function(products){
+        if (products.error) {
+            console.log(products.error);
+            $scope.error = products.error;
+        } else {
+            $scope.products = products;
+            console.log($scope.products)
+        }
     })
 
 })
