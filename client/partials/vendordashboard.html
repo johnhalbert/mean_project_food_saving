@@ -1,9 +1,9 @@
 <link rel="stylesheet" type="text/css" href="css/listingStyle.css">
 
-<div ng-controller='login_regController'>
+<div ng-controller='vendorsController'>
 
 	<div id='dashMain'>
-			<div class='small-4 columns' ng-controller="vendorsController">
+			<div class='small-4 columns'>
 				<form>
 					<fieldset>
 						<legend>My Profile</legend>
@@ -19,7 +19,7 @@
 			</div>
 			<div class='small-8 columns'>
 				<input type='text' ng-model='products_filter' placeholder='Search Products' />
-				<table ng-controller = "productsController">
+				<table>
 					<thead>
 						<tr>
 							<td>Name</td>
@@ -41,10 +41,9 @@
 						</tr>
 					</tbody>
 				</table>
-				<form ng-controller = "productsController">
+				<form>
 					<fieldset>
 						<legend>Add/Update Products</legend>
-						<!-- <input type = "hidden" value = "{{vendor._id}}" ng-model='addEditProduct.vendor_id'> -->
 						<label>Product Name</label>
 						<input type='text' name='name' ng-model='addEditProduct.name' />
 						<label>Description</label>

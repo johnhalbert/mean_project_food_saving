@@ -2,31 +2,61 @@
 <html ng-app='foodThingie'>
 <head>
 	<title>Food Unused</title>
+
+    <!-- Foundation CSS -->
 	<link rel="stylesheet" type="text/css" href="css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="css/foundation.min.css">
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" media="screen" rel="stylesheet">
+
+    <!-- AngularJS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
+    <script type="text/javascript" src='js/foodThingie.js'></script>
+
+    <!-- Foundation JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
-	<script type="text/javascript" src='js/foodThingie.js'></script>
-	<!-- Scripts required for sign in / register modal -->
-	<script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/titleStyle.css">
+
+    <!-- Socket.IO -->
 	<script src='/socket.io/socket.io.js'></script>
-	<!-- for the piechart -->
+
+	<!-- PieChart JS -->
 	<script src="js/angularjs-nvd3-directives.js"></script>
 	<script src="js/d3.js"></script>
 	<script src="js/nv.d3.js"></script>
+
+    <!-- PieChart CSS -->
 	<link rel="stylesheet" href="css/nv.d3.css"/>
-	<!-- end for the piechart -->
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="css/titleStyle.css">
+
+    <!-- foodThingie Routes -->
+    <script src='js/ngRoutes.js'></script>
+
+    <!-- foodThingie Factories -->
+    <script src='js/factories/customerFactory.js'></script>
+    <script src='js/factories/orderFactory.js'></script>
+    <script src='js/factories/pieChartFactory.js'></script>
+    <script src='js/factories/productFactory.js'></script>
+    <script src='js/factories/socketFactory.js'></script>
+    <script src='js/factories/vendorFactory.js'></script>
+
+    <!-- foodThingie Controllers -->
+    <script src='js/controllers/customerController.js'></script>
+    <script src='js/controllers/dashCtrl.js'></script>
+    <script src='js/controllers/indiController.js'></script>
+    <script src='js/controllers/infoController.js'></script>
+    <script src='js/controllers/login_regController.js'></script>
+    <script src='js/controllers/pieChartController.js'></script>
+    <script src='js/controllers/productsController.js'></script>
+    <script src='js/controllers/vendorController.js'></script>
+
 
 </head>
 <body>
 
-
-	<!-- ############################ -->
 	<div class="contain-to-grid">
 	<nav class='top-bar' data-topbar role='navigation'>
 		<ul class='title-area'>
@@ -81,119 +111,7 @@
 
 </div>
 
-
-
-
-<!-- ######################### -->
-<!-- 	<nav class='top-bar' data-topbar role='navigation'>
-		<ul class='title-area'>
-			<li class='name'>
-				<h1>Food Savers</h1>
-			</li>
-
-		</ul>
-		<section class='top-bar-section'>
-			<ul class='right'>
-				<li><a href="#">About</a></li>
-				<li><a data-href="/register" data-toggle="modal" data-target="#loginRegister">Business Sign Up/Log In</a>
-					<ul class='dropdown'>
-						<li><a href="#">Customer Sign In</a></li>
-						<li><a href="#">Business Sign In</a></li>
-					</ul>
-				</li>
-				<li><a data-href="/register" data-toggle="modal" data-target="#loginRegisterCustomer">Customer Sign Up/Log In</a>
-				</li>
-				<li ng-controller='login_regController'><a ng-click='logout()'>Logout</a></li>
-			</ul>
-		</section>
-	</nav> -->
-
-	<!-- **************** BUSINESS SIGN-IN / REGISTER  MODAL **************** -->
-	<!-- <div ng-controller='login_regController' class="modal fade" id="loginRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Register / Sign in</h4>
-                </div>
-            
-                <div class="modal-body">
-                	<div style = "overflow-y:scroll;height:20em;">
-                	<h2>Register</h2>
-                	<form>
-                		<input type = 'text' placeholder = 'Name' ng-model='newVendor.name' />
-                		<input type = 'email' placeholder = 'Email' ng-model='newVendor.email' />
-                		<input type = 'password' placeholder = 'Password' ng-model='newVendor.password' />
-                		From: <input type='time' ng-model='newVendor.fromTime' />
-                		To: <input type='time' ng-model='newVendor.toTime' />
-                		<input type='text' placeholder='Address' ng-model='newVendor.address' />
-                		<input type='text' placeholder='Phone' ng-model='newVendor.phone' />
-                		Type: <select ng-model='newVendor.type'>
-                					<option value='grocery'>Grocery Store</option>
-                					<option value='restaurant'>Restaurant</option>
-                			  </select>
-                		<a class="btn btn-success btn-ok" ng-click='addVendor()'>Register</a>
-                	</form>
-                </div>
-                	<h2>Login</h2>
-                	<form>
-                		<input type = 'email' placeholder = 'Email' ng-model='vendorLogin.email' />
-                		<input type = 'password' placeholder = 'Password' ng-model='vendorLogin.password'>
-                		<button class="btn btn-success btn-ok" data-dismiss="modal" ng-click='retrieveVendor()'>Login</button>
-                	</form>
-                
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- ****************************************************************** -->
-
-
-    <!-- **************** CUSTOMER SIGN-IN / REGISTER  MODAL **************** -->
-	<!-- <div ng-controller='login_regController' class="modal fade" id="loginRegisterCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Register / Sign in</h4>
-                </div>
-            
-                <div class="modal-body">
-                	<div style = "overflow-y:scroll;height:30em;">
-                	<h2>Register</h2>
-                	<form>
-                		<input type = 'text' placeholder = 'Name' ng-model='newCustomer.name' />
-                		<input type = 'email' placeholder = 'Email' ng-model='newCustomer.email' />
-                		<input type = 'password' placeholder = 'Password' ng-model='newCustomer.password' />
-                		
-                		<a class="btn btn-success btn-ok" ng-click='addCustomer()'>Register</a>
-                	</form>
-
-                	<h2>Login</h2>
-                	<form>
-                		<input type = 'email' placeholder = 'Email' ng-model='customerLogin.email' />
-                		<input type = 'password' placeholder = 'Password' ng-model='customerLogin.password'>
-                		<button class="btn btn-success btn-ok" data-dismiss="modal" ng-click='retrieveCustomer()'>Login</button>
-                	</form>
-                </div>
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- ****************************************************************** -->
-
-
-    <!-- ****************BUSINESS REGISTRATION FOUNDATION MODAL******************** -->
+    <!-- *** BUSINESS REGISTRATION FOUNDATION MODAL *** -->
 
     <div ng-controller='login_regController' id="vendorModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" style = "background-color: rgba(250, 255, 255, 0.75);">
 
@@ -228,7 +146,7 @@
       <a class="close-reveal-modal" aria-label="Close">&#215;</a>
     </div>
 
-    <!-- ***********************CUSTOMER LOGIN/REGISTER MODAL****************** -->
+    <!-- *** CUSTOMER LOGIN/REGISTER MODAL *** -->
 
     <div ng-controller='login_regController' id="customerModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" style = "background-color: rgba(250, 255, 255, 0.75);">
         <h4 class="modal-title" id="myModalLabel">Register / Sign in</h4>
