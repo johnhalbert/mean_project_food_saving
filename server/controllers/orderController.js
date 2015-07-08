@@ -5,18 +5,34 @@ var Customer = mongoose.model('Customer');
 
 module.exports = {
 	createOrder: function(req, res){
+		console.log('createOrder in orderController.js');
+		console.log(req.body);
 		Vendor.findOne({_id: req.body.vendor_id}, function(err, vendor){
-			Customer.findOne({_id: req.body.customer_id}, function(err, customer){
+			Customer.findOne({email: req.body.customeremail}, function(err, customer){
 				if (err) {
 					console.log('Error creating new order (1)', err);
 				} else {
-					var newOrder = new Order({_vendor: vendor._id, _customer: customer._id, pickup_time: req.body.pickup_time, status: 'Pending'})
-					order.save(function(err, result){
+					var newOrder = new Order({_vendor: req.body.vendor_id, _customer: customer._id, pickup_time: req.body.pickup_time, status: 'Pending', products: req.body.product})
+					newOrder.save(function(err, result){
 					    if(err){
 						    res.send(err.message); 
 					    } else {
-						    console.log("Successfully added an order!");
-						    res.send(result._id); // *** end the function to return
+					    	vendor.orders.push(newOrder);
+					    	vendor.save(function(err){
+					    		if (err) {
+					    			console.log('Error creating new order (2)', err);
+					    		} else {
+					    			customer.orders.push(newOrder);
+					    			customer.save(function(err){
+					    				if (err) {
+					    					console.log('Error creating new order (3)', err);
+					    				} else {
+										    console.log("Successfully added an order!");
+					    					res.json(result);
+					    				}
+					    			})
+					    		}
+					    	})
 					    }
 					})
 				}
@@ -68,15 +84,27 @@ module.exports = {
 		       	}
 	   		})
 	},
-	retrieveOrders: function(req, res){
-		Order.find({_customer: req.params.id}, function(err, results) {
-		       	if(err) {
-		         	console.log(err);
-		       	} else {
-		         	res.send(results);
-
-		       	}
-	   		})
+	retrieveCustomerOrders: function(req, res){
+		Customer.findOne({_id: req.params.id})
+			.populate('orders')
+			.exec(function(err, orders){
+				if(err){
+					console.log("Error retrieving orders for vendor", err);
+				} else {
+					res.json(orders);
+				}
+			})
+	},
+	retrieveVendorOrders: function(req, res){
+		Vendor.findOne({_id: req.params.id})
+			.populate('orders')
+			.exec(function(err, orders){
+				if(err){
+					console.log("Error retrieving orders for vendor", err);
+				} else {
+					res.json(orders);
+				}
+			})
 	},
 	updateOrder: function(req, res){
 		Order.update(

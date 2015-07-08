@@ -35,8 +35,12 @@ module.exports = function(app) {
 
 	/***************** Orders *****************/
 
-	app.get('/orders/:id/show', function(req, res){
-		orderController.retrieveOrder(req, res);
+	app.get('/orders/:id/vendor', function(req, res){
+		orderController.retrieveVendorOrder(req, res);
+	})
+
+	app.get('/orders/:id/customer', function(req, res){
+		orderController.retrieveCustomerOrder(req, res);
 	})
 
 	app.get('/orders/show', function(req, res){
@@ -44,6 +48,7 @@ module.exports = function(app) {
 	})
 
 	app.post('/orders/new', function(req, res){
+		console.log('/orders/new in routes.js');
 		orderController.createOrder(req, res);
 	})
 

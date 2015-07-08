@@ -56,8 +56,15 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
     }
 
     $scope.addOrder = function(){
+    	console.log('addOrder in vendorController');
+    	$scope.newOrder.vendor_id = $scope.vendor._id;
     	orderFactory.createOrder($scope.newOrder, function(addedOrder){
-
+    		if (addedOrder.error) {
+    			console.log('Error adding new order', addedOrder.error);
+    			$scope.error = addedOrder.error;
+    		} else {
+	    		$scope.orders.orders.push(addedOrder);
+	    	}
     	})
     }
 

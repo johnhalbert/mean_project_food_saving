@@ -3,6 +3,7 @@ foodThingie.factory("orderFactory", function($http){
     var factory = {};
 
     factory.createOrder = function(order, callback){
+      console.log('createOrder in orderFactory');
       $http.post('/orders/new', order)
         .success(function(order){
           callback(order);
@@ -32,7 +33,7 @@ foodThingie.factory("orderFactory", function($http){
     }
 
     // factory.retrieveVendorOrders = function(vendor, callback){
-    //   $http.get('/')
+    //   $http.get('/orders/')
     // }
 
     factory.updateOrder = function(order, callback){
