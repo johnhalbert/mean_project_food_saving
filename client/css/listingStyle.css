@@ -19,7 +19,7 @@
 			width: 100%;
 		}
 
-		table tr:hover { background: palegreen; } 
+		table tr:hover { background: rgba(150, 230, 150, 0.5);; } 
 
 		h1 {
 			margin-left: 1em;
@@ -38,6 +38,13 @@
 		
 		#largeContainer {
 			height:98em;
+		}
+
+		.vendorButton {
+		  background-color: rgba(100, 180, 100, 1);
+		}
+		.vendorButton:hover {
+		    background: linear-gradient(45deg, #70E276, silver); 
 		}
 
 		#dashMain {

@@ -1,7 +1,9 @@
 <link rel="stylesheet" type="text/css" href="css/storeStyle.css">
+<link rel="stylesheet" type="text/css" href="css/general.css">
+
 <!-- @author Anika -->
 <div id="container" ng-controller='indiController'>
-	<div class="row">
+	<div class="storeContainer">
 		<div class="medium-3 columns">
 			<div class="card">
 			    <div class="image">
@@ -35,7 +37,7 @@
 							   	<div class="large-6 columns">
 								<div class="row collapse postfix-round">
 							   		<div class="small-9 columns">
-							   			<input type="text" placeholder="Find Product">
+							   			<input type="text" ng-model="filter_name" placeholder="Find Product">
 							   		</div>
 							   		<div class="small-3 columns">
 							   			<a href="#" class="button postfix">Go</a>
@@ -59,16 +61,20 @@
 						    </tr>
 						  </thead>
 						  <tbody>
-						    <tr ng-repeat='product in products.products'>
+						    <tr ng-repeat='product in products.products | filter: filter_name'>
 						      <td ng-bind='product.name'></td>
-						      <td ng-bind='product.ageexpires'></td>
+						      <td ng-bind="product.ageexpires | date:'MM/dd/yyyy'"></td>
 						      <td ng-bind='product.description'></td>
 						      <td ng-bind='product.category'></td>
-						      <td ng-bind='product.price'></td>
-						      <td>Qty: <select ng-model='newOrder.quantity' ng-init="(_Array = []).length = product.quantity;">
+						      <td>${{product.price}}</td>
+						      <td> 
+						      	<select class="large-5 columns" class = "qtyDropdown" ng-model='newOrder.quantity' ng-init="(_Array = []).length = product.quantity;">
 						      		<!-- <option ng-repeat='product in products.products' ng-bind='product.quantity'>{{product.quantity}}</option> -->
 						      		 <option ng-repeat="i in _Array track by $index">{{$index+1}}</option>
-						      </select></td>
+						      	</select>
+							   	
+							   	<a href="#" class="large-4 columns" class="addCart">Add to Cart</a>
+						  </td>
 						    </tr>
 						  </tbody>
 						</table>

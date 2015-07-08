@@ -11,7 +11,7 @@
 .modal-close-vendor, .modal-close-customer {
   border: 5px solid rgba(150, 160, 150, 1);
   border-radius: 1em;
-  background-color: rgba(150, 160, 150, 0.4);
+  background-color: rgba(100, 180, 100, 1);
   /*text-shadow: 0px 0px 10px palegreen;*/
 }
 
