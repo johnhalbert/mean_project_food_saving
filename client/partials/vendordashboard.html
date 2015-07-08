@@ -68,17 +68,17 @@
 							<th>Customer Name</th>
 							<th>Product</th>
 							<th>Quantity</th>
-							<th>Total</th>
+							<th>Status</th>
 							<th>Order Date</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat='order in orders'>
+						<tr ng-repeat='order in orders.orders'>
 							<td ng-bind='order.customername'></td>
 							<td ng-bind='order.product'></td>
 							<td ng-bind='order.quantity'></td>
-							<td ng-bind='order.total'></td>
-							<td ng-bind='order.date'></td>
+							<td ng-bind='order.status'></td>
+							<td ng-bind='order.created'></td>
 						</tr>
 					</tbody>
 				</table>
@@ -92,13 +92,36 @@
 						<fieldset>
 							<legend>Add Products</legend>
 							<label>Product</label>
-							<select ng-model='newOrder.product'>
+							<select ng-model='orderProduct._id'>
 								<option ng-repeat='product in products.products' value='{{product._id}}' ng-bind='product.name'></option>
 							</select>
 							<label>Quantity</label>
-							<input type='text' name='quantity' ng-model='newOrder.quantity' placeholder='This will be chaning to something else soon!' />
+							<input type='text' name='quantity' ng-model='orderProduct.quantity' />
+							<button ng-click='addItem()'>Add to Order</button>	
 						</fieldset>
-						<button class = "vendorButton" ng-click='addOrder()'>Create Order</button>
+						<!-- <button class = "vendorButton" ng-click='addOrder()'>Create Order</button> -->
+
+						<div id='orderProducts'>
+							<h4>Current Order</h4>
+							<table>
+								<thead>
+									<tr>
+										<th>Product</th>
+										<th>Quantity</th>
+										<th>Remove</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat='pendingItem in pendingOrder'>
+										<td ng-bind='pendingItem.product'></td>
+										<td ng-bind='pendingItem.quantity'></td>
+										<td><button ng-click='removeItem(pendingItem)'>Remove From Order</button></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<button ng-click='addOrder()'>Create Order</button>
 					</fieldset>
 				</form>
 			</div>

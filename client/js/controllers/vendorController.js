@@ -1,5 +1,9 @@
 foodThingie.controller('vendorsController', function($scope, socket, $routeParams, vendorFactory, productFactory, orderFactory){
 
+	$scope.newOrder = {};
+	$scope.newOrder.products = [];
+	$scope.pendingOrder = [];
+
    	vendorFactory.getVendorInfo(function(data){
 		$scope.vendor = data;
 		$scope.updateVendor = data;
@@ -13,6 +17,11 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
             $scope.products = products;
             console.log($scope.products);
         }
+    })
+
+    orderFactory.retrieveVendorOrders($scope.vendor._id, function(orders){
+    	$scope.orders = orders;
+    	console.log('$scope.orders', $scope.orders);
     })
 
 
@@ -64,9 +73,28 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
     			console.log('Error adding new order', addedOrder.error);
     			$scope.error = addedOrder.error;
     		} else {
+	    		$scope.newOrder = {};
+	    		$scope.pendingOrder = {};
 	    		$scope.orders.orders.push(addedOrder);
 	    	}
     	})
+    }
+
+    $scope.addItem = function(){
+    	for (var i = 0; i < $scope.products.products.length; i++) {
+    		if ($scope.products.products[i]._id === $scope.orderProduct._id) {
+    			$scope.orderProduct.product = $scope.products.products[i].name;
+    		}
+    	}
+    	$scope.pendingOrder.push($scope.orderProduct);
+    	$scope.newOrder.products.push($scope.orderProduct._id);
+    	$scope.orderProduct = {};
+    }
+
+    $scope.removeItem = function(pendingItem){
+    	console.log(pendingItem);
+    	$scope.pendingOrder.splice($scope.pendingOrder.indexOf(pendingItem), 1);
+    	$scope.newOrder.products.splice($scope.newOrder.products.indexOf(pendingItem._id),1);
     }
 
     $scope.updateOrder = function(){

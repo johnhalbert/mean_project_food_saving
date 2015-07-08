@@ -32,9 +32,13 @@ foodThingie.factory("orderFactory", function($http){
         })
     }
 
-    // factory.retrieveVendorOrders = function(vendor, callback){
-    //   $http.get('/orders/')
-    // }
+    factory.retrieveVendorOrders = function(vendor, callback){
+      console.log('retrieveVendorOrders, orderFactory');
+      $http.get('/orders/'+vendor+'/vendor')
+        .success(function(orders){
+          callback(orders);
+        })
+    }
 
     factory.updateOrder = function(order, callback){
       $http.post('/orders/'+order._id+'/update', order)

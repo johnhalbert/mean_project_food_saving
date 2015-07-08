@@ -36,7 +36,7 @@ module.exports = function(app) {
 	/***************** Orders *****************/
 
 	app.get('/orders/:id/vendor', function(req, res){
-		orderController.retrieveVendorOrder(req, res);
+		orderController.retrieveVendorOrders(req, res);
 	})
 
 	app.get('/orders/:id/customer', function(req, res){
