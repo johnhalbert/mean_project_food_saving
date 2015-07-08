@@ -3,3 +3,26 @@
 	margin-top: 3em;
 	margin-left: 20%;
 }
+
+.selection {
+	margin: 0.5em 0.5em;
+  color: black;
+  font-size: 2rem;
+  letter-spacing: 5px;
+  border: 4px solid transparent;
+  border-image: linear-gradient(45deg, lightgray, skyblue);
+  border-image-slice: 1;
+  background: linear-gradient(45deg, lightgray, skyblue);
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  transition: all 0.2s ease; 
+}
+
+.button:hover {
+    border-image: linear-gradient(45deg, #2ecc71, dodgerblue);
+    background: linear-gradient(45deg, #2ecc71, dodgerblue); 
+}
+
+#chooseType {
+	text-align: center;
+}

@@ -1,5 +1,10 @@
 <div class="row" ng-controller="piechart" >
     <div class="large-12 columns">
+    <!-- <img id = "siteTitle" src="assets/foodUnusedTitle2.png"> -->
+	<!-- <img id = "siteTitle" src="assets/foodUnusedTitle3.png"> -->
+	<!-- <img id = "siteTitle" src="assets/foodUnusedTitle4.png"> -->
+	<img id = "siteTitle" src="assets/foodUnusedTitle5.png">
+
 	<h1>Did You Know?</h1>
 	<h5>Roughly one third of the food produced in the world for human consumption every year — approximately 1.3 billion tonnes — gets lost or wasted.</h5>
 	<h3>Food loss and waste per person per year (lb)</h3>
@@ -19,7 +24,9 @@
         <svg height="250"></svg>
     </nvd3-pie-chart>
 	</div>
-	<p>Where are you eating today?</p>
-	<a href='#/restaurantList' class='button'>Restaurant</a> <a href='#/groceryList' class='button'>Grocery</a>
+	<div id = "chooseType">
+		<p>Where are you eating today?</p>
+		<a href='#/restaurantList' class='button selection'>Restaurant</a> <a href='#/groceryList' class='button selection'>Grocery</a>
+	</div>
 </div>
 </div>
