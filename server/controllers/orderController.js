@@ -12,7 +12,10 @@ module.exports = {
 				if (err) {
 					console.log('Error creating new order (1)', err);
 				} else {
-					var newOrder = new Order({_vendor: req.body.vendor_id, _customer: customer._id, pickup_time: req.body.pickup_time, status: 'Pending', products: req.body.product})
+					var newOrder = new Order({_vendor: req.body.vendor_id, _customer: customer._id, pickup_time: req.body.pickup_time, status: 'Pending' })
+					for (var i = 0; i < req.body.products.length; i++) {
+						newOrder.products.push(req.body.products[i]);
+					}
 					newOrder.save(function(err, result){
 					    if(err){
 						    res.send(err.message); 
@@ -96,11 +99,12 @@ module.exports = {
 			})
 	},
 	retrieveVendorOrders: function(req, res){
+		console.log('retrieveVendorOrders, orderController');
 		Vendor.findOne({_id: req.params.id})
-			.populate('orders')
+			.populate('orders products')
 			.exec(function(err, orders){
 				if(err){
-					console.log("Error retrieving orders for vendor", err);
+					console.log("Error retrieving orders for vendor (1)", err);
 				} else {
 					res.json(orders);
 				}

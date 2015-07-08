@@ -11,7 +11,7 @@ var VendorSchema = new mongoose.Schema({
 	phone: { type: String, required: 'You must include your company phone number' },
 	hours: { type: String, required: 'You must include your store hours' },
 	products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
-	orders: [{ type: Schema.Types.ObjectId, ref: 'Orders' }],
+	orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
 	created: { type: Date, default: Date.now }
 });
 
