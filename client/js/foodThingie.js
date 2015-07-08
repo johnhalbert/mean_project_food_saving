@@ -469,8 +469,8 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
 
 /********************************* PRODUCTS CONTROLLER *********************************/
    
-foodThingie.controller('productsController', function($scope, socket, $routeParams, productFactory, vendorFactory){
-    $scope.products = {};
+foodThingie.controller('productsController', function($window, $scope, socket, $routeParams, productFactory, vendorFactory){
+    $scope.products = [];
     vendorFactory.getVendorInfo(function(data){
     $scope.vendor = data;
    })
@@ -497,16 +497,16 @@ foodThingie.controller('productsController', function($scope, socket, $routePara
                 console.log(product.error);
                 $scope.error = product.error;
             } else {
-                console.log('Success!', product);
-                $scope.products.push(product);
+                console.log('Success! (1)', product);
                 $scope.addEditProduct = {};
 
                 productFactory.retrieveProductsOfVendor($scope.vendor, function(products){
+                    console.log('loggin scope in addProduct',$scope.vendor);
                     if (products.error) {
                         console.log(products.error);
                         $scope.error = products.error;
                     } else {
-                        console.log('Success!', products);
+                        console.log('Success! (2)', products);
                         $scope.products = products;
                         $window.location.href = '#/vendor';
                     }

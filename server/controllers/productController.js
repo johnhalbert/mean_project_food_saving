@@ -14,8 +14,14 @@ module.exports = {
 					if (err) {
 						console.log('Error creating new product (2)', err);
 					} else {
-						vendor.products.push({_product: product._id});
-						res.json(product);
+						vendor.products.push(newProduct);
+						vendor.save(function(err){
+							if (err) {
+								console.log('Error creating new product (3)', err);
+							} else {
+								res.json(product);
+							}
+						})
 					}
 				})
 			}
@@ -52,7 +58,7 @@ module.exports = {
 		})
 	},
 	retrieveProducts: function(req, res){
-		Product.find({}, function(err, products){
+		Vendor.find({}, function(err, products){
 			if (err) {
 				console.log('Error retrieving product list', err);
 			} else {
@@ -61,13 +67,13 @@ module.exports = {
 		})
 	},
 	retrieveProductsOfVendor: function(req, res){
-		Product.find({_vendor: req.params.vendor_id}, function(err, products){
-			if (err) {
-				console.log('Error retrieving product list', err);
-			} else {
+		console.log('retrieveProductsofVendor', req.params.id)
+		Vendor.find({_id: req.params.id})
+			.populate('products')
+			.exec(function(err, products){
+				console.log(products);
 				res.json(products);
-			}
-		})
+			})
 	},
 	destroyProduct: function(req, res){
 		Product.remove({'_id': req.params.id}, function(err){
