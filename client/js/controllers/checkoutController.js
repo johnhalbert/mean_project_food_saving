@@ -1,4 +1,16 @@
-foodThingie.controller('checkoutController', function($window, $scope, socket, $routeParams, productFactory, vendorFactory){
+foodThingie.controller('checkoutController', function($window, $scope, socket, $routeParams, productFactory, vendorFactory, orderFactory){
+	
+	orderFactory.getCart(function(customerCart){
+		$scope.cart = customerCart;
+		$scope.cart.total = new Number();
+		for (var i = 0; i < $scope.cart.length; i++){
+			$scope.cart[i].product.total = $scope.cart[i].product.product.price * $scope.cart[i].quantity;
+			$scope.cart.total += +$scope.cart[i].product.product.price;
+			console.log($scope.cart.total, $scope.cart[i].product.product.price);
+		}
+		console.log($scope.cart);
+	})
+
 	$scope.example = {
        value: new Date(1970, 0, 1, 14, 57, 0)
      };
