@@ -9,7 +9,7 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
 			console.log($scope.cart.total, $scope.cart[i].product.product.price);
 		}
 		console.log($scope.cart);
-	})
+	}) 
 
 	$scope.example = {
        value: new Date(1970, 0, 1, 14, 57, 0)
@@ -18,6 +18,7 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
     vendorFactory.retrieveVendor($routeParams.id, function(data){
     $scope.vendor = data;
     console.log($scope.vendor);
+    
     var maxtime = new Date($scope.vendor.end_hour)
 	var maxhours = maxtime.getHours()
 	maxhours = maxhours - 2;
@@ -47,6 +48,7 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
 		}
 	}
 	console.log($scope.arr);
+	mapItOut(); // show google maps
 	 })
 
 	$scope.stripeCallback = function (code, result) {
@@ -90,5 +92,51 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
 			}
 		})
 	}
+
+	/************************ GOOGLE MAPS ************************/
+
+    var mapItOut = function() {
+   
+        var geocoder = new google.maps.Geocoder();
+
+        var mapOptions = {
+            zoom: 12,
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        }
+    
+        var encoded;
+          var address = $scope.vendor.address;
+          
+          geocoder.geocode( { 'address': address }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              // map.setCenter(results[0].geometry.location);
+                $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+                encoded = results[0].geometry;
+                $scope.map.setCenter(encoded.location);
+                
+                var infoWindow = new google.maps.InfoWindow();
+                
+                var marker = new google.maps.Marker({
+                    map: $scope.map,
+                    position: encoded.location
+                });
+                marker.content = '<div class="infoWindowContent">' + address + '</div>';
+            
+            google.maps.event.addListener(marker, 'click', function(){
+                infoWindow.setContent('<h2>' + $scope.vendor.name + '</h2>' + marker.content);
+                infoWindow.open($scope.map, marker);
+            });
+
+            } else {
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+          });
+
+        $scope.openInfoWindow = function(e, selectedMarker){
+            // e.preventDefault();
+            google.maps.event.trigger(selectedMarker, 'click');
+        }
+
+    }   
 	
 })

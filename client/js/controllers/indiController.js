@@ -54,7 +54,7 @@ foodThingie.controller('indiController', function($window, $scope, socket, $rout
                 marker.content = '<div class="infoWindowContent">' + address + '</div>';
             
             google.maps.event.addListener(marker, 'click', function(){
-                infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+                infoWindow.setContent('<h2>' + $scope.products.name + '</h2>' + marker.content);
                 infoWindow.open($scope.map, marker);
             });
 
@@ -64,7 +64,7 @@ foodThingie.controller('indiController', function($window, $scope, socket, $rout
           });
 
         $scope.openInfoWindow = function(e, selectedMarker){
-            e.preventDefault();
+            // e.preventDefault();
             google.maps.event.trigger(selectedMarker, 'click');
         }
 
