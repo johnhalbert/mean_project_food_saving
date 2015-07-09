@@ -47,8 +47,8 @@ body,html{
   font-weight: 800;
   color: transparent;
   font-size:80px;
-  /*background: url("http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/05/rainbow-nebula.jpg") repeat;*/
-  background: url("http://imagesdie.com/wp-content/uploads/2014/12/awesome-3d-wallpapers-hd-02-hd-desktop-wallpapers-computer-abstract-picture-wallpapers-hd.jpg");
+  background: url("http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/05/rainbow-nebula.jpg") repeat;
+  /*background: url("http://imagesdie.com/wp-content/uploads/2014/12/awesome-3d-wallpapers-hd-02-hd-desktop-wallpapers-computer-abstract-picture-wallpapers-hd.jpg");*/
   background-position: 40% 50%;
   -webkit-background-clip: text;
   /*position:relative;*/
