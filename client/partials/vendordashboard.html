@@ -82,10 +82,10 @@
 						<tr ng-repeat='order in orders.orders'>
 							<td ng-bind='order._customer.name'></td>
 							<td><span ng-repeat='product in orders.orders[$index].products track by $index'>{{product.name}}, </span></td>
-							<td><span ng-repeat='product in orders.orders[$index].products track by $index'>{{product.quantity}}, </span></td>
+							<td><span ng-repeat='quantity in orders.orders[$index].quantities track by $index'>{{quantity}}, </span></td>
 							<td ng-bind='order.status'></td>
 							<td ng-bind='order.created'></td>
-							<td><button ng-click='editUpdateOrder(order)'>Edit/Update Order</button></td>
+							<td><button class = "vendorButton" ng-click='editUpdateOrder(order)'>Edit/Update Order</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -123,14 +123,14 @@
 									<tr ng-repeat='pendingItem in pendingOrder'>
 										<td ng-bind='pendingItem.product'></td>
 										<td ng-bind='pendingItem.quantity'></td>
-										<td><button ng-click='removeItem(pendingItem)'>Remove From Order</button></td>
+										<td><button class = "vendorButton" ng-click='removeItem(pendingItem)'>Remove From Order</button></td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 
-						<button ng-hide='updateOrderPresent' ng-click='addOrder()'>Create Order</button>
-						<button ng-show='updateOrderPresent' ng-click='updateOrder()'>Update Order</button>
+						<button class = "vendorButton" ng-hide='updateOrderPresent' ng-click='addOrder()'>Create Order</button>
+						<button class = "vendorButton" ng-show='updateOrderPresent' ng-click='updateOrder()'>Update Order</button>
 
 					</fieldset>
 				</form>

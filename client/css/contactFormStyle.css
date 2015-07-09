@@ -55,37 +55,36 @@
 .feedback-input:focus{
 	background: #fff;
 	box-shadow: 0;
-	border: 3px solid #3498db;
-	color: #3498db;
+	border: 3px solid #6AAE24;
+	color: #6AAE24;
 	outline: none;
   padding: 13px 13px 13px 54px;
 }
 
 .focused{
-	color:#30aed6;
-	border:#30aed6 solid 3px;
+	color:#6AAE24;
+	border:#6AAE24 solid 3px;
 }
 
 /* Icons ---------------------------------- */
 #name{
 	background-image: url(http://rexkirby.com/kirbyandson/images/name.svg);
 	background-size: 30px 30px;
-	background-position: 11px 8px;
+	background-position: 90% 8px;
 	background-repeat: no-repeat;
 }
 
 #name:focus{
 	background-image: url(http://rexkirby.com/kirbyandson/images/name.svg);
 	background-size: 30px 30px;
-	background-position: 8px 5px;
-  background-position: 11px 8px;
+	background-position: 11px 5px;
 	background-repeat: no-repeat;
 }
 
 #email{
 	background-image: url(http://rexkirby.com/kirbyandson/images/email.svg);
 	background-size: 30px 30px;
-	background-position: 11px 8px;
+	background-position: 90% 8px;
 	background-repeat: no-repeat;
 }
 
@@ -121,7 +120,7 @@ input:focus, textarea:focus {
 	width: 100%;
 	border: #fbfbfb solid 4px;
 	cursor:pointer;
-	background-color: #3498db;
+	background-color: #6AAE24;
 	color:white;
 	font-size:24px;
 	padding-top:22px;
@@ -135,11 +134,11 @@ input:focus, textarea:focus {
 
 #button-blue:hover{
 	background-color: rgba(0,0,0,0);
-	color: #0493bd;
+	color: #6AAE24;
 }
 	
 .submit:hover {
-	color: #3498db;
+	color: #6AAE24;
 }
 	
 .ease {
