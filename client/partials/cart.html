@@ -59,6 +59,13 @@
 			</div>
 			<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 		</div>
+
+		<form stripe-form="stripeCallback">
+		    <input ng-model="number" placeholder="Card Number" />
+		    <input ng-model="expiry" placeholder="Expiration" />
+		    <input ng-model="cvc" placeholder="CVC" />
+		    <button type="submit">Submit</button>
+		</form>
 	</div>
 
 
