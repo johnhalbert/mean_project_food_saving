@@ -44,6 +44,15 @@ foodThingie.factory("customerFactory", function($http){
         })
     }
 
+    factory.getSingleCustomer = function(customerToGet, callback, idx1, idx2) {
+        idx1 = idx1 || 0;
+        idx2 = idx2 || 0;
+        $http.get('/customers/'+customerToGet+'/show')
+            .success(function(retrievedCustomer){
+                callback(retrievedCustomer, idx1, idx2);
+            })
+    }
+
     factory.retrieveLogin = function(callback){
         callback(customer);
     }

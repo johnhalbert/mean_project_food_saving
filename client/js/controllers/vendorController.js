@@ -1,4 +1,4 @@
-foodThingie.controller('vendorsController', function($scope, socket, $routeParams, vendorFactory, productFactory, orderFactory){
+foodThingie.controller('vendorsController', function($scope, socket, $routeParams, vendorFactory, productFactory, orderFactory, customerFactory){
 
 	$scope.newOrder = {};
 	$scope.newOrder.products = [];
@@ -19,9 +19,6 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
         }
     })
 
-    $scope.i;
-    $scope.j;
-    var something;
     orderFactory.retrieveVendorOrders($scope.vendor._id, function(orders){
     	$scope.orders = orders;
         for ($scope.i = 0; $scope.i < $scope.orders.orders.length; $scope.i++) {
@@ -31,6 +28,9 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
                 console.log($scope.i, $scope.j);
                 productFactory.retrieveProduct(productToGet, function(product, idx1, idx2){
                     $scope.orders.orders[idx1].products[idx2] = product;
+                    customerFactory.getSingleCustomer($scope.orders.orders[idx1]._customer, function(customer, idx1, idx2){
+                        $scope.orders.orders[idx1]._customer = customer;
+                    }, idx1, idx2)
                 }, $scope.i, $scope.j)
             }
         }

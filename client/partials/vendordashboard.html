@@ -76,9 +76,9 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat='order in orders.orders'>
-							<td ng-bind='order.customername'></td>
-							<td ng-bind='order.product'></td>
-							<td ng-bind='order.quantity'></td>
+							<td ng-bind='order._customer.name'></td>
+							<td><span ng-repeat='product in orders.orders[$index].products track by $index'>{{product.name}}, </span></td>
+							<td><span ng-repeat='product in orders.orders[$index].products track by $index'>{{product.quantity}}, </span></td>
 							<td ng-bind='order.status'></td>
 							<td ng-bind='order.created'></td>
 						</tr>
