@@ -33,14 +33,12 @@
 			        <form id = "search">
 						<div class="row collapse">					  
 							<div class="row">
-								<div class="large-6 columns"></div>
-							   	<div class="large-6 columns">
+								<div class="large-7 columns"></div>
+							   	<div class="large-5 columns" style = "padding-right:0px;">
 								<div class="row collapse postfix-round">
+									<div class = "small-3 columns"></div>
 							   		<div class="small-9 columns">
 							   			<input type="text" ng-model="filter_name" placeholder="Find Product">
-							   		</div>
-							   		<div class="small-3 columns">
-							   			<a href="#" class="button postfix">Go</a>
 							   		</div>
 								</div>
 							</div>
@@ -68,12 +66,14 @@
 						      <td ng-bind='product.category'></td>
 						      <td>${{product.price}}</td>
 						      <td> 
-						      	<select class="large-5 columns" class = "qtyDropdown" ng-model='newOrder.quantity' ng-init="(_Array = []).length = product.quantity;">
-						      		<!-- <option ng-repeat='product in products.products' ng-bind='product.quantity'>{{product.quantity}}</option> -->
-						      		 <option ng-repeat="i in _Array track by $index">{{$index+1}}</option>
-						      	</select>
-							   	
-							   	<a href="#" class="large-4 columns" class="addCart">Add to Cart</a>
+						      	<form>
+							      	<select class="large-5 columns" class = "qtyDropdown" ng-init="(_Array = []).length = product.quantity;">
+							      		<!-- <option ng-repeat='product in products.products' ng-bind='product.quantity'>{{product.quantity}}</option> -->
+							      		 <option ng-model='newOrder.quantity' ng-repeat="i in _Array track by $index">{{$index+1}}</option>
+							      	</select>
+								   	
+								   	<button ng-click='addItem(product._id)' class="large-4 columns" class="addCart">Add to Cart</button>
+								</form>
 						  </td>
 						    </tr>
 						  </tbody>
