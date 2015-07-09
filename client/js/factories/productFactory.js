@@ -19,10 +19,17 @@ foodThingie.factory("productFactory", function($http){
     factory.retrieveProduct = function(product, callback, idx1, idx2){
       idx1 = idx1 || 0;
       idx2 = idx2 || 0;
+      if (product._id) {
       $http.get('/products/'+product._id+'/show')
         .success(function(product){
           callback(product, idx1, idx2);
         })
+      } else {
+        $http.get('/products/'+product+'/show')
+        .success(function(product){
+          callback(product, idx1, idx2);
+        })
+      }
     }
 
     factory.retrieveProducts = function(callback){
