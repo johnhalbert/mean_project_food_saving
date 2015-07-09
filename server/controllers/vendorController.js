@@ -3,7 +3,7 @@ var Vendor = mongoose.model('Vendor');
 
 module.exports = {
 	createVendor: function(req, res){
-		var newVendor = new Vendor({name: req.body.name, type: req.body.type, address: req.body.address, phone: req.body.phone, hours: req.body.hours, email: req.body.email, password: req.body.password});
+		var newVendor = new Vendor({name: req.body.name, type: req.body.type, address: req.body.address, phone: req.body.phone, hours: req.body.hours, email: req.body.email, password: req.body.password, start_hour: req.body.fromTime, end_hour: req.body.toTime});
 		newVendor.save(function(err, vendor){
 			if (err) {
 				console.log('Error creating new vendor', err);

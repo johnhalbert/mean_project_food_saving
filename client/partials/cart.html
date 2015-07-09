@@ -1,5 +1,4 @@
-<link rel="stylesheet" type="text/css" href="css/general.css">
-
+	<link rel="stylesheet" type="text/css" href="css/general.css">
 <div class="row" ng-controller='checkoutController'>
 	<div class="medium-9 columns">
 		<h2>My Cart</h2>
@@ -31,7 +30,9 @@
 				<p><span style = "font-weight:bold;">Phone: </span><span ng-bind='vendor.phone'></span></p>
 				<p><span style = "font-weight:bold;">Hours: </span><span ng-bind='vendor.hours'></span></p>
 					<label for="exampleInput">Pickup Time between 8am and 5pm:</label>
-				<input type="text" id="#durationExample" name="input" placeholder="HH:mm:ss"/>
+					<select>
+						<option ng-repeat="time in arr" value="{{time}}" ng-bind="time"></option>
+					</select>
 					<a class="button" data-href="#" data-reveal-id="cartModal">Order</a>
 				</div>
 			</div>
@@ -56,3 +57,4 @@
 			<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 		</div>
 	</div>
+
