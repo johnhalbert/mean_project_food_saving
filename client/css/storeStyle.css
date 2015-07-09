@@ -42,17 +42,32 @@
 		}
 
 		.qtyDropdown {
-			display: inline-block;
+			margin-top: 15%;
 		}
 
-		.addCart {
-			width: 3em;
-			font-size: 12px;
-			display: inline-block;
+		.actionsForm {
+			padding: 0;
 		}
 
-			.addCart:hover, .action a:hover {
+		.addToCart {
+			float: none;
+			margin-bottom: 0;
+			text-align: center;
+			padding: 0.2em;
+			width: 5em;
+			margin-top: 13%;
+			color: black;
+			outline: 3px solid #698827;
+			background: transparent;
+		}
+
+			.action a:hover {
+				color: lightgray;
+			}
+
+			.addToCart:hover {
 				color: silver;
+				background-color: #698827;
 			}
 
 		.card {

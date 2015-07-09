@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" href="css/storeStyle.css">
 <link rel="stylesheet" type="text/css" href="css/general.css">
+<link rel="stylesheet" type="text/css" href="css/storeStyle.css">
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 <script type="text/javascript" src = "js/geocoderGoogleMapsAPI.js"></script>
 <!-- @author Anika -->
@@ -74,13 +74,13 @@
 						      <td ng-bind='product.category'></td>
 						      <td>${{product.price}}</td>
 						      <td> 
-						      	<form>
+						      	<form class = "actionsForm">
 							      	<select class="large-5 columns qtyDropdown" ng-model="newOrder.quantity" ng-init="(_Array = []).length = product.quantity;">
 							      		<option value="" disabled selected>QTY</option>
 							      		 <option ng-bind = "$index+1" ng-repeat="i in _Array track by $index">{{$index+1}}</option>
 							      	</select>
 								   	
-								   	<button ng-click='addItem(product._id)' class="large-4 columns" class="addCart">Add to Cart</button>
+								   	<button ng-click='addItem(product._id)' class="large-4 columns addToCart" >Add to Cart</button>
 								</form>
 						  </td>
 						    </tr>
