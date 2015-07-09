@@ -58,7 +58,10 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
 	        $scope.newOrder.vendor_id = $scope.vendor._id;
 			for (var o = 0; o < $scope.cart.length; o++){
 				$scope.newOrder.products = [];
-				$scope.newOrder.products.push($scope.cart[o].product.product._id)
+				$scope.newOrder.quantities = [];
+				$scope.newOrder.products.push($scope.cart[o].product.product._id);
+				console.log('check quantities', $scope.cart[o]);
+				$scope.newOrder.quantities.push($scope.cart[o].quantity);
 			}
 			orderFactory.createOrder($scope.newOrder, function(addedOrder){
 				if (addedOrder.error) {
@@ -80,7 +83,10 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
 		$scope.newOrder.vendor_id = $scope.vendor._id;
 		for (var o = 0; o < $scope.cart.length; o++){
 			$scope.newOrder.products = [];
+			$scope.newOrder.quantities = [];
 			$scope.newOrder.products.push($scope.cart[o].product.product._id)
+			$scope.newOrder.quantities.push($scope.cart[o].product.quantity);
+			console.log('scope.neworder.quantities', $scope.newOrder.quantities);
 		}
 		orderFactory.createOrder($scope.newOrder, function(addedOrder){
 			if (addedOrder.error) {

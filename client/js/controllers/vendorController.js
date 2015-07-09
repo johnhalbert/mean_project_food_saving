@@ -21,6 +21,7 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
 
     orderFactory.retrieveVendorOrders($scope.vendor._id, function(orders){
     	$scope.orders = orders;
+        console.log('orderOfVendors', $scope.orders);
         for ($scope.i = 0; $scope.i < $scope.orders.orders.length; $scope.i++) {
             for ($scope.j = 0; $scope.j < $scope.orders.orders[$scope.i].products.length; $scope.j++) {
                 var productToGet = {};

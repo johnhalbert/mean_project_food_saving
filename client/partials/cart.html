@@ -41,7 +41,7 @@
 		<!-- **********************   MODAL   **************************** -->
 		<div id="cartModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" style = "background-color: rgba(250, 255, 255, 0.75);">
 
-			<h4 class="modal-title" id="myModalLabel">Pay for Order ($20.00)</h4>
+			<h4 class="modal-title" id="myModalLabel">Pay for Order (${{cart.total}})</h4>
 
 
 			<div class="modal-body">
@@ -70,7 +70,7 @@
 					    <div ng-if="checkoutForm.cvc.$invalid">
 					    Error: invalid cvc number!
 						</div>
-						<button class="modal-close-vendor" type="submit">Place Order $20.00</button>
+						<button class="modal-close-vendor" type="submit">Place Order ${{cart.total}}</button>
 						<a class="button modal-close-vendor" ng-click='requestUber()'>Request Uber</a>
 					</form>
 					<!-- <form stripe-form="stripeCallback">
