@@ -19,6 +19,28 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
         }
     })
 
+    socket.on('update_orders', function(data){
+        alert('New order received');
+        orderFactory.retrieveVendorOrders($scope.vendor._id, function(orders){
+            $scope.orders = orders;
+            console.log('orderOfVendors', $scope.orders);
+            for ($scope.i = 0; $scope.i < $scope.orders.orders.length; $scope.i++) {
+                for ($scope.j = 0; $scope.j < $scope.orders.orders[$scope.i].products.length; $scope.j++) {
+                    var productToGet = {};
+                    productToGet._id = $scope.orders.orders[$scope.i].products[$scope.j];
+                    console.log($scope.i, $scope.j);
+                    productFactory.retrieveProduct(productToGet, function(product, idx1, idx2){
+                        $scope.orders.orders[idx1].products[idx2] = product;
+                        customerFactory.getSingleCustomer($scope.orders.orders[idx1]._customer, function(customer, idx1, idx2){
+                            $scope.orders.orders[idx1]._customer = customer;
+                        }, idx1, idx2)
+                    }, $scope.i, $scope.j)
+                }
+            }
+            console.log($scope.orders);
+        })
+    })
+
     orderFactory.retrieveVendorOrders($scope.vendor._id, function(orders){
     	$scope.orders = orders;
         console.log('orderOfVendors', $scope.orders);
