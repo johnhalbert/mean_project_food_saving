@@ -13,10 +13,10 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat='product in cart'>
-					<td ng-bind='product.name'></td>
+					<td ng-bind='product.product.product.name'></td>
 					<td ng-bind='product.quantity'></td>
-					<td ng-bind='product.price'></td>
-					<td ng-bind='product.total'></td>
+					<td ng-bind='product.product.product.price'></td>
+					<td ng-bind='product.product.total'></td>
 				</tr>
 			</tbody>
 		</table>
@@ -29,11 +29,12 @@
 				<p><span style = "font-weight:bold;">Address: </span> <span ng-bind='vendor.address'></span></p>
 				<p><span style = "font-weight:bold;">Phone: </span><span ng-bind='vendor.phone'></span></p>
 				<p><span style = "font-weight:bold;">Hours: </span><span ng-bind='vendor.hours'></span></p>
-					<label for="exampleInput">Pickup Time between 8am and 5pm:</label>
+					<label for="exampleInput">Pickup Time:</label>
 					<select>
 						<option ng-repeat="time in arr" value="{{time}}" ng-bind="time"></option>
 					</select>
 					<a class="button" data-href="#" data-reveal-id="cartModal">Order</a>
+					
 				</div>
 			</div>
 		</div>
@@ -49,7 +50,9 @@
 						Name:<input type = 'text' placeholder = 'Name' ng-model='newVendor.name' />
 						Zip:<input type = 'text' placeholder = 'Zip' ng-model='newVendor.email' />
 						CC:<input type = 'text' placeholder = 'CC' ng-model='newVendor.password' />
-						<a class="button modal-close-vendor" ng-click='checkout()'>Place Order</a>
+						<a class="button modal-close-vendor" ng-click='checkout()'>Place Order
+
+						</a>
 						<a class="button modal-close-vendor" ng-click='requestUber()'>Request Uber</a>
 					</form>
 				</div>
@@ -57,4 +60,5 @@
 			<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 		</div>
 	</div>
+
 

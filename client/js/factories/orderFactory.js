@@ -1,6 +1,16 @@
 foodThingie.factory("orderFactory", function($http){
 
+    var cart = [];
+
     var factory = {};
+
+    factory.updateCart = function(updatedCart){
+        cart = updatedCart;
+    }
+
+    factory.getCart = function(callback){
+      callback(cart);
+    }
 
     factory.createOrder = function(order, callback){
       console.log('createOrder in orderFactory');

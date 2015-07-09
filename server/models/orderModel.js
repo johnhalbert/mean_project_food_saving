@@ -9,6 +9,7 @@ var OrderSchema = new mongoose.Schema({
 		type: Schema.Types.ObjectId, 
 		ref: 'Product'
 	}],
+	quantities: [{ type: Number }],
 	pickup_time: Date,
 	status: String,
 	total_price: Number,
