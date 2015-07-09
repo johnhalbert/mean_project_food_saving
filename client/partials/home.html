@@ -1,9 +1,14 @@
 <link rel="stylesheet" type="text/css" href="css/general.css">
 <link rel="stylesheet" type="text/css" href="css/textAnimation.css">
-<script type="text/javascript" src = "js/scrollToBottom.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="css/geometryAnimation.css"> -->
+<!-- <script type="text/javascript" src = "js/geometryAnimationScript.js"></script> -->
+<div id = "mainPage">
 <div>
 
     <!-- <div class="to-bottom"><a href="#">TO BOTTOM</a></div> -->
+
+ <!-- // <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+
 
         <h2 class="tagline">... because 
           <span class="change-container">
@@ -13,17 +18,21 @@
             <span class="changing">change</span> 
           </span>
           is important</h2>
-    
 
-    <!-- <img id = "siteTitle" src="assets/foodUnusedTitle2.png"> -->
-    <!-- <img id = "siteTitle" src="assets/foodUnusedTitle3.png"> -->
-    <!-- <img id = "siteTitle" src="assets/foodUnusedTitle4.png"> -->
-    <img id = "siteTitle" src="assets/foodUnusedTitle5.png">
-
+    <div class="moving-zone">
+        <div class="popup">
+            <div class="popup-content">
+                <div class="popup-text">
+                    <img id = "siteTitle" src="assets/foodUnusedTitle5.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <img id = "siteTitle" src="assets/foodUnusedTitle5.png"> -->
 
 </div>  
 
-<div class="row" ng-controller="piechart" >
+<div class="row contentHome" ng-controller="piechart" >
     <div class="large-12 columns">
 
 	<h1>Did You Know?</h1>
@@ -49,5 +58,6 @@
 		<p>Where are you eating today?</p>
 		<a href='#/restaurantList' class='button selection'>Restaurant</a> <a href='#/groceryList' class='button selection'>Grocery</a>
 	</div>
+</div>
 </div>
 </div>

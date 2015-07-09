@@ -35,7 +35,6 @@ foodThingie.controller('indiController', function($window, $scope, socket, $rout
     }
 
 
-
     google.maps.event.addDomListener(window, 'load', $scope.initialize);
     google.maps.event.addDomListener(window, 'load', $scope.codeAddress);
     // ************************

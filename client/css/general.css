@@ -6,3 +6,54 @@
   	background: #6F8C2D; /* Gecko Browsers */
   	color: #DBE5DA;
 }
+
+/*@import url(http://fonts.googleapis.com/css?family=Roboto:300,100);
+body,html{
+  font-family: 'Roboto';
+}*/
+
+/*#mainPage:after {
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-repeat: repeat;
+	background-image: url("http://www.siwallpaper.com/wp-content/uploads/2015/06/awesome_techno_wallpaper_for_desktop_1.jpg");
+    width: 100%;
+    height: 190%;
+    opacity : 0.5;
+    z-index: -1;
+}*/
+
+
+
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,,800,900);
+
+/*http://codepen.io/dghez/pen/ItxKE*/
+/*body{
+  background: -webkit-linear-gradient(rgb(235, 236, 231), rgb(255, 255, 255));
+  background: linear-gradient(rgb(235, 236, 231), rgb(255, 255, 255));
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Raleway', sans-serif;
+}*/
+.titlecontainer{
+  width: 80%;
+  @include center();
+}
+.abouttitle{
+  font-weight: 800;
+  color: transparent;
+  font-size:80px;
+  /*background: url("http://phandroid.s3.amazonaws.com/wp-content/uploads/2014/05/rainbow-nebula.jpg") repeat;*/
+  background: url("http://imagesdie.com/wp-content/uploads/2014/12/awesome-3d-wallpapers-hd-02-hd-desktop-wallpapers-computer-abstract-picture-wallpapers-hd.jpg");
+  background-position: 40% 50%;
+  -webkit-background-clip: text;
+  /*position:relative;*/
+  margin-left: 10%;
+  text-align:center;
+  line-height:120px;
+  letter-spacing: -8px;
+}
