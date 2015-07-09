@@ -1,4 +1,4 @@
-foodThingie.controller('checkoutController', function($window, $scope, socket, $routeParams, productFactory, vendorFactory, orderFactory){
+foodThingie.controller('checkoutController', function($window, $scope, socket, $routeParams, productFactory, vendorFactory, orderFactory, customerFactory){
 	
 	orderFactory.getCart(function(customerCart){
 		$scope.cart = customerCart;
@@ -55,8 +55,40 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
 	    if (result.error) {
 	        window.alert('it failed! error: ' + result.error.message);
 	    } else {
-	        window.alert('success! token: ' + result.id);
+	        $scope.newOrder.vendor_id = $scope.vendor._id;
+			for (var o = 0; o < $scope.cart.length; o++){
+				$scope.newOrder.products = [];
+				$scope.newOrder.products.push($scope.cart[o].product.product._id)
+			}
+			orderFactory.createOrder($scope.newOrder, function(addedOrder){
+				if (addedOrder.error) {
+					console.log('Error creating new order');
+				} else {
+					console.log('Successfully added new order');
+				}
+			})
 	    }
 	};
+
+	$scope.newOrder = {};
+	customerFactory.retrieveLogin(function(customer){
+		$scope.newOrder.customername = customer.name;
+		$scope.newOrder.customeremail = customer.email;
+	})
+
+	$scope.addOrder = function(){
+		$scope.newOrder.vendor_id = $scope.vendor._id;
+		for (var o = 0; o < $scope.cart.length; o++){
+			$scope.newOrder.products = [];
+			$scope.newOrder.products.push($scope.cart[o].product.product._id)
+		}
+		orderFactory.createOrder($scope.newOrder, function(addedOrder){
+			if (addedOrder.error) {
+				console.log('Error creating new order');
+			} else {
+				console.log('Successfully added new order');
+			}
+		})
+	}
 	
 })
