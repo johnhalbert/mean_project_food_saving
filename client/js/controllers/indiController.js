@@ -59,7 +59,7 @@ foodThingie.controller('indiController', function($window, $scope, socket, $rout
             });
 
             } else {
-              alert('Geocode was not successful for the following reason: ' + status);
+              alert('Google Maps is unable to find this address on Earth. Please try another planet.');
             }
           });
 

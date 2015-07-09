@@ -135,7 +135,7 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
             });
 
             } else {
-              alert('Geocode was not successful for the following reason: ' + status);
+              alert('Google Maps is unable to find this address on Earth. Please try another planet.');
             }
           });
 
