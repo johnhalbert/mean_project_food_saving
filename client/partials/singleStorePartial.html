@@ -76,10 +76,10 @@
 						      <td> 
 						      	<form class = "actionsForm">
 							      	<select class="large-5 columns qtyDropdown" ng-model="newOrder[$index].quantity" ng-init="(_Array = []).length = product.quantity;">
-							      		<option value=''>Qty</option>
+							      		<option value=''>QTY</option>
 							      		 <option value="{{$index+1}}" data-ng-repeat="i in _Array track by $index">{{$index+1}}</option>
 							      	</select>
-								   	<button ng-click='addItem(product._id,$index)' class="large-4 columns" class="addCart">Add to Cart</button>
+								   	<button ng-click='addItem(product._id,$index)' class="large-4 columns addToCart">Add to Cart</button>
 
 								</form>
 							  </td>
