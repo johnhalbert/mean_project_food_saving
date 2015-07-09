@@ -72,6 +72,7 @@
 							<th>Quantity</th>
 							<th>Status</th>
 							<th>Order Date</th>
+							<th>Edit/Update Order</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -81,6 +82,7 @@
 							<td><span ng-repeat='product in orders.orders[$index].products track by $index'>{{product.quantity}}, </span></td>
 							<td ng-bind='order.status'></td>
 							<td ng-bind='order.created'></td>
+							<td><button ng-click='editUpdateOrder(order)'>Edit/Update Order</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -123,7 +125,8 @@
 							</table>
 						</div>
 
-						<button ng-click='addOrder()'>Create Order</button>
+						<button ng-hide='updateOrderPresent' ng-click='addOrder()'>Create Order</button>
+						<button ng-show='updateOrderPresent' ng-click='updateOrder()'>Update Order</button>
 					</fieldset>
 				</form>
 			</div>

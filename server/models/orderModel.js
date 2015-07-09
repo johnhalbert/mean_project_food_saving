@@ -7,7 +7,7 @@ var OrderSchema = new mongoose.Schema({
 	_customer: { type: Schema.ObjectId, ref: 'Customer' },
 	products: [{
 		type: Schema.Types.ObjectId, 
-		ref: 'Product', 
+		ref: 'Product'
 	}],
 	pickup_time: Date,
 	status: String,

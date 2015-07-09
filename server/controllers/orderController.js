@@ -115,8 +115,17 @@ module.exports = {
 				{_id : req.params.id},
 				req.body,
 				function(err, numberAffected, rawResponse) {
-		   			console.log('error', err);
-		   			res.end();
+					if (err) {
+			   			console.log('Error updating order (1)', err);
+			   		} else {
+			   			Order.findOne({_id: req.params.id}, function(err, order){
+			   				if (err) {
+			   					console.log('Error updating order (2)', err);
+			   				} else {
+			   					res.json(order);
+			   				}
+			   			})
+			   		}
 		   		}
 			)
 	}
