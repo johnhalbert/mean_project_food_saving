@@ -70,14 +70,14 @@ foodThingie.controller('indiController', function($window, $scope, socket, $rout
 
     }   
 
-    $scope.addItem = function(product_id){
+    $scope.addItem = function(product_id, index){
         $scope.orderProduct = {};
         for (var i = 0; i < $scope.products.products.length; i++) {
             if ($scope.products.products[i]._id === product_id) {
                 $scope.orderProduct.product = $scope.products.products[i];
             }
         }
-        $scope.cart.push({product: $scope.orderProduct, quantity: $scope.newOrder.quantity});
+        $scope.cart.push({product: $scope.orderProduct, quantity: $scope.newOrder[index].quantity});
         orderFactory.updateCart($scope.cart);
         console.log($scope.cart);
         $scope.orderProduct = {};
