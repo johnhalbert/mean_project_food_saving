@@ -12,6 +12,16 @@
 			margin-top: 4em;
 		}
 
+		#map {
+		    height:420px;
+		    width:600px;
+		}
+		.infoWindowContent {
+		    font-size:  14px !important;
+		    border-top: 1px solid #ccc;
+		    padding-top: 10px;
+		}
+
 		#panel {
 	        /*position: absolute;*/
 	        /*top: 5px;*/

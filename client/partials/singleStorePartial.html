@@ -1,12 +1,21 @@
 <link rel="stylesheet" type="text/css" href="css/storeStyle.css">
 <link rel="stylesheet" type="text/css" href="css/general.css">
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<!-- <meta name="viewport" content="initial-scale=1.0, user-scalable=no"> -->
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 <script type="text/javascript" src = "js/geocoderGoogleMapsAPI.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 <!-- @author Anika -->
 <div id="container" ng-controller='indiController'>
 	<div class="storeContainer">
+
+ <div id="map"></div>
+				    <div id="class" ng-repeat="marker in markers | orderBy : 'title'">
+				         <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
+				    </div>
+
+
+
+
+
 		<div class="medium-3 columns">
 			<div class="card">
 			    <div class="image">
@@ -14,14 +23,17 @@
 			        <span class="title" ng-bind='products.name'></span>
 			    </div>
 
-			    <div class="content">
-			    	<div id="panel">
 
-				      <input id="address" type="textbox" value="1980 Zanker Rd, San Jose, CA 95112">
-				      <input type="button" value="Zip" onclick="codeAddress()">
+			    <!-- <div class="content" onload="initialize()"> -->
+			    	<!-- <div id="panel" onload="codeAddress()"> -->
 
-				    </div>
-				    <div id="map-canvas"></div>
+			    		<!-- <p id = "address">1980 Zanker Rd, San Jose, CA 95112</p> -->
+
+				      <!-- <input id="address" type="textbox" value="1980 Zanker Rd, San Jose, CA 95112"> -->
+				      <!-- <input type="button" value="Zip" onclick="codeAddress()"> -->
+
+				    <!-- </div> -->
+				    <!-- <div id="map-canvas"></div> -->
 
 			      	<img src="https://slaterjd.files.wordpress.com/2012/09/manchester-england-google-maps4.jpg">
 			        <p><span style = "font-weight:bold;">Address: </span> <span ng-bind='products.address'></span></p>
