@@ -23,12 +23,15 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
 	$scope.arr = [];
 	for(i=1;i<length;i++){
 		if(i+minhours>12){
-			$scope.arr.push(i+minhours-12 + "pm")
+			$scope.arr.push(i+minhours-12 + ":00 pm")
+			$scope.arr.push(i+minhours-12 + ":30 pm")
 		}else if(i+minhours==12){
-			$scope.arr.push(i+minhours + "pm")
+			$scope.arr.push(i+minhours + ":00 pm")
+			$scope.arr.push(i+minhours + ":30 pm")
 		}
 		else{
-		$scope.arr.push(i+minhours + "am");
+		$scope.arr.push(i+minhours + ":00 am");
+		$scope.arr.push(i+minhours + ":30 am");
 		}
 	}
 	console.log($scope.arr);
