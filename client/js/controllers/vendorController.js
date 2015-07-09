@@ -19,9 +19,22 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
         }
     })
 
+    $scope.i;
+    $scope.j;
+    var something;
     orderFactory.retrieveVendorOrders($scope.vendor._id, function(orders){
     	$scope.orders = orders;
-    	console.log('$scope.orders', $scope.orders);
+        for ($scope.i = 0; $scope.i < $scope.orders.orders.length; $scope.i++) {
+            for ($scope.j = 0; $scope.j < $scope.orders.orders[$scope.i].products.length; $scope.j++) {
+                var productToGet = {};
+                productToGet._id = $scope.orders.orders[$scope.i].products[$scope.j];
+                console.log($scope.i, $scope.j);
+                productFactory.retrieveProduct(productToGet, function(product, idx1, idx2){
+                    $scope.orders.orders[idx1].products[idx2] = product;
+                }, $scope.i, $scope.j)
+            }
+        }
+        console.log($scope.orders);
     })
 
 
