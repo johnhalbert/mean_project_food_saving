@@ -1,7 +1,10 @@
 #siteTitle {
 	width: 60%;
-	margin-top: 3em;
 	margin-left: 20%;
+}
+
+.tagline {
+  margin-bottom: 1em;
 }
 
 .reveal-modal {

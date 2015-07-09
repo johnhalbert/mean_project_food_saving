@@ -1,0 +1,43 @@
+/*http://codepen.io/praveenpuglia/pen/zGRPjM*/
+.tagline {
+  margin-top: 100px;
+  text-align: center;
+}
+.change-container {
+  position: relative;
+  display: inline-block;
+  width:150px;
+  border-bottom:1px solid #698827;
+  margin-bottom:-10px;
+}
+.changing {
+  position:absolute;
+  overflow:hidden;
+  display: inline-block;
+  color:#698827;
+  width:100%;
+  left:0;
+  bottom:0;
+  height:0;
+  opacity:0;
+  text-rendering:optimizeLegibility;
+  animation : revealNextWord 8s ease-in-out infinite;
+}
+
+.changing:nth-child(2) {
+  animation-delay:2s;
+}
+.changing:nth-child(3) {
+  animation-delay:4s;
+}
+.changing:nth-child(4) {
+  animation-delay:6s;
+}
+
+@keyframes revealNextWord {
+    0% { opacity: .3; height: 0; }
+    10% { opacity: 1; height: 1.2em; }
+    20% { opacity: 1; height: 1.2em; }
+	  28% { opacity: 0; height:2em;}
+    100% { opacity: 0; }
+}

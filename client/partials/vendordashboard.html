@@ -19,28 +19,30 @@
 			</div>
 			<div class='small-8 columns'>
 				<input type='text' ng-model='products_filter' placeholder='Search Products' />
-				<table>
-					<thead>
-						<tr>
-							<td>Name</td>
-							<td>Description</td>
-							<td>Price</td>
-							<td>Quantity</td>
-							<td>Age/Expires</td>
-							<td>Update/Delete</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat='product in products.products | filter: products_filter'>
-							<td ng-bind='product.name'></td>
-							<td ng-bind='product.description'></td>
-							<td>${{product.price}}</td>
-							<td ng-bind='product.quantity'></td>
-							<td ng-bind='product.ageexpires | date: "medium"'></td>
-							<td><button class = "vendorButton" ng-click='updateProduct(product)'>Update</button> <button class = "vendorButton" ng-click='deleteProduct(product)'>Delete</button></td>
-						</tr>
-					</tbody>
-				</table>
+				<div class = "vendorTable">
+					<table>
+						<thead>
+							<tr>
+								<td>Name</td>
+								<td>Description</td>
+								<td>Price</td>
+								<td>Quantity</td>
+								<td>Age/Expires</td>
+								<td>Update/Delete</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat='product in products.products | filter: products_filter'>
+								<td ng-bind='product.name'></td>
+								<td ng-bind='product.description'></td>
+								<td>${{product.price}}</td>
+								<td ng-bind='product.quantity'></td>
+								<td ng-bind='product.ageexpires | date: "medium"'></td>
+								<td><button class = "vendorButton" ng-click='updateProduct(product)'>Update</button> <button class = "vendorButton" ng-click='deleteProduct(product)'>Delete</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
 				<form>
 					<fieldset>
@@ -64,6 +66,7 @@
 					</fieldset>
 				</form>
 				<hr />
+
 				<table>
 					<thead>
 						<tr>
@@ -86,6 +89,7 @@
 						</tr>
 					</tbody>
 				</table>
+
 				<form>
 					<fieldset>
 						<legend>Create New Order</legend>
@@ -101,7 +105,7 @@
 							</select>
 							<label>Quantity</label>
 							<input type='text' name='quantity' ng-model='orderProduct.quantity' />
-							<button ng-click='addItem()'>Add to Order</button>	
+							<button class = "vendorButton" ng-click='addItem()'>Add to Order</button>	
 						</fieldset>
 						<!-- <button class = "vendorButton" ng-click='addOrder()'>Create Order</button> -->
 
@@ -125,8 +129,12 @@
 							</table>
 						</div>
 
+<<<<<<< HEAD
 						<button ng-hide='updateOrderPresent' ng-click='addOrder()'>Create Order</button>
 						<button ng-show='updateOrderPresent' ng-click='updateOrder()'>Update Order</button>
+=======
+						<button class = "vendorButton" ng-click='addOrder()'>Create Order</button>
+>>>>>>> 52158f4af3aabede9bdc4ae0c87a3a023647e6b5
 					</fieldset>
 				</form>
 			</div>
