@@ -76,6 +76,7 @@
 						      <td> 
 						      	<form>
 							      	<select class="large-5 columns qtyDropdown" ng-model="newOrder.quantity" ng-init="(_Array = []).length = product.quantity;">
+							      		<option value="" disabled selected>QTY</option>
 							      		 <option ng-bind = "$index+1" ng-repeat="i in _Array track by $index">{{$index+1}}</option>
 							      	</select>
 								   	

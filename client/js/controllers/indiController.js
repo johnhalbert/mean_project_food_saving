@@ -7,7 +7,7 @@ foodThingie.controller('indiController', function($window, $scope, socket, $rout
         if (customer) {
             $scope.customer = customer;
         } else {
-            $window.location.href = '#/';
+            // $window.location.href = '#/';
         }
     });
 
