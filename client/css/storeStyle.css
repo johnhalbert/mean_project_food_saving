@@ -3,6 +3,11 @@
 		  background: #FAFAFA; 
 		  }
 
+		 .storeContainer {
+		 	height: 45em;
+		 	margin: 1em 3em;
+		 }
+
 		#container {
 			margin-top: 4em;
 		}
@@ -16,6 +21,20 @@
 		#search {
 			text-align: right;
 		}
+
+		.qtyDropdown {
+			display: inline-block;
+		}
+
+		.addCart {
+			width: 3em;
+			font-size: 12px;
+			display: inline-block;
+		}
+
+			.addCart:hover, .action a:hover {
+				color: silver;
+			}
 
 		.card {
 		  font-family: 'Roboto', sans-serif;

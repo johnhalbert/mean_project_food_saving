@@ -1,4 +1,6 @@
 <link rel="stylesheet" type="text/css" href="css/listingStyle.css">
+<link rel="stylesheet" type="text/css" href="css/general.css">
+
 <div ng-controller='vendorsController' id="largeContainer">
 	<div id='dashMain'>
 			<div class='small-4 columns'>
@@ -11,7 +13,7 @@
 						<input type='text' name='phone' value='{{updateVendor.phone}}' ng-model='updateVendor.phone'/>
 						<label>Hours: </label>
 						<input type='text' name='hours' value='{{updateVendor.hours}}' ng-model='updateVendor.hours' />
-						<button ng-click='updateVendorInfo()'>Update</button>
+						<button class = "vendorButton" ng-click='updateVendorInfo()'>Update</button>
 					</fieldset>
 				</form>
 			</div>
@@ -35,7 +37,7 @@
 							<td>${{product.price}}</td>
 							<td ng-bind='product.quantity'></td>
 							<td ng-bind='product.ageexpires | date: "medium"'></td>
-							<td><button ng-click='updateProduct(product)'>Update</button> <button ng-click='deleteProduct(product)'>Delete</button></td>
+							<td><button class = "vendorButton" ng-click='updateProduct(product)'>Update</button> <button class = "vendorButton" ng-click='deleteProduct(product)'>Delete</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -57,8 +59,8 @@
 						<input type='text' name='quantity' ng-model='addEditProduct.quantity' />
 						<label>Age/Expires</label>
 						<input type='text' name='ageexpires' ng-model='addEditProduct.ageexpires' />
-						<button ng-hide='updateButton' ng-click='addProduct(vendor._id)'>Add</button>
-						<button ng-show='updateButton' ng-click='editProduct(addEditProduct)'>Update</button>
+						<button class = "vendorButton" ng-hide='updateButton' ng-click='addProduct(vendor._id)'>Add</button>
+						<button class = "vendorButton" ng-show='updateButton' ng-click='editProduct(addEditProduct)'>Update</button>
 					</fieldset>
 				</form>
 				<hr />
@@ -99,6 +101,7 @@
 							<input type='text' name='quantity' ng-model='orderProduct.quantity' />
 							<button ng-click='addItem()'>Add to Order</button>	
 						</fieldset>
+						<!-- <button class = "vendorButton" ng-click='addOrder()'>Create Order</button> -->
 
 						<div id='orderProducts'>
 							<h4>Current Order</h4>

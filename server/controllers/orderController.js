@@ -101,7 +101,7 @@ module.exports = {
 	retrieveVendorOrders: function(req, res){
 		console.log('retrieveVendorOrders, orderController');
 		Vendor.findOne({_id: req.params.id})
-			.populate('orders products')
+			.populate('orders')
 			.exec(function(err, orders){
 				if(err){
 					console.log("Error retrieving orders for vendor (1)", err);
