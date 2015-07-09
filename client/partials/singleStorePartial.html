@@ -66,7 +66,6 @@
 						      <td ng-bind='product.category'></td>
 						      <td ng-bind='product.price'></td>
 						      <td>Qty: <select ng-model='newOrder.quantity' ng-init="(_Array = []).length = product.quantity;">
-						      		<!-- <option ng-repeat='product in products.products' ng-bind='product.quantity'>{{product.quantity}}</option> -->
 						      		 <option ng-repeat="i in _Array track by $index">{{$index+1}}</option>
 						      </select></td>
 						    </tr>
