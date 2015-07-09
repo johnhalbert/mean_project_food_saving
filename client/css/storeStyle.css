@@ -13,8 +13,8 @@
 		}
 
 		#map {
-		    height:420px;
-		    width:600px;
+		    height: 15em;
+	        width: 15em;
 		}
 		.infoWindowContent {
 		    font-size:  14px !important;
