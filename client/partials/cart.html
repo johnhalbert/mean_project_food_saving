@@ -41,12 +41,12 @@
 		<!-- **********************   MODAL   **************************** -->
 		<div id="cartModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" style = "background-color: rgba(250, 255, 255, 0.75);">
 
-			<h4 class="modal-title" id="myModalLabel">Pay for Order</h4>
+			<h4 class="modal-title" id="myModalLabel">Pay for Order ($20.00)</h4>
 
 
 			<div class="modal-body">
 				<div style = "overflow-y:scroll;height:20em;">
-					<form>
+					<!-- <form>
 						Name:<input type = 'text' placeholder = 'Name' ng-model='newVendor.name' />
 						Zip:<input type = 'text' placeholder = 'Zip' ng-model='newVendor.email' />
 						CC:<input type = 'text' placeholder = 'CC' ng-model='newVendor.password' />
@@ -54,11 +54,38 @@
 
 						</a>
 						<a class="button modal-close-vendor" ng-click='requestUber()'>Request Uber</a>
+					</form> -->
+					<form stripe-form="stripeCallback" name="checkoutForm">
+						Name:<input type = 'text' placeholder = 'Name' ng-model='user.name' />
+						Zip:<input type = 'text' placeholder = 'Zip' ng-model='user.email' />
+						CC:<input type = 'text' ng-model="number" placeholder="Card Number" payments-format="card" payments-validate="card" name="card"/>
+						<div ng-if="checkoutForm.card.$invalid">
+					    Error: invalid card number!
+						</div>
+						Expiry:<input type = 'text' ng-model="expiry" placeholder="Expiration" payments-format="expiry" payments-validate="expiry" name="expiry"/>
+						<div ng-if="checkoutForm.expiry.$invalid">
+					    Error: invalid expire date!
+						</div>
+					    CVC:<input type = 'text' ng-model="cvc" placeholder="CVC" payments-format="cvc" payments-validate="cvc" name="cvc"/>
+					    <div ng-if="checkoutForm.cvc.$invalid">
+					    Error: invalid cvc number!
+						</div>
+						<button class="modal-close-vendor" type="submit">Place Order $20.00</button>
+						<a class="button modal-close-vendor" ng-click='requestUber()'>Request Uber</a>
 					</form>
+					<!-- <form stripe-form="stripeCallback">
+					    <input ng-model="number" placeholder="Card Number" />
+					    <input ng-model="expiry" placeholder="Expiration" />
+					    <input ng-model="cvc" placeholder="CVC" />
+					    <button type="submit">Submit</button>
+					</form> -->
 				</div>
 			</div>
 			<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 		</div>
+
+		
 	</div>
+	
 
 
