@@ -109,7 +109,8 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
     			$scope.error = addedOrder.error;
     		} else {
 	    		$scope.newOrder = {};
-	    		$scope.pendingOrder = {};
+	    		$scope.pendingOrder = [];
+                $scope.newOrder.products = [];
 	    		$scope.orders.orders.push(addedOrder);
                 customerFactory.getSingleCustomer($scope.orders.orders[$scope.orders.orders.length-1]._customer, function(customer, idx1, idx2){
                     $scope.orders.orders[$scope.orders.orders.length-1]._customer = customer; // pushed new order to array, update products and customer in that order with this loop.
@@ -131,10 +132,10 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
     	}
     	$scope.pendingOrder.push($scope.orderProduct);
     	$scope.newOrder.products.push($scope.orderProduct._id);
-        if (!$scope.newOrder.quantities){
+        if (!$scope.newOrder.quantities) {
             $scope.newOrder.quantities = [];
         }
-        $scope.newOrder.quantities.push($scope.orderProduct.quantity)
+        $scope.newOrder.quantities.push($scope.orderProduct.quantity);
     	$scope.orderProduct = {};
     }
 
@@ -154,7 +155,8 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
         $scope.newOrder._id = order._id;
         for (var k = 0; k < order.products.length; k++) {
             $scope.newOrder.products.push(order.products[k]._id);
-            $scope.pendingOrder.push({product: order.products[k].name, quantity: order.products[k].quantity});
+            console.log(order);
+            $scope.pendingOrder.push({product: order.products[k].name, quantity: order.quantities[k]});
         }
     }
 

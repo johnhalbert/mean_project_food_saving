@@ -60,7 +60,7 @@
 						<label>Quantity</label>
 						<input type='text' name='quantity' ng-model='addEditProduct.quantity' />
 						<label>Age/Expires</label>
-						<input type='text' name='ageexpires' ng-model='addEditProduct.ageexpires' />
+						<input type='text' name='ageexpires' ng-model="addEditProduct.ageexpires" />
 						<button class = "vendorButton" ng-hide='updateButton' ng-click='addProduct(vendor._id)'>Add</button>
 						<button class = "vendorButton" ng-show='updateButton' ng-click='editProduct(addEditProduct)'>Update</button>
 					</fieldset>
@@ -84,7 +84,7 @@
 							<td><span ng-repeat='product in orders.orders[$index].products track by $index'>{{product.name}}, </span></td>
 							<td><span ng-repeat='quantity in orders.orders[$index].quantities track by $index'>{{quantity}}, </span></td>
 							<td ng-bind='order.status'></td>
-							<td ng-bind='order.created'></td>
+							<td ng-bind="order.created | date: 'medium'"></td>
 							<td><button class = "vendorButton" ng-click='editUpdateOrder(order)'>Edit/Update Order</button></td>
 						</tr>
 					</tbody>
