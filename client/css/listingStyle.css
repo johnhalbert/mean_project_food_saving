@@ -19,6 +19,11 @@
 			width: 100%;
 		}
 
+		.vendorTable {
+			height: 20em;
+			overflow-y: scroll;
+		}
+
 		table tr:hover { background: rgba(150, 230, 150, 0.5);; } 
 
 		h1 {
@@ -37,7 +42,7 @@
 		}
 		
 		#largeContainer {
-			height:98em;
+			height:142em;
 		}
 
 		.vendorButton {
