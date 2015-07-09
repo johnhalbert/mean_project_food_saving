@@ -82,7 +82,7 @@
 						<tr ng-repeat='order in orders.orders'>
 							<td ng-bind='order._customer.name'></td>
 							<td><span ng-repeat='product in orders.orders[$index].products track by $index'>{{product.name}}, </span></td>
-							<td><span ng-repeat='product in orders.orders[$index].products track by $index'>{{product.quantity}}, </span></td>
+							<td><span ng-repeat='quantity in orders.orders[$index].quantities track by $index'>{{quantity}}, </span></td>
 							<td ng-bind='order.status'></td>
 							<td ng-bind='order.created'></td>
 							<td><button ng-click='editUpdateOrder(order)'>Edit/Update Order</button></td>

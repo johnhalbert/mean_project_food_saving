@@ -15,6 +15,8 @@ module.exports = {
 					var newOrder = new Order({_vendor: req.body.vendor_id, _customer: customer._id, pickup_time: req.body.pickup_time, status: 'Pending' })
 					for (var i = 0; i < req.body.products.length; i++) {
 						newOrder.products.push(req.body.products[i]);
+						console.log(req.body);
+						newOrder.quantities.push(req.body.quantities[i]);
 					}
 					newOrder.save(function(err, result){
 					    if(err){
