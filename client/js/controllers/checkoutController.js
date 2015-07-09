@@ -50,6 +50,8 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
 	 })
 
 	$scope.stripeCallback = function (code, result) {
+		console.log(result);
+		console.log($scope.user);
 	    if (result.error) {
 	        window.alert('it failed! error: ' + result.error.message);
 	    } else {
