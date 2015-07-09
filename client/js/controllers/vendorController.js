@@ -131,6 +131,10 @@ foodThingie.controller('vendorsController', function($scope, socket, $routeParam
     	}
     	$scope.pendingOrder.push($scope.orderProduct);
     	$scope.newOrder.products.push($scope.orderProduct._id);
+        if (!$scope.newOrder.quantities){
+            $scope.newOrder.quantities = [];
+        }
+        $scope.newOrder.quantities.push($scope.orderProduct.quantity)
     	$scope.orderProduct = {};
     }
 
