@@ -69,6 +69,7 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
 				if (addedOrder.error) {
 					console.log('Error creating new order');
 				} else {
+					socket.emit('new_order');
 					console.log('Successfully added new order');
 				}
 			})
