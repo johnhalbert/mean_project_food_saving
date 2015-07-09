@@ -1,4 +1,4 @@
-foodThingie.controller('indiController', function($window, $scope, socket, $routeParams, customerFactory, vendorFactory, productFactory){
+foodThingie.controller('indiController', function($window, $scope, socket, $routeParams, customerFactory, vendorFactory, productFactory, orderFactory){
     $scope.cart = [];
     $scope.newOrder = {};
 
@@ -35,7 +35,6 @@ foodThingie.controller('indiController', function($window, $scope, socket, $rout
     }
 
 
-
     google.maps.event.addDomListener(window, 'load', $scope.initialize);
     google.maps.event.addDomListener(window, 'load', $scope.codeAddress);
     // ************************
@@ -68,6 +67,7 @@ foodThingie.controller('indiController', function($window, $scope, socket, $rout
             }
         }
         $scope.cart.push({product: $scope.orderProduct, quantity: $scope.newOrder.quantity});
+        orderFactory.updateCart($scope.cart);
         console.log($scope.cart);
         // $scope.newOrder.products.push($scope.orderProduct._id);
         $scope.orderProduct = {};
