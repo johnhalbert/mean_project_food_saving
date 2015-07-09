@@ -1,4 +1,4 @@
-foodThingie.controller('checkoutController', function($window, $scope, socket, $routeParams, productFactory, vendorFactory, orderFactory){
+foodThingie.controller('checkoutController', function($window, $scope, socket, $routeParams, productFactory, vendorFactory, orderFactory, customerFactory){
 	
 	orderFactory.getCart(function(customerCart){
 		$scope.cart = customerCart;
@@ -9,7 +9,7 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
 			console.log($scope.cart.total, $scope.cart[i].product.product.price);
 		}
 		console.log($scope.cart);
-	})
+	}) 
 
 	$scope.example = {
        value: new Date(1970, 0, 1, 14, 57, 0)
@@ -18,6 +18,7 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
     vendorFactory.retrieveVendor($routeParams.id, function(data){
     $scope.vendor = data;
     console.log($scope.vendor);
+    
     var maxtime = new Date($scope.vendor.end_hour)
 	var maxhours = maxtime.getHours()
 	maxhours = maxhours - 2;
@@ -47,6 +48,7 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
 		}
 	}
 	console.log($scope.arr);
+	mapItOut(); // show google maps
 	 })
 
 	$scope.stripeCallback = function (code, result) {
@@ -55,8 +57,86 @@ foodThingie.controller('checkoutController', function($window, $scope, socket, $
 	    if (result.error) {
 	        window.alert('it failed! error: ' + result.error.message);
 	    } else {
-	        window.alert('success! token: ' + result.id);
+	        $scope.newOrder.vendor_id = $scope.vendor._id;
+			for (var o = 0; o < $scope.cart.length; o++){
+				$scope.newOrder.products = [];
+				$scope.newOrder.products.push($scope.cart[o].product.product._id)
+			}
+			orderFactory.createOrder($scope.newOrder, function(addedOrder){
+				if (addedOrder.error) {
+					console.log('Error creating new order');
+				} else {
+					console.log('Successfully added new order');
+				}
+			})
 	    }
 	};
+
+	$scope.newOrder = {};
+	customerFactory.retrieveLogin(function(customer){
+		$scope.newOrder.customername = customer.name;
+		$scope.newOrder.customeremail = customer.email;
+	})
+
+	$scope.addOrder = function(){
+		$scope.newOrder.vendor_id = $scope.vendor._id;
+		for (var o = 0; o < $scope.cart.length; o++){
+			$scope.newOrder.products = [];
+			$scope.newOrder.products.push($scope.cart[o].product.product._id)
+		}
+		orderFactory.createOrder($scope.newOrder, function(addedOrder){
+			if (addedOrder.error) {
+				console.log('Error creating new order');
+			} else {
+				console.log('Successfully added new order');
+			}
+		})
+	}
+
+	/************************ GOOGLE MAPS ************************/
+
+    var mapItOut = function() {
+   
+        var geocoder = new google.maps.Geocoder();
+
+        var mapOptions = {
+            zoom: 12,
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        }
+    
+        var encoded;
+          var address = $scope.vendor.address;
+          
+          geocoder.geocode( { 'address': address }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              // map.setCenter(results[0].geometry.location);
+                $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+                encoded = results[0].geometry;
+                $scope.map.setCenter(encoded.location);
+                
+                var infoWindow = new google.maps.InfoWindow();
+                
+                var marker = new google.maps.Marker({
+                    map: $scope.map,
+                    position: encoded.location
+                });
+                marker.content = '<div class="infoWindowContent">' + address + '</div>';
+            
+            google.maps.event.addListener(marker, 'click', function(){
+                infoWindow.setContent('<h2>' + $scope.vendor.name + '</h2>' + marker.content);
+                infoWindow.open($scope.map, marker);
+            });
+
+            } else {
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+          });
+
+        $scope.openInfoWindow = function(e, selectedMarker){
+            // e.preventDefault();
+            google.maps.event.trigger(selectedMarker, 'click');
+        }
+
+    }   
 	
 })

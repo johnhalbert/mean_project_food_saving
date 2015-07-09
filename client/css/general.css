@@ -26,7 +26,15 @@ body,html{
     z-index: -1;
 }*/
 
-
+#map {
+  height: 15em;
+  width: 15em;
+}
+.infoWindowContent {
+  font-size:  14px !important;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
 
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,,800,900);
 

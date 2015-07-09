@@ -13,8 +13,8 @@
 		}
 
 		#map {
-		    height:420px;
-		    width:600px;
+		    height: 15em;
+	        width: 15em;
 		}
 		.infoWindowContent {
 		    font-size:  14px !important;
@@ -23,10 +23,6 @@
 		}
 
 		#panel {
-	        /*position: absolute;*/
-	        /*top: 5px;*/
-	        /*left: 50%;*/
-	        /*margin-left: -180px;*/
 	        z-index: 5;
 	        background-color: #fff;
 	        padding: 5px;

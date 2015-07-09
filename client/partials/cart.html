@@ -25,7 +25,10 @@
 		<div class="card">
 			<div class="content">
 				<h4><span class="title" ng-bind='vendor.name'></span></h4>
-				<img src="https://slaterjd.files.wordpress.com/2012/09/manchester-england-google-maps4.jpg">
+				<div id="map"></div>
+				<div id="class" ng-repeat="marker in markers | orderBy : 'title'">
+				    <!-- <a href="#" ng-click="openInfoWindow($event, marker)">{{vendor.name}}</a> -->
+				</div>
 				<p><span style = "font-weight:bold;">Address: </span> <span ng-bind='vendor.address'></span></p>
 				<p><span style = "font-weight:bold;">Phone: </span><span ng-bind='vendor.phone'></span></p>
 				<p><span style = "font-weight:bold;">Hours: </span><span ng-bind='vendor.hours'></span></p>
