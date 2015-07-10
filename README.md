@@ -17,9 +17,10 @@ With the billions of dollars of good food that is tossed each year in North Amer
 * John
 * Sina
 
-## Time Log
+## Time Log (Total: 42 hours)
 
 * July 6: Brainstorming, Wireframe mockup, Foundation learning, creation of html views (11 hours)
 * July 7: discussion of workflow and division of tasks, discussion of APIs and features to include, completion of login/registration, completion of initial customer listing page (12 hours)
 * July 8: completion of food lising page, vendor dashboard, customer store products listing, integration of twitter follow button (12 hours)
-* July 9: integration of google maps api, integration of stripe api (5 hours)
+* July 9: integration of google maps api, integration of stripe api, final touch ups (7 hours)
+
